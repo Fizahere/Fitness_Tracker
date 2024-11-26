@@ -1,11 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Login from '../pages/Login'
-import Signup from '../pages/Auth/Signup'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Contact from '../pages/Contact'
 import Notfound from '../pages/Notfound'
+import Signup from '../pages/Auth/Signup'
+import Login from '../pages/Auth/Login'
 
 const UnAuthenticatedRoutes = () => {
   return (

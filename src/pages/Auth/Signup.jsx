@@ -1,5 +1,5 @@
 import React from 'react'
-import login from '../assets/images/login.png'
+import login from '../../assets/images/login.png'
 import { Link } from 'react-router-dom'
 
 const Signup = () => {
@@ -13,13 +13,13 @@ const Signup = () => {
         <form>
           <div className='flex flex-col'>
             <label className='mt-3 font-bold'>Username</label>
-            <input type="text" className='bg-gray-200 w-72 md:w-96 p-2 border-2 border-black rounded-md' placeholder='Fiza..' />
+            <input type="text" className='bg-[#fafafa] w-72 md:w-96 p-2 border-2 border-[#262135] rounded-md' placeholder='Fiza..' />
             <label className='mt-3 font-bold'>Email</label>
-            <input type="text" className='bg-gray-200 w-72 md:w-96 p-2 border-2 border-black rounded-md' placeholder='fiza@gmail.com..' />
+            <input type="text" className='bg-[#fafafa] w-72 md:w-96 p-2 border-2 border-[#262135] rounded-md' placeholder='fiza@gmail.com..' />
             <label className='mt-3 font-bold'>Password</label>
-            <input type="text" className='bg-gray-200 w-72 md:w-96 p-2 border-2 border-black rounded-md' placeholder='12345' />
-            <button className='p-3 text-lg font-bold bg-[#e5b875]  rounded-md mt-4'>Sign Up</button>
-            <p>Already have an account? <Link to={'/login'} className='text-blue-500'>Login</Link></p>
+            <input type="text" className='bg-[#fafafa] w-72 md:w-96 p-2 border-2 border-[#262135] rounded-md' placeholder='12345' />
+            <button className='p-3 text-lg font-bold text-white bg-[#262135]  rounded-md mt-4'>Sign Up</button>
+            <p className='mt-2'>Already have an account? <Link to={'/login'} className='text-blue-500'>Login</Link></p>
           </div>
         </form>
       </div>
