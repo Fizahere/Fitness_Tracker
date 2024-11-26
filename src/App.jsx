@@ -1,12 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 import UnAuthenticatedRoutes from "./routes/UnAuthenticatedRoutes";
+import Dashboard from "./components/Dashboard";
 
 function App() {
 
   return (
     <>
     <BrowserRouter>
-<UnAuthenticatedRoutes/>
+<Dashboard/>
 </BrowserRouter>
     </>
   )
