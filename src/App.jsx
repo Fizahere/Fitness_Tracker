@@ -1,9 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
+import UnAuthenticatedRoutes from "./routes/UnAuthenticatedRoutes";
 
 function App() {
 
   return (
     <>
-   <div>fitness tracker</div>
+    <BrowserRouter>
+<UnAuthenticatedRoutes/>
+</BrowserRouter>
     </>
   )
 }
