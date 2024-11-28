@@ -18,6 +18,10 @@ import { FiMoon } from "react-icons/fi";
 import { GoSun } from "react-icons/go";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
+import { BiPencil } from "react-icons/bi";
+import { BiRun } from "react-icons/bi";
+import { FaBed } from "react-icons/fa6"; 
+import { GiMeal } from "react-icons/gi";
 
 const ICONS={
 LOGO:IoFitnessOutline,
@@ -40,6 +44,10 @@ CHART1:LiaChartLineSolid,
 CHART2:RiBubbleChartLine,
 MOON:FiMoon,
 SUN:GoSun,
+PENCIL:BiPencil,
+RUN:BiRun,
+SLEEP:FaBed,
+MEAL:GiMeal
 }
 
 export default ICONS
