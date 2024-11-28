@@ -16,9 +16,13 @@ import { LiaChartLineSolid } from "react-icons/lia";
 import { RiBubbleChartLine } from "react-icons/ri";
 import { FiMoon } from "react-icons/fi";
 import { GoSun } from "react-icons/go";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { CgClose } from "react-icons/cg";
 
 const ICONS={
 LOGO:IoFitnessOutline,
+HAMBURGER:GiHamburgerMenu,
+CLOSE:CgClose,
 HOME:IoHomeOutline,
 WORKOUT:IoIosFitness,
 NUTRITION:FaNutritionix,
