@@ -1,18 +1,17 @@
 import { BrowserRouter } from "react-router-dom";
-import UnAuthenticatedRoutes from "./routes/UnAuthenticatedRoutes";
-import Dashboard from "./components/Dashboard";
 import AuthenticatedRoutes from "./routes/AuthenticatedRoutes";
 import { useState } from "react";
+import MainLayout from "./components/MainLayout";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   return (
     <>
       <BrowserRouter>
         {isAuthenticated ?
           <AuthenticatedRoutes />
           :
-          <UnAuthenticatedRoutes />
+          <MainLayout />
         }
       </BrowserRouter>
     </>
