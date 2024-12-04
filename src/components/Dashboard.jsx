@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ICONS from '../assets/constants/icons'
 import { Link, Outlet } from 'react-router-dom';
+import '../App.css'
 
 const Dashboard = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
