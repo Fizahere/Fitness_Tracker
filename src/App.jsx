@@ -5,6 +5,8 @@ import MainLayout from "./components/MainLayout";
 import './App.css'
 import { WorkoutServices } from "./services/WorkoutServices";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Login from "./pages/Auth/Login";
+import UnAuthenticatedRoutes from "./routes/UnAuthenticatedRoutes";
 
 function App() {
   const queryClient = new QueryClient({
@@ -18,15 +20,16 @@ function App() {
       },
     },
   });
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   return (
     <>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      {/* <Login/> */}
         {isAuthenticated ?
           <AuthenticatedRoutes />
           :
-          <MainLayout />
+          <UnAuthenticatedRoutes />
         }
       </BrowserRouter>
       </QueryClientProvider>

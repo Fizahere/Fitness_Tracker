@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import DataTable from '../../components/Mists/DataTable';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { WorkoutServices } from '../../services/WorkoutServices';
 
 const UserWorkout = () => {
@@ -14,12 +14,14 @@ const UserWorkout = () => {
     notes: '',
   });
   const [category, setCategory] = useState('');
+  const queryClient = useQueryClient();
 
-  const { data: workoutData, isLoading: workoutLoading } = useQuery('workout-data', WorkoutServices.getWorkouts);
+  const { data: workoutData, isLoading: workoutLoading } = useQuery(
+    'workout-data',
+    WorkoutServices.getWorkouts
+  );
 
-  const workoutMemoData = useMemo(() => {
-    return workoutData?.data?.results || [];
-  }, [workoutData?.data?.results]);
+  const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
 
   const workoutCategories = ['strength', 'cardio', 'flexibility', 'endurance'];
 
@@ -30,7 +32,6 @@ const UserWorkout = () => {
   const {
     mutateAsync: createWorkoutRequest,
     isLoading: isCreatingWorkout,
-    isError: isCreateError, error
   } = useMutation(WorkoutServices.addWorkout, {
     onSuccess: () => {
       setTitle('');
@@ -43,6 +44,8 @@ const UserWorkout = () => {
       });
       setCategory('');
       toggleDrawer(false);
+
+      queryClient.invalidateQueries('workout-data');
     },
     onError: (err) => {
       console.error('Error creating workout:', err);
@@ -53,7 +56,7 @@ const UserWorkout = () => {
     e.preventDefault();
 
     const workoutData = {
-      userId:'674845dcd5c72555296ada40',
+      userId: '674845dcd5c72555296ada40',
       title,
       exercises,
       category,
@@ -82,19 +85,20 @@ const UserWorkout = () => {
       <DataTable data={workoutMemoData} loading={workoutLoading} />
 
       <div
-        className={`fixed inset-0 bg-gray-600 bg-opacity-50 z-50 transition-opacity duration-300 ${drawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-gray-600 bg-opacity-50 z-50 transition-opacity duration-300 ${
+          drawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={() => toggleDrawer(false)}
       >
         <div
-          className={`fixed right-0 top-0 w-[30rem] h-full bg-white shadow-xl transform transition-transform duration-300 ${drawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`fixed right-0 top-0 w-[30rem] h-full bg-white shadow-xl transform transition-transform duration-300 ${
+            drawerOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-6">
             <h2 className="text-xl font-semibold mb-4">Add New Workout</h2>
             <form onSubmit={addWorkoutHandler}>
-              <div>
-                <input type="hidden" name="userId" className="w-full p-2 mt-2 border rounded-lg" />
-              </div>
               <div className="flex">
                 <div>
                   <label className="block text-sm font-medium">Title</label>
@@ -104,6 +108,7 @@ const UserWorkout = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="w-full p-2 border rounded-lg"
+                    required
                   />
                 </div>
                 <div className="relative inline-block w-48 ml-2">
@@ -113,7 +118,9 @@ const UserWorkout = () => {
                     name="category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
+                    required
                   >
+                    <option value="" disabled>Select category</option>
                     {workoutCategories.map((singleCat, index) => (
                       <option key={index} value={singleCat}>
                         {singleCat}
@@ -122,64 +129,68 @@ const UserWorkout = () => {
                   </select>
                 </div>
               </div>
-              <div className="flex">
-                <div className="mt-4">
-                  <label className="block text-sm font-medium">Exercise name</label>
-                  <input
-                    type="text"
-                    name="exerciseName"
-                    value={exercises.exerciseName}
-                    onChange={(e) => setExercises({ ...exercises, exerciseName: e.target.value })}
-                    className="w-full p-2 mt-2 border rounded-lg"
-                  />
-                </div>
-                <div className="mt-4 ml-2">
+              <div className="mt-4">
+                <label className="block text-sm font-medium">Exercise Name</label>
+                <input
+                  type="text"
+                  name="exerciseName"
+                  value={exercises.exerciseName}
+                  onChange={(e) => setExercises({ ...exercises, exerciseName: e.target.value })}
+                  className="w-full p-2 border rounded-lg"
+                  required
+                />
+              </div>
+              <div className="flex mt-4">
+                <div>
                   <label className="block text-sm font-medium">Sets</label>
                   <input
                     type="number"
                     name="sets"
                     value={exercises.sets}
                     onChange={(e) => setExercises({ ...exercises, sets: e.target.value })}
-                    className="w-full p-2 mt-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg"
+                    required
                   />
                 </div>
-              </div>
-              <div className="flex">
-                <div className="mt-4">
+                <div className="ml-2">
                   <label className="block text-sm font-medium">Reps</label>
                   <input
                     type="number"
                     name="reps"
                     value={exercises.reps}
                     onChange={(e) => setExercises({ ...exercises, reps: e.target.value })}
-                    className="w-full p-2 mt-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg"
+                    required
                   />
                 </div>
-                <div className="mt-4 ml-2">
-                  <label className="block text-sm font-medium">Weight</label>
-                  <input
-                    type="number"
-                    name="weight"
-                    value={exercises.weight}
-                    onChange={(e) => setExercises({ ...exercises, weight: e.target.value })}
-                    className="w-full p-2 mt-2 border rounded-lg"
-                  />
-                </div>
+              </div>
+              <div className="mt-4">
+                <label className="block text-sm font-medium">Weight</label>
+                <input
+                  type="number"
+                  name="weight"
+                  value={exercises.weight}
+                  onChange={(e) => setExercises({ ...exercises, weight: e.target.value })}
+                  className="w-full p-2 border rounded-lg"
+                />
               </div>
               <div className="mt-4">
                 <label className="block text-sm font-medium">Notes</label>
                 <textarea
-                  type="text"
                   name="notes"
                   value={exercises.notes}
                   onChange={(e) => setExercises({ ...exercises, notes: e.target.value })}
-                  className="w-full p-2 mt-2 border rounded-lg"
+                  className="w-full p-2 border rounded-lg"
                 />
               </div>
 
               <div className="mt-4">
-                <button type="submit" className="bg-black text-white px-4 py-2 rounded-lg">
-                  Save Workout
+                <button
+                  type="submit"
+                  className="bg-black text-white px-4 py-2 rounded-lg"
+                  disabled={isCreatingWorkout}
+                >
+                  {isCreatingWorkout ? 'Saving...' : 'Save Workout'}
                 </button>
               </div>
             </form>
