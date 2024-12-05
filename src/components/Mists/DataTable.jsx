@@ -1,7 +1,9 @@
 import React from 'react'
+import ICONS from '../../assets/constants/icons'
 
 const DataTable = (props) => {
-    const { data, loading } = props
+    const { data,loading } = props
+
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full bg-white dark:bg-black dark:border-[#1b1b1c] border border-gray-200 rounded-lg shadow-md">
@@ -12,7 +14,8 @@ const DataTable = (props) => {
                         <th className="px-6 py-3 text-left">Reps</th>
                         <th className="px-6 py-3 text-left">Weights</th>
                         <th className="px-6 py-3 text-left">Notes</th>
-                        <th className="px-6 py-3 text-left">Action</th>
+                        <th className="px-6 py-3 text-left">Edit</th>
+                        <th className="px-6 py-3 text-left">Delete</th>
                     </tr>
                 </thead>
                 <tbody className="text-gray-700 dark:text-zinc-400">
@@ -25,13 +28,19 @@ const DataTable = (props) => {
                             <td className="px-6 py-4">{singleData.category}</td>
                             <td className="px-6 py-4">
                                 <button className="text-white bg-blue-400 px-4 rounded-lg py-2 hover:underline">Edit</button>
+                            </td>
+                            <td className="px-6 py-4">
                                 <button className="text-white bg-red-400 px-4 rounded-lg py-2 hover:underline ml-2">Delete</button>
                             </td>
                         </tr>
                     ))}
-                    {loading && <p className='text-white text-center p-4'>Loading...</p>}
                 </tbody>
             </table>
+                <div className='flex justify-center items-center m-10'>
+                    {loading &&
+                        <ICONS.LOADING className='animate-spin text-black dark:text-white text-4xl' />
+                    }
+                    </div>
         </div>
     )
 }

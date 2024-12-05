@@ -22,6 +22,7 @@ import { BiPencil } from "react-icons/bi";
 import { BiRun } from "react-icons/bi";
 import { FaBed } from "react-icons/fa6"; 
 import { GiMeal } from "react-icons/gi";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const ICONS={
 LOGO:IoFitnessOutline,
@@ -47,7 +48,8 @@ SUN:GoSun,
 PENCIL:BiPencil,
 RUN:BiRun,
 SLEEP:FaBed,
-MEAL:GiMeal
+MEAL:GiMeal,
+LOADING:AiOutlineLoading3Quarters,
 }
 
 export default ICONS
