@@ -14,12 +14,15 @@ const createAccount = async (payload) => {
 };
 const login = async (payload) => {
     try {
-        const response = await axios.post(`${Auth_Url.AUTH_URL}/login`, payload)
+        const response = await axios.post(`${Auth_Url.AUTH_URL}/login`, payload);
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        localStorage.setItem('loginTime', Date.now());
         return response.data;
     } catch (error) {
         throw error.response?.data || { msg: "An unknown error occurred." };
     }
-}
+};
 
 export const AuthServices = {
     createAccount,

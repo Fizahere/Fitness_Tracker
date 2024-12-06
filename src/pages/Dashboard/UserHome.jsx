@@ -12,7 +12,7 @@ const UserHome = () => {
               <p className='text-zinc-700 mt-2 text-sm sm:text-md'>Time</p>
               <p className='text-lg sm:text-3xl font-bold'>56m</p>
             </div>
-            <div className='px-5 py-6 sm:px-20 sm:py-10 bg-[#e9dffa] flex flex-col items-center justify-center rounded-3xl'>
+            <div className='px-5 py-6 sm:px-20 sm:py-10 bg-[#d5c7ec] flex flex-col items-center justify-center rounded-3xl'>
               <i><ICONS.DISTANCE fontSize={30} /></i>
               <p className='text-zinc-700 mt-3 text-sm sm:text-md'>Total distance</p>
               <p className='text-lg sm:text-3xl font-bold'>15 h 5km</p>
@@ -22,7 +22,7 @@ const UserHome = () => {
               <p className='text-zinc-700 mt-2 text-sm sm:text-md'>Energy burn</p>
               <p className='text-lg sm:text-3xl font-bold'>1 345 kal</p>
             </div>
-            <div className='px-5 py-6 sm:px-20 sm:py-10 bg-[#d8e6e6] flex flex-col items-center justify-center rounded-3xl'>
+            <div className='px-5 py-6 sm:px-20 sm:py-10 bg-[#c5e0e0] flex flex-col items-center justify-center rounded-3xl'>
               <i><ICONS.MOON fontSize={30} /></i>
               <p className='text-zinc-700 mt-2 text-sm sm:text-md'>Sleep</p>
               <p className='text-lg sm:text-3xl font-bold'>56m</p>

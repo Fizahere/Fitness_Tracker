@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
 import login from '../../assets/images/login.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
-
+import { AuthServices } from '../../services/authServices';
+import ICONS from '../../assets/constants/icons';
 
 const Login = () => {
+  const [isShowPassword, setShowPassword] = useState(true);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    username: 'Khizar',
+    password: '123456',
   });
   const [errors, setErrors] = useState({});
-const {}=useMutation(Auth)
+  const [apiError, setApiError] = useState('');
+  const navigate=useNavigate();
+
+  const { mutateAsync: loginRequest, isLoading: loginLoading} = useMutation(AuthServices.login, {
+    onSuccess: () => {
+      setFormData({
+        username: '',
+        password: '',
+      })
+      navigate('/dashboard/')
+      console.log('loggedIn.')
+    },
+    onError: (error) => {
+      const errorMsg = error.msg || 'Something went wrong.';
+      setApiError(errorMsg);
+    }
+  })
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.email) {
-      newErrors.email = 'Email is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Enter a valid email address.';
-    }
+    if (!formData.username) newErrors.username = 'Username is required.';
 
     if (!formData.password) {
       newErrors.password = 'Password is required.';
@@ -34,7 +48,7 @@ const {}=useMutation(Auth)
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-//login logic
+      loginRequest(formData)
     }
   };
 
@@ -52,41 +66,46 @@ const {}=useMutation(Auth)
         <h3 className="text-3xl font-bold">Welcome Back,</h3>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col">
-            <label className="mt-3 font-bold">Email</label>
+            <label className="mt-3 font-bold">Username</label>
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
-              className={`bg-[#fafafa] w-72 md:w-96 p-2 border-2 rounded-md ${
-                errors.email ? 'border-red-500' : 'border-[#262135]'
-              }`}
-              placeholder="fiza@gmail.com.."
+              className={`bg-[#fafafa] w-72 md:w-96 p-2 border-2 rounded-md ${errors.username ? 'border-red-500' : 'border-[#262135]'
+                }`}
+              placeholder="Fiza.."
             />
-            {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+            {errors.username && <span className="text-red-500 text-sm">{errors.username}</span>}
 
             <label className="mt-3 font-bold">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={`bg-[#fafafa] w-72 md:w-96 p-2 border-2 rounded-md ${
-                errors.password ? 'border-red-500' : 'border-[#262135]'
-              }`}
-              placeholder="12345"
-            />
+            <div className='relative'>
+              <i className='absolute right-3 top-3 text-xl cursor-pointer' onClick={() => setShowPassword(!isShowPassword)}>
+                {isShowPassword ? <ICONS.CLOSEDEYE /> : <ICONS.OPENEYE />}
+              </i>
+              <input
+                type={isShowPassword ? "password" : "text"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`bg-[#fafafa] w-72 md:w-96 p-2 border-2 rounded-md ${errors.password ? 'border-red-500' : 'border-[#262135]'
+                  }`}
+                placeholder="12345"
+              />
+            </div>
             {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
 
+            {apiError && <span className="mt-2 text-red-500 text-sm">{apiError}</span>}
             <button
               type="submit"
               className="p-3 text-lg font-bold text-white bg-[#262135] rounded-md mt-4"
+              disabled={loginLoading}
             >
-              Login
+              {loginLoading ? <div className='flex justify-center items-center'><ICONS.LOADING className='animate-spin text-white text-xl' /></div> : <p>Login</p>}
             </button>
             <p className="mt-2">
-              Don't have an account?{' '}
-              <Link to="/create-new-account" className="text-blue-500">
+              Don't have an account?
+              <Link to="/create-new-account" className="text-blue-500 ml-1">
                 Signup
               </Link>
             </p>

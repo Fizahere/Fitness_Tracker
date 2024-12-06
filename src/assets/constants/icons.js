@@ -20,36 +20,40 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
 import { BiPencil } from "react-icons/bi";
 import { BiRun } from "react-icons/bi";
-import { FaBed } from "react-icons/fa6"; 
+import { FaBed } from "react-icons/fa6";
 import { GiMeal } from "react-icons/gi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaEye } from "react-icons/fa6";
+import { FaEyeSlash } from "react-icons/fa6";
 
-const ICONS={
-LOGO:IoFitnessOutline,
-HAMBURGER:GiHamburgerMenu,
-CLOSE:CgClose,
-HOME:IoHomeOutline,
-WORKOUT:IoIosFitness,
-NUTRITION:FaNutritionix,
-PROGRESS:IoBarChartOutline,
-PROFILE:FaRegUser,
-LOCATION:GoLocation,
-RINGBELL:HiOutlineBell,
-CLOCK:LuClock,
-DISTANCE:GiPathDistance,
-FIRE:PiFireLight,
-MOON:PiMoonStars,
-SHOEDOWN:GiRunningShoe,
-SHOEUP:GiConverseShoe,
-CHART1:LiaChartLineSolid,
-CHART2:RiBubbleChartLine,
-MOON:FiMoon,
-SUN:GoSun,
-PENCIL:BiPencil,
-RUN:BiRun,
-SLEEP:FaBed,
-MEAL:GiMeal,
-LOADING:AiOutlineLoading3Quarters,
+const ICONS = {
+    LOGO: IoFitnessOutline,
+    HAMBURGER: GiHamburgerMenu,
+    CLOSE: CgClose,
+    HOME: IoHomeOutline,
+    WORKOUT: IoIosFitness,
+    NUTRITION: FaNutritionix,
+    PROGRESS: IoBarChartOutline,
+    PROFILE: FaRegUser,
+    LOCATION: GoLocation,
+    RINGBELL: HiOutlineBell,
+    CLOCK: LuClock,
+    DISTANCE: GiPathDistance,
+    FIRE: PiFireLight,
+    MOON: PiMoonStars,
+    SHOEDOWN: GiRunningShoe,
+    SHOEUP: GiConverseShoe,
+    CHART1: LiaChartLineSolid,
+    CHART2: RiBubbleChartLine,
+    MOON: FiMoon,
+    SUN: GoSun,
+    PENCIL: BiPencil,
+    RUN: BiRun,
+    SLEEP: FaBed,
+    MEAL: GiMeal,
+    LOADING: AiOutlineLoading3Quarters,
+    OPENEYE: FaEye,
+    CLOSEDEYE: FaEyeSlash,
 }
 
 export default ICONS

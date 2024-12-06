@@ -12,12 +12,12 @@ const AuthenticatedRoutes = () => {
   return (
     <Routes>
       <Route element={<Dashboard />}>
-        <Route path='/' element={<UserHome />} />
-        <Route path='/home' element={<UserHome />} />
-        <Route path='/workout' element={<UserWorkout />} />
-        <Route path='/nutrition' element={<Nutrition />} />
-        <Route path='/progress' element={<Progress />} />
-        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/dashboard/' element={<UserHome />} />
+        <Route path='/dashboard/home' element={<UserHome />} />
+        <Route path='/dashboard/workout' element={<UserWorkout />} />
+        <Route path='/dashboard/nutrition' element={<Nutrition />} />
+        <Route path='/dashboard/progress' element={<Progress />} />
+        <Route path='/dashboard/profile' element={<UserProfile />} />
       </Route>
       <Route path='*' element={<Notfound />} />
     </Routes>

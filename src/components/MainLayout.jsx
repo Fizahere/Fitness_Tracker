@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink, Element } from "react-scroll";
 import ICONS from "../assets/constants/icons";
 import Home from "../pages/Home";
@@ -17,7 +17,7 @@ const MainLayout = () => {
       }
     }
   }, [location]);
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -25,7 +25,7 @@ const MainLayout = () => {
 
   return (
     <div>
-      <nav className={`flex justify-between bg-zinc-900 text-white py-4 fixed top-0 left-0 w-full z-50`}>
+      <nav className={`flex justify-between bg-white text-black py-4 fixed top-0 left-0 w-full z-50`}>
         <h3 className="hidden md:block ml-4 text-3xl">Fitness Tracker</h3>
         <div className="flex md:hidden">
           <ICONS.HAMBURGER
@@ -42,7 +42,7 @@ const MainLayout = () => {
           </li>
           <li className="mr-6 mt-1 text-lg cursor-pointer">
             <ScrollLink to="contact-info" smooth={true} duration={500}>
-              Contacts
+              Contact
             </ScrollLink>
           </li>
           <li className="mr-6 mt-1 text-lg cursor-pointer">
@@ -55,16 +55,21 @@ const MainLayout = () => {
               About
             </ScrollLink>
           </li>
-          <li className="mr-6 ml-6 text-lg mt-1">
-            <a
-              href="https://github.com/fizahere/BoilerPlate"
-              target="blank"
-              className="border-white border-2 rounded-full px-3 py-2"
-            >
-              Github
-            </a>
+          <li className="mr-6 mt-1 text-lg cursor-pointer">
+            <Link to="/login">
+              Login
+            </Link>
           </li>
         </ul>
+        <div className="mr-6 ml-6 text-lg mt-1">
+          <a
+            href="https://github.com/fizahere/BoilerPlate"
+            target="blank"
+            className="border-black border-2 rounded-full px-3 py-2"
+          >
+            Github
+          </a>
+        </div>
       </nav>
 
       <div
@@ -89,7 +94,7 @@ const MainLayout = () => {
             </li>
             <li className="mr-6 mt-1 text-lg cursor-pointer">
               <ScrollLink onClick={toggleDrawer} to="contact-info" smooth={true} duration={500}>
-                Contacts
+                Contact
               </ScrollLink>
             </li>
             <li className="mr-6 mt-1 text-lg cursor-pointer">
@@ -101,6 +106,11 @@ const MainLayout = () => {
               <ScrollLink onClick={toggleDrawer} to="about" smooth={true} duration={500}>
                 About
               </ScrollLink>
+            </li>
+            <li className="mr-6 mt-1 text-lg cursor-pointer">
+              <Link onClick={toggleDrawer} to="/login">
+                Login
+              </Link>
             </li>
           </ul>
         </div>
@@ -123,8 +133,45 @@ const MainLayout = () => {
         </Element>
       </div>
 
-      <div className="border-t-2 border-zinc-800 bg-zinc-900">
-        <p> </p>
+      <div className="lg:px-40 px-4 py-20 bg-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div>
+            <h3 className="text-1xl md:text-3xl font-bold">Fitness Tracker</h3>
+            <p className="text-zinc-600 mt-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta, suscipit?</p>
+          </div>
+          <div>
+            <ul>
+              <li className="text-lg mb-4">Contacts</li>
+              <li className="text-zinc-600">0312 232 2343</li>
+              <li className="text-zinc-600">fitnessTracker@gmail.com</li>
+              <li className="text-zinc-600">fitness-tracker.pk</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li className="text-lg mb-4">Privacy Policy</li>
+              <li className="text-zinc-600">settings</li>
+              <li className="text-zinc-600">about</li>
+              <li className="text-zinc-600">privacy</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li className="text-lg mb-4">FAQ</li>
+              <li className="text-zinc-600">home</li>
+              <li className="text-zinc-600">contact</li>
+              <li className="text-zinc-600">about</li>
+            </ul>
+          </div>
+          <div>
+            <button className="bg-black rounded-full text-white w-full py-3">Explore</button>
+            <div className="flex justify-evenly mt-4">
+              <i className="text-2xl bg-lime-300 rounded-full p-4 cursor-pointer"><ICONS.MEAL /></i>
+              <i className="text-2xl bg-lime-300 rounded-full p-4 cursor-pointer"><ICONS.CHART2 /></i>
+              <i className="text-2xl bg-lime-300 rounded-full p-4 cursor-pointer"><ICONS.LOCATION /></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

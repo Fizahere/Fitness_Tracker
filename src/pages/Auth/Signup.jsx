@@ -6,12 +6,13 @@ import { AuthServices } from '../../services/authServices';
 import ICONS from '../../assets/constants/icons';
 
 const Signup = () => {
+  const [isShowPassword, setShowPassword] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
 
@@ -25,6 +26,7 @@ const Signup = () => {
           password: '',
         });
         setApiError('');
+        navigate('/login')
         console.log('Account created successfully.');
       },
       onError: (error) => {
@@ -92,15 +94,20 @@ const Signup = () => {
             {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
 
             <label className="mt-3 font-bold">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={`bg-[#fafafa] w-72 md:w-96 p-2 border-2 rounded-md ${errors.password ? 'border-red-500' : 'border-[#262135]'
-                }`}
-              placeholder="12345"
-            />
+            <div className='relative'>
+              <i className='absolute right-3 top-3 text-xl cursor-pointer' onClick={() => setShowPassword(!isShowPassword)}>
+                {isShowPassword ? <ICONS.CLOSEDEYE /> : <ICONS.OPENEYE />}
+              </i>
+              <input
+                type={isShowPassword?"password":"text"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`bg-[#fafafa] w-72 md:w-96 p-2 border-2 rounded-md ${errors.password ? 'border-red-500' : 'border-[#262135]'
+                  }`}
+                placeholder="12345"
+              />
+            </div>
             {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
             {apiError && <div className="mt-1 text-red-500">{apiError}</div>}
 
@@ -113,7 +120,7 @@ const Signup = () => {
             </button>
             <p className="mt-2">
               Already have an account?
-              <Link to="/login" className="text-blue-500">
+              <Link to="/login" className="text-blue-500 ml-1">
                 Login
               </Link>
             </p>
@@ -123,6 +130,7 @@ const Signup = () => {
     </div>
   );
 };
+
 
 
 export default Signup;

@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import AuthenticatedRoutes from "./routes/AuthenticatedRoutes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainLayout from "./components/MainLayout";
 import './App.css'
 import { WorkoutServices } from "./services/WorkoutServices";
@@ -21,17 +21,26 @@ function App() {
     },
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      setIsAuthenticated(true)
+    }
+    else {
+      setIsAuthenticated(false)
+    }
+  }, [])
   return (
     <>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-      {/* <Login/> */}
-        {isAuthenticated ?
-          <AuthenticatedRoutes />
-          :
-          <UnAuthenticatedRoutes />
-        }
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          {/* <Login/> */}
+          {isAuthenticated ?
+            <AuthenticatedRoutes />
+            :
+            <UnAuthenticatedRoutes />
+          }
+        </BrowserRouter>
       </QueryClientProvider>
     </>
   )
