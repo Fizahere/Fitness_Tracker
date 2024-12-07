@@ -114,14 +114,14 @@ const UserWorkout = () => {
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                    className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
                 <div className="relative inline-block w-52 ml-2">
                   <label className="block text-sm font-medium text-black dark:text-white">Category</label>
                   <select
-                    className="block w-full px-4 py-2 text-sm text-black dark:text-white bg-white dark:bg-[#1b1b1c] border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-4 py-2 text-sm text-black dark:text-white bg-white text-black dark:bg-[#1b1b1c] dark:text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     name="category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -143,7 +143,7 @@ const UserWorkout = () => {
                   name="exerciseName"
                   value={exercises.exerciseName}
                   onChange={(e) => setExercises({ ...exercises, exerciseName: e.target.value })}
-                  className="w-full p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                   required
                 />
               </div>
@@ -155,7 +155,7 @@ const UserWorkout = () => {
                     name="sets"
                     value={exercises.sets}
                     onChange={(e) => setExercises({ ...exercises, sets: e.target.value })}
-                    className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                    className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
@@ -166,7 +166,7 @@ const UserWorkout = () => {
                     name="reps"
                     value={exercises.reps}
                     onChange={(e) => setExercises({ ...exercises, reps: e.target.value })}
-                    className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                    className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
@@ -178,7 +178,7 @@ const UserWorkout = () => {
                   name="weight"
                   value={exercises.weight}
                   onChange={(e) => setExercises({ ...exercises, weight: e.target.value })}
-                  className="w-full p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                 />
               </div>
               <div className="mt-4">
@@ -187,7 +187,7 @@ const UserWorkout = () => {
                   name="notes"
                   value={exercises.notes}
                   onChange={(e) => setExercises({ ...exercises, notes: e.target.value })}
-                  className="w-full p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                 />
               </div>
 

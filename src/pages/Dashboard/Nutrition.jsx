@@ -46,7 +46,7 @@ const Nutrition = () => {
       setMealType('');
       toggleDrawer(false);
 
-      queryClient.invalidateQueries('-data');
+      queryClient.invalidateQueries('nutrtion-data');
     },
     onError: (err) => {
       console.error('Error creating nutrtion:', err);
@@ -64,6 +64,7 @@ const Nutrition = () => {
       mealType,
       foodItems,
     };
+    console.log(nutrtionData,'nutrtionData')
     try {
       await createNutritionRequest(nutrtionData);
       console.log('nutrtion created:', nutrtionData);
@@ -110,14 +111,14 @@ const Nutrition = () => {
                   name="foodName"
                   value={foodItems.foodName}
                   onChange={(e) => setFoodItems({ ...foodItems, foodName: e.target.value })}
-                  className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                   required
                 />
               </div>
                 <div className="relative inline-block w-52 ml-2">
                   <label className="block text-sm font-medium text-black dark:text-white">Mealtype</label>
                   <select
-                    className="block w-full px-4 py-2 text-sm text-black dark:text-white bg-white dark:bg-[#1b1b1c] border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-4 py-2 text-sm text-black dark:text-white bg-white text-black dark:bg-[#1b1b1c] dark:text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     name="mealType"
                     value={mealType}
                     onChange={(e) => setMealType(e.target.value)}
@@ -141,7 +142,7 @@ const Nutrition = () => {
                     name="quantity"
                     value={foodItems.quantity}
                     onChange={(e) => setFoodItems({ ...foodItems, quantity: e.target.value })}
-                    className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                    className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
@@ -152,7 +153,7 @@ const Nutrition = () => {
                     name="calories"
                     value={foodItems.calories}
                     onChange={(e) => setFoodItems({ ...foodItems, calories: e.target.value })}
-                    className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                    className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
@@ -165,7 +166,7 @@ const Nutrition = () => {
                   name="protein"
                   value={foodItems.protein}
                   onChange={(e) => setFoodItems({ ...foodItems, protein: e.target.value })}
-                  className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                 />
               </div>
               <div className="mt-4 ml-2">
@@ -175,7 +176,7 @@ const Nutrition = () => {
                   name="fats"
                   value={foodItems.fats}
                   onChange={(e) => setFoodItems({ ...foodItems, fats: e.target.value })}
-                  className="w-52 p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                 />
               </div>
              </div>
@@ -185,7 +186,7 @@ const Nutrition = () => {
                   name="carbs"
                   value={foodItems.carbs}
                   onChange={(e) => setFoodItems({ ...foodItems, carbs: e.target.value })}
-                  className="w-full p-2 border rounded-lg bg-white dark:bg-[#1b1b1c]"
+                  className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                 />
               </div>
 

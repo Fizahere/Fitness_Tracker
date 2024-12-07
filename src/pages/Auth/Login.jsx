@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { AuthServices } from '../../services/authServices';
 import ICONS from '../../assets/constants/icons';
 
-const Login = () => {
+const Login = ({setIsAuthenticated}) => {
   const [isShowPassword, setShowPassword] = useState(true);
   const [formData, setFormData] = useState({
     username: 'Khizar',
@@ -21,7 +21,8 @@ const Login = () => {
         username: '',
         password: '',
       })
-      navigate('/dashboard/')
+      setIsAuthenticated(true)
+      navigate('/dashboard')
       console.log('loggedIn.')
     },
     onError: (error) => {

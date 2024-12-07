@@ -5,11 +5,11 @@ import MainLayout from '../components/MainLayout'
 import Login from '../pages/Auth/Login'
 import Signup from '../pages/Auth/Signup'
 
-const UnAuthenticatedRoutes = () => {
+const UnAuthenticatedRoutes = ({setIsAuthenticated}) => {
   return (
     <Routes>
       <Route path='/' element={<MainLayout />} />
-      <Route path='/login' element={<Login />} />
+      <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
       <Route path='/create-new-account' element={<Signup />} />
       <Route path='*' element={<Notfound />} />
     </Routes>
