@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ICONS from '../../assets/constants/icons'
+import { useMutation } from 'react-query'
+import {WorkoutServices} from '../../services/WorkoutServices'
 
 const WorkoutDataTable = (props) => {
     const { data, loading } = props
+    const { mutateAsync: deleteWorkout, isLoading: deleteWorkoutLoading } = useMutation(
+        WorkoutServices.deleteWokrout,
+        {
+            onSuccess:()=>{},
+            onError:()=>{}
+        }
+    )
+    const deleteWorkoutHandler=(workoutID)=>{
+        try {
+            console.log(workoutID,'workout id')
+            deleteWorkout(workoutID)
+            
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <div className="overflow-x-auto">
@@ -30,10 +48,12 @@ const WorkoutDataTable = (props) => {
                                 <button className="text-white bg-blue-400 px-4 rounded-lg py-2 hover:underline">Edit</button>
                             </td>
                             <td className="px-6 py-4">
-                                <button className="text-white bg-red-400 px-4 rounded-lg py-2 hover:underline ml-2">Delete</button>
+                                <button className="text-white bg-red-400 px-4 rounded-lg py-2 hover:underline ml-2"
+                                    onClick={deleteWorkoutHandler(singleData._id)}
+                                >Delete</button>
                             </td>
                         </tr>
-                    )) : !loading&&<p className='text-center p-5'>No Data</p>}
+                    )) : !loading && <p className='text-center p-5'>No Data</p>}
                 </tbody>
             </table>
             <div className='flex justify-center items-center m-10'>

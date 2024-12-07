@@ -23,8 +23,13 @@ const login = async (payload) => {
         throw error.response?.data || { msg: "An unknown error occurred." };
     }
 };
+const logout = () => {
+    setAuthState({ isAuthenticated: false, token: null });
+    localStorage.removeItem('token');
+};
 
 export const AuthServices = {
     createAccount,
     login,
+    logout,
 }

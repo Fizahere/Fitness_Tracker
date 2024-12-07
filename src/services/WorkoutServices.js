@@ -5,6 +5,7 @@ const WorkoutUrl = {
 }
 
 const token = localStorage.getItem('token');
+
 const getWorkouts = async () => {
   try {
     if (!token) {
@@ -42,8 +43,17 @@ const addWorkout = async (payload) => {
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 };
+const deleteWokrout = async (userId) => {
+  try {
+    const response = await axios.delete(`${WorkoutUrl.WORKOUT_URL}/delete-workout/${userId}`)
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
 
+  }
+}
 export const WorkoutServices = {
   getWorkouts,
   addWorkout,
+  deleteWokrout,
 }

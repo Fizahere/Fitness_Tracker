@@ -24,7 +24,6 @@ const Nutrition = () => {
   );
 
   const nutrtionMemoData = useMemo(() => nutritionData?.data?.results || [], [nutritionData]);
-
   const mealTypes = ['breakfast', 'lunch', 'dinner', 'snack'];
 
   const toggleDrawer = (open) => {
@@ -37,11 +36,12 @@ const Nutrition = () => {
   } = useMutation(NutritionServices.addNutrition, {
     onSuccess: () => {
       setFoodItems({
-        exerciseName: '',
-        sets: '',
-        reps: '',
-        weight: '',
-        notes: '',
+        foodName: '',
+        quantity: '',
+        calories: '',
+        protein: '',
+        carbs: '',
+        fats: '',
       });
       setMealType('');
       toggleDrawer(false);
