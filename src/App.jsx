@@ -20,7 +20,7 @@ function App() {
       },
     },
   });
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
   // useEffect(() => {
   //   const token = localStorage.getItem('token')
   //   if (token) {

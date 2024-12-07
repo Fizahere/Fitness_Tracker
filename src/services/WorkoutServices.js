@@ -4,9 +4,9 @@ const WorkoutUrl = {
   WORKOUT_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/workout/'
 }
 
+const token = localStorage.getItem('token');
 const getWorkouts = async () => {
   try {
-    const token = localStorage.getItem('token');
     if (!token) {
       throw { msg: "No token found, please log in again." };
     }
@@ -28,8 +28,15 @@ const getWorkouts = async () => {
 
 const addWorkout = async (payload) => {
   try {
-    console.log("payload", payload)
-    const response = await axios.post('https://fitness-tracker-backend-1-vqav.onrender.com/workout/add-workout', payload);
+    const response = await axios.post(
+      `${WorkoutUrl.WORKOUT_URL}/add-workout`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response;
   } catch (error) {
     throw error.response?.data || { msg: "An unknown error occurred." };
