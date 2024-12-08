@@ -41,12 +41,12 @@ const Dashboard = () => {
     }
 
     return (
-        <div className='bg-gray-200 dark:bg-black min-h-screen'>
+        <div className='bg-gray-200 w-auto dark:bg-black min-h-screen'>
             <div className='flex flex-col md:flex-row'>
                 <div className='pt-4 ml-3 flex md:hidden justify-between items-center text-black dark:text-white'>
                     <div className='flex items-center'>
                         <i className='cursor-pointer' onClick={toggleSideBar}><ICONS.HAMBURGER fontSize={20} /></i>
-                        <Link to={'/dashboard/home'}><i><ICONS.LOGO className='ml-2' fontSize={28} /></i></Link>
+                        <Link to={'/home'}><i><ICONS.LOGO className='ml-2' fontSize={28} /></i></Link>
                     </div>
                     <div className='flex text-black dark:text-white items-center'>
                         <i className='cursor-pointer'><ICONS.RINGBELL fontSize={27} /></i>
@@ -59,7 +59,7 @@ const Dashboard = () => {
                                     <ICONS.MOON color='black' fontSize={27} />
                                 )}
                         </i>
-                        <Link to={'/dashboard/profile'}>
+                        <Link to={'/profile'}>
                             <div className='border-2 border-black dark:border-white rounded-full p-1.5 mx-2'>
                                 <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
                             </div>
@@ -67,21 +67,21 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className={`bg-[#1b1b1c] w-1/6 px-10 py-10 rounded-r-3xl min-h-screen hidden md:flex flex-col items-center`}>
-                    <Link to={'/dashboard/home'}><i><ICONS.LOGO color='#fcc6e6' fontSize={40} /></i></Link>
+                    <Link to={'/home'}><i><ICONS.LOGO color='#fcc6e6' fontSize={40} /></i></Link>
                     <ul className='mt-6 text-zinc-400'>
-                        <Link to={'/dashboard/home'}>
+                        <Link to={'/home'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.HOME /></i>Overview</li>
                         </Link>
-                        <Link to={'/dashboard/workout'}>
+                        <Link to={'/workout'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.WORKOUT /></i>Workout</li>
                         </Link>
-                        <Link to={'/dashboard/nutrition'}>
+                        <Link to={'/nutrition'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.NUTRITION /></i>Nutrition</li>
                         </Link>
-                        <Link to={'/dashboard/progress'}>
+                        <Link to={'/progress'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.PROGRESS /></i>Progress</li>
                         </Link>
-                        <Link to={'/dashboard/profile'}>
+                        <Link to={'/profile'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.PROFILE /></i>Profile</li>
                         </Link>
                     </ul >
@@ -104,7 +104,7 @@ const Dashboard = () => {
                                         <ICONS.MOON color='black' fontSize={27} />
                                     )}
                             </i>
-                            <Link to={'/dashboard/profile'}>
+                            <Link to={'/profile'}>
                                 <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2'>
                                     <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
                                 </div>
@@ -126,23 +126,23 @@ const Dashboard = () => {
                     onClick={(e) => { e.stopPropagation() }}
                 >
                     <div className='flex justify-between items-center'>
-                        <Link to={'/dashboard/home'}><i className='cursor-pointer' onClick={toggleSideBar}><ICONS.LOGO color='#fcc6e6' fontSize={35} /></i></Link>
+                        <Link to={'/home'}><i className='cursor-pointer' onClick={toggleSideBar}><ICONS.LOGO color='#fcc6e6' fontSize={35} /></i></Link>
                         <i className='cursor-pointer' onClick={toggleSideBar}><ICONS.CLOSE color='#fcc6e6' fontSize={25} /></i>
                     </div>
                     <ul className='mt-6 text-zinc-400'>
-                        <Link to={'/dashboard/home'}>
+                        <Link to={'/home'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer' onClick={toggleSideBar}><i className='mr-4'><ICONS.HOME /></i>Overview</li>
                         </Link>
-                        <Link to={'/dashboard/workout'}>
+                        <Link to={'/workout'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer' onClick={toggleSideBar}><i className='mr-4'><ICONS.WORKOUT /></i>Workout</li>
                         </Link>
-                        <Link to={'/dashboard/nutrition'}>
+                        <Link to={'/nutrition'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer' onClick={toggleSideBar}><i className='mr-4'><ICONS.NUTRITION /></i>Nutrition</li>
                         </Link>
-                        <Link to={'/dashboard/progress'}>
+                        <Link to={'/progress'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer' onClick={toggleSideBar}><i className='mr-4'><ICONS.PROGRESS /></i>Progress</li>
                         </Link>
-                        <Link to={'/dashboard/profile'}>
+                        <Link to={'/profile'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer' onClick={toggleSideBar}><i className='mr-4'><ICONS.PROFILE /></i>Profile</li>
                         </Link>
                     </ul>

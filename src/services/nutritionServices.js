@@ -26,7 +26,13 @@ const getNutritions = async () => {
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 }
-
+const getNutritionById=async(nutritionId)=>{
+  try {
+    const response=await axios.get(`${Nutriton_Url.NUTRITION_URL}/`)
+  } catch (error) {
+    throw error.response?.data || { msg: "An unknown error occurred." };
+  }
+}
   const addNutrition = async (payload) => {
     try {
       const response = await axios.post(
