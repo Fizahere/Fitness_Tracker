@@ -1,8 +1,14 @@
 import axios from "axios"
+import { jwtDecode } from "jwt-decode";
 
 const Auth_Url = {
     AUTH_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/auth'
 }
+export const getUserIdFromToken = () => {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwtDecode(token);
+    return decodedToken?.user?.id;
+  };
 
 const createAccount = async (payload) => {
     try {

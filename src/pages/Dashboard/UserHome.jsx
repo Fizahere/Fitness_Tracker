@@ -1,7 +1,10 @@
 import React from 'react'
 import ICONS from '../../assets/constants/icons'
+import Calendar from '../../components/Mists/Calender'
+import WorkoutTrackingChart from '../../components/Mists/WorkoutTrackingChart'
 
 const UserHome = () => {
+  
   return (
     <div>
       <div className='flex flex-col lg:flex-row w-auto'>
@@ -56,6 +59,10 @@ const UserHome = () => {
         <div className='lg:w-2/5 w-auto bg-[#1b1b1c] m-4 p-6 rounded-3xl min-h-screen'>
           <p className='text-3xl text-white'>Activity Tracking</p>
           <p className='text-zinc-400'>Tuesday, 26 November</p>
+          <div>
+            <Calendar/>
+            <WorkoutTrackingChart/>
+          </div>
         </div>
       </div>
     </div>

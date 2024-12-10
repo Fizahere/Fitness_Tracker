@@ -1,12 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
 import AuthenticatedRoutes from "./routes/AuthenticatedRoutes";
 import { useEffect, useState } from "react";
-import MainLayout from "./components/MainLayout";
-import './App.css'
-import { WorkoutServices } from "./services/WorkoutServices";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Login from "./pages/Auth/Login";
 import UnAuthenticatedRoutes from "./routes/UnAuthenticatedRoutes";
+import './App.css'
 
 function App() {
   const queryClient = new QueryClient({
@@ -30,15 +27,15 @@ function App() {
       setIsAuthenticated(false)
     }
   }, [])
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          {/* <Login/> */}
           {isAuthenticated ?
             <AuthenticatedRoutes />
             :
-            <UnAuthenticatedRoutes setIsAuthenticated={setIsAuthenticated}/>
+            <UnAuthenticatedRoutes setIsAuthenticated={setIsAuthenticated} />
           }
         </BrowserRouter>
       </QueryClientProvider>

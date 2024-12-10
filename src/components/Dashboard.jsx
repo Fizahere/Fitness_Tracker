@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ICONS from '../assets/constants/icons'
 import { Link, Outlet } from 'react-router-dom';
 import '../App.css'
+import ProfileModal from './Mists/ProfileModal';
 
 const Dashboard = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -39,11 +40,31 @@ const Dashboard = () => {
     const toggleSideBar = () => {
         setIsSidebarOpen(!isSidebarOpen)
     }
+    //profile modsl 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const buttonRef = useRef(null);
+    const [modalPosition, setModalPosition] = useState({});
 
+    const user = {
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        profileImage: 'https://via.placeholder.com/150',
+    };
+
+    const handleButtonClick = () => {
+        if (buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect();
+            setModalPosition({
+                top: rect.bottom + window.scrollY,
+                left: rect.left + window.scrollX,
+            });
+        }
+        setIsModalOpen(!isModalOpen);
+    };
     return (
-        <div className='bg-gray-200 w-auto dark:bg-black min-h-screen'>
+        <div className='bg-gray-200 dark:bg-black min-h-screen'>
             <div className='flex flex-col md:flex-row'>
-                <div className='pt-4 ml-3 flex md:hidden justify-between items-center text-black dark:text-white'>
+                <div className='pt-4 px-4 md:px-0 md:ml-3 flex md:hidden justify-between items-center text-black dark:text-white'>
                     <div className='flex items-center'>
                         <i className='cursor-pointer' onClick={toggleSideBar}><ICONS.HAMBURGER fontSize={20} /></i>
                         <Link to={'/home'}><i><ICONS.LOGO className='ml-2' fontSize={28} /></i></Link>
@@ -60,10 +81,11 @@ const Dashboard = () => {
                                 )}
                         </i>
                         <Link to={'/profile'}>
-                            <div className='border-2 border-black dark:border-white rounded-full p-1.5 mx-2'>
-                                <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
-                            </div>
+                        <div className='border-2 border-black dark:border-white rounded-full p-1.5 mx-2'>
+                            <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
+                        </div>
                         </Link>
+
                     </div>
                 </div>
                 <div className={`bg-[#1b1b1c] w-1/6 px-10 py-10 rounded-r-3xl min-h-screen hidden md:flex flex-col items-center`}>
@@ -104,11 +126,23 @@ const Dashboard = () => {
                                         <ICONS.MOON color='black' fontSize={27} />
                                     )}
                             </i>
-                            <Link to={'/profile'}>
-                                <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2'>
-                                    <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
-                                </div>
-                            </Link>
+                            {/* <Link to={'/profile'}> */}
+                            <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2'>
+                                <ICONS.PROFILE
+                                    className="cursor-pointer"
+                                    fontSize={16}
+                                    ref={buttonRef}
+                                    onClick={handleButtonClick}
+                                />
+
+                            </div>
+                            <ProfileModal
+                                isOpen={isModalOpen}
+                                onClose={() => setIsModalOpen(false)}
+                                user={user}
+                                position={modalPosition}
+                            />
+                            {/* </Link> */}
                         </div>
                     </div>
                     <div className='px-3'>

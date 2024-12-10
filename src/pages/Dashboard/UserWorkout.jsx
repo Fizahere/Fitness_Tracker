@@ -4,12 +4,7 @@ import { WorkoutServices } from '../../services/WorkoutServices';
 import ICONS from '../../assets/constants/icons';
 import { jwtDecode } from 'jwt-decode';
 import WorkoutDataTable from '../../components/Mists/WorkoutDataTable';
-
-const getUserIdFromToken = () => {
-  const token = localStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-  return decodedToken?.user?.id;
-};
+import { getUserIdFromToken } from '../../services/authServices';
 
 const workoutCategories = ['strength', 'cardio', 'flexibility', 'endurance'];
 
@@ -112,10 +107,10 @@ const UserWorkout = () => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-between mb-4 items-center">
+      <div className="flex justify-around md:justify-between mb-4 items-center w-screen lg:w-auto">
         <h1 className="text-3xl font-bold text-black dark:text-white">Workouts</h1>
         <button
-          className="text-white bg-black dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
+          className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
           onClick={() => toggleDrawer(true)}
         >
           Add Workout
@@ -155,24 +150,24 @@ const UserWorkout = () => {
             <form onSubmit={handleSaveWorkout}>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium">Title</label>
+                  <label className="block text-sm font-medium text-black dark:text-white">Title</label>
                   <input
                     type="text"
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full p-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium">Category</label>
+                  <label className="block text-sm font-medium text-black dark:text-white">Category</label>
                   <select
                     name="category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   >
                     <option value="" disabled>
@@ -188,7 +183,7 @@ const UserWorkout = () => {
 
                 {['exerciseName', 'sets', 'reps', 'weight', 'notes'].map((field) => (
                   <div key={field}>
-                    <label className="block text-sm font-medium">
+                    <label className="block text-sm font-medium text-black dark:text-white">
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </label>
                     <input
@@ -198,7 +193,7 @@ const UserWorkout = () => {
                       onChange={(e) =>
                         setExercises({ ...exercises, [field]: e.target.value })
                       }
-                      className="w-full p-2 border rounded-lg"
+                      className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                       required={field !== 'notes'}
                     />
                   </div>
@@ -206,7 +201,7 @@ const UserWorkout = () => {
 
                 <button
                   type="submit"
-                  className="bg-black text-white dark:bg-white dark:text-black px-4 py-3 rounded-lg w-full"
+                  className="bg-[#262135] text-white dark:bg-white dark:text-black px-4 py-3 rounded-lg w-full"
                   disabled={isSavingWorkout}
                 >
                   {isSavingWorkout ? 'Saving...' : 'Save Workout'}

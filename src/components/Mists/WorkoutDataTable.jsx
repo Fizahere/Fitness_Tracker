@@ -23,39 +23,33 @@ const WorkoutDataTable = ({
 
     return (
         <div className="overflow-x-auto">
-            <table className="min-w-full bg-transparent dark:border-[#1b1b1c] border border-gray-200 rounded-lg shadow-md">
+            <table className="bg-transparent dark:border-[#1b1b1c] border border-gray-200 rounded-lg shadow-md">
                 <thead>
                     <tr className="bg-gray-300 text-gray-700 dark:bg-[#1b1b1c] dark:text-zinc-400 text-sm font-semibold">
-                        <th className="px-6 py-3 text-left">S.no</th>
-                        <th className="px-6 py-3 text-left">Exercise Name</th>
-                        <th className="px-6 py-3 text-left">Sets</th>
-                        <th className="px-6 py-3 text-left">Reps</th>
-                        <th className="px-6 py-3 text-left">Weights</th>
-                        <th className="px-6 py-3 text-left">Notes</th>
-                        <th className="px-6 py-3 text-left">Category</th>
-                        <th className="px-6 py-3 text-left">Edit</th>
-                        <th className="px-6 py-3 text-left">Delete</th>
+                        {['S.no', 'Exercise Name', 'Sets', 'Reps', 'Weights', 'Notes', 'Category', 'Edit', 'Delete'].map((headerName) => (
+                            <th className="px-2 md:px-8 py-3 text-left">{headerName}</th>
+                        ))}
                     </tr>
                 </thead>
                 <tbody className="text-gray-700 dark:text-zinc-400">
                     {data.length >= 1 ? (
-                        data.map((singleData,index) => (
+                        data.map((singleData, index) => (
                             <tr
                                 key={singleData._id}
                                 className="hover:bg-gray-50 border-b dark:hover:bg-[#1b1b1c]"
                             >
-                                <td className="px-6 py-4">{index+1}</td>
-                                <td className="px-6 py-4">
-                                    <p className='text-black w-32'>{singleData.title}</p>
+                                <td className="px-2 md:px-8 py-4">{index + 1}.</td>
+                                <td className="px-2 md:px-8 py-4">
+                                    <p className='text-black dark:text-white w-36'>{singleData.title}</p>
                                     <p>{singleData.exercises.exerciseName}</p>
                                 </td>
-                                <td className="px-6 py-4">{singleData.exercises.sets}</td>
-                                <td className="px-6 py-4">{singleData.exercises.reps}</td>
-                                <td className="px-6 py-4">{singleData.exercises.weight}</td>
-                                <td className="px-6 py-4"><p className="w-32">{singleData.exercises.notes}</p></td>
-                                <td className="px-6 py-4">{singleData.category}</td>
-                                <td className="px-6 py-4">
-                                    <button className="text-white bg-blue-400 px-4 rounded-lg py-2"
+                                <td className="px-2 md:px-8 py-4">{singleData.exercises.sets}</td>
+                                <td className="px-2 md:px-8 py-4">{singleData.exercises.reps}</td>
+                                <td className="px-2 md:px-8 py-4">{singleData.exercises.weight}</td>
+                                <td className="px-2 md:px-8 py-4"><p className="w-36">{singleData.exercises.notes}</p></td>
+                                <td className="px-2 md:px-8 py-4">{singleData.category}</td>
+                                <td className="px-2 md:px-8 py-4">
+                                    <button className="text-white bg-blue-400 px-2 md:px-8 rounded-lg py-2"
                                         onClick={() => onEdit(singleData._id)}
                                     >
                                         Edit
@@ -63,7 +57,7 @@ const WorkoutDataTable = ({
                                 </td>
                                 <td className="px-6 py-4">
                                     <button
-                                        className="text-white bg-red-400 px-4 rounded-lg py-2 w-20 ml-2"
+                                        className="text-white bg-red-400 px-2 md:px-8 rounded-lg py-2 w-20 ml-2"
                                         onClick={() => deleteWorkoutHandler(singleData._id)}
                                     >
                                         {deleteLoading && deletingWorkoutId === singleData._id ? (

@@ -6,7 +6,7 @@ const UserProfile = () => {
   return (
     <div>
       <div className='relative'>
-        <img src={bgImage} className='h-72 w-screen' alt="" />
+        <img src={bgImage} className='h-72 w-full' alt="" />
         <div className='absolute top-36 left-12 lg:left-20 border-2 border-gray-500 rounded-full p-1 h-64 w-64'><img src={'https://i.pinimg.com/736x/67/6f/15/676f1545c9539c15809b3c5595b6986f.jpg'} className='h-full w-full bg-contain rounded-full' alt="" /></div>
         <div className='flex flex-col md:flex-row justify-around mt-4'>
           <div className='md:w-7/12'>
