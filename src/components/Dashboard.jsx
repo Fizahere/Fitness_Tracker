@@ -127,12 +127,12 @@ const Dashboard = () => {
                                     )}
                             </i>
                             {/* <Link to={'/profile'}> */}
-                            <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2'>
+                            <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2 cursor-pointer'
+                                    onClick={handleButtonClick}
+                                    >
                                 <ICONS.PROFILE
-                                    className="cursor-pointer"
                                     fontSize={16}
                                     ref={buttonRef}
-                                    onClick={handleButtonClick}
                                 />
 
                             </div>

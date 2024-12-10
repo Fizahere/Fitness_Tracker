@@ -32,7 +32,7 @@ const WorkoutTrackingChart = () => {
             <h1 className='text-white text-2xl mb-4'>Workout Tracking</h1>
             <CalendarHeatmap
                 startDate={new Date(today.getFullYear(), 0, 6)}
-                endDate={new Date(today.getFullYear(), 6, 31)}
+                endDate={new Date(today.getFullYear(), 12, 30)}
                 values={heatmapData}
                 classForValue={(value) => {
                     if (!value) return 'color-empty';
@@ -58,8 +58,9 @@ const WorkoutTrackingChart = () => {
                     fill: #6a4b5d!important;
                 }
 
-                .react-calendar-heatmap .react-calendar-heatmap__svg {
-                    height: 250px!important; 
+                .react-calendar-heatmap {
+                    // height: 100px!important; 
+                    // width: 2000px!important; 
                 }
                 `}
             </style>
