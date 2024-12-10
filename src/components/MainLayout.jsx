@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { Link as ScrollLink, Element } from "react-scroll";
 import ICONS from "../assets/constants/icons";
 import Home from "../pages/Home";
@@ -22,7 +22,6 @@ const MainLayout = () => {
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
-
   return (
     <div>
       <nav className={`flex justify-between bg-white text-black py-4 fixed top-0 left-0 w-full z-50`}>
@@ -35,11 +34,13 @@ const MainLayout = () => {
           <h3 className="text-1xl mt-1 ml-2">Fitness Tracker</h3>
         </div>
         <ul className="hidden md:flex">
+        <ScrollLink to="home" smooth={true} duration={500}>
           <li className="mr-6 mt-1 text-lg cursor-pointer">
-            <ScrollLink to="home" smooth={true} duration={500}>
+            <Link to="/" smooth={true} duration={500}>
               Home
-            </ScrollLink>
+            </Link>
           </li>
+          </ScrollLink>
           <li className="mr-6 mt-1 text-lg cursor-pointer">
             <ScrollLink to="contact-info" smooth={true} duration={500}>
               Contact
@@ -62,13 +63,9 @@ const MainLayout = () => {
           </li>
         </ul>
         <div className="mr-6 ml-6 text-lg mt-1">
-          <a
-            href="https://github.com/fizahere/BoilerPlate"
-            target="blank"
-            className="border-black border-2 rounded-full px-3 py-2"
-          >
-            Github
-          </a>
+          <Link to="/explore">
+            Explore
+          </Link>
         </div>
       </nav>
 
@@ -117,7 +114,9 @@ const MainLayout = () => {
       </div>
 
       <div className="mt-16">
-        <Element name="socials" id="socials">
+        {location.pathname === '/explore' && <Outlet />}
+        <div className={`${location.pathname==='/explore'?'hidden':'block'}`}>
+        <Element name="home" id="home">
           <Home />
         </Element>
         <Element name="about" id="about">
@@ -131,6 +130,7 @@ const MainLayout = () => {
         <Element name="contact-info" id="contact-info">
           <Contact />
         </Element>
+        </div>
       </div>
 
       <div className="lg:px-40 px-4 py-20 bg-gray-100">
