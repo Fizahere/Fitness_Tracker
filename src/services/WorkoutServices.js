@@ -6,6 +6,14 @@ const WorkoutUrl = {
 
 const token = localStorage.getItem('token');
 
+const getAllWorkouts=async()=>{
+  try {
+    const response=await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-all-workouts`)
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { msg: "An unknown error occurred." };
+  }
+}
 const getWorkouts = async () => {
   try {
     if (!token) {
@@ -84,6 +92,7 @@ const deleteWorkout = async (userId) => {
   }
 }
 export const WorkoutServices = {
+  getAllWorkouts,
   getWorkouts,
   getWorkoutById,
   addWorkout,

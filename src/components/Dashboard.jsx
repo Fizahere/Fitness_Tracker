@@ -45,11 +45,11 @@ const Dashboard = () => {
     const buttonRef = useRef(null);
     const [modalPosition, setModalPosition] = useState({});
 
-    const user = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        profileImage: 'https://via.placeholder.com/150',
-    };
+    // const user = {
+    //     name: 'John Doe',
+    //     email: 'john.doe@example.com',
+    //     profileImage: 'https://via.placeholder.com/150',
+    // };
 
     const handleButtonClick = () => {
         if (buttonRef.current) {

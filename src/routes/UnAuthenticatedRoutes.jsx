@@ -4,7 +4,7 @@ import Notfound from '../pages/Notfound'
 import MainLayout from '../components/MainLayout'
 import Login from '../pages/Auth/Login'
 import Signup from '../pages/Auth/Signup'
-import ExploreUsers from '../pages/ExporeUsers'
+import ExploreUsers from '../pages/ExploreUsers'
 
 const UnAuthenticatedRoutes = ({setIsAuthenticated}) => {
 
