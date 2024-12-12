@@ -7,7 +7,7 @@ const ProfileModal = ({ isOpen, onClose, user, position }) => {
 
     return (
         <div
-            className="absolute top-12 lg:right-7 bg-white dark:bg-[#1b1b1c] dark:text-white text-black rounded-lg shadow-5xl p-10 z-50"
+            className="absolute border-2 dark:border-white border-black top-12 lg:right-7 bg-white dark:bg-[#1b1b1c] dark:text-white text-black rounded-lg p-10 z-50"
             style={{ top: position.top, left: position.left }}
         >
             <button

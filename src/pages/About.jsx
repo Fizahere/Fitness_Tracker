@@ -39,13 +39,13 @@ const About = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-14">
-          {tabsData.map((tab) => (
-            <div className='mr-2 mt-2'>
+          {tabsData.map((tab,index) => (
+            <div key={index} className='mr-2 mt-2'>
             <img src={tab.image} alt="" className='rounded-3xl h-80' />
            <div className="p-3">
            <div className="flex justify-between items-center">
              <h3 className='text-black text-4xl font-bold my-5'>{tab.heading}</h3>
-             <i className='text-lg bg-lime-300 rounded-full p-4'>{tab.icon}</i>
+             <i className='text-lg bg-lime-300 rounded-full p-4 hover:text-xl'>{tab.icon}</i>
              </div>
               <p className='text-zinc-700'>{tab.description}</p>
            </div>

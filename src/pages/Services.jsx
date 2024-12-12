@@ -34,8 +34,8 @@ const Services = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-14">
-          {tabsData.map((tab) => (
-            <div className='bg-black px-8 py-14 rounded-3xl mr-2 text-zinc-400 hover:text-lime-300 mt-2'>
+          {tabsData.map((tab,index) => (
+            <div key={index} className='bg-black px-8 py-14 rounded-3xl mr-2 text-zinc-400 hover:text-lime-300 mt-2 hover:py-10'>
               <i className='flex justify-end text-5xl'>{tab.icon}</i>
               <h3 className='text-white text-4xl font-bold my-5'>{tab.heading}</h3>
               <p>{tab.description}</p>

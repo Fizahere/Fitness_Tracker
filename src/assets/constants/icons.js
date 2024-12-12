@@ -25,6 +25,9 @@ import { GiMeal } from "react-icons/gi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
+import { BiHeart } from "react-icons/bi";
+import { BiPlusCircle } from "react-icons/bi";
+import { BsHeartFill } from "react-icons/bs";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -54,6 +57,9 @@ const ICONS = {
     LOADING: AiOutlineLoading3Quarters,
     OPENEYE: FaEye,
     CLOSEDEYE: FaEyeSlash,
+    LIKE:BiHeart,
+    LIKED:BsHeartFill,
+    FOLLOW:BiPlusCircle
 }
 
 export default ICONS

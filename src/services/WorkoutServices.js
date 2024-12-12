@@ -49,11 +49,6 @@ const addWorkout = async (payload) => {
     const response = await axios.post(
       `${WorkoutUrl.WORKOUT_URL}/add-workout`,
       payload,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
     );
     return response;
   } catch (error) {

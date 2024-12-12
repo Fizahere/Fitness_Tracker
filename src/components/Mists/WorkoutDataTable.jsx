@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ICONS from '../../assets/constants/icons';
 
-const WorkoutDataTable = ({
+const  WorkoutDataTable = ({
     data,
     workoutLoading,
     deleteLoading,

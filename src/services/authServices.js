@@ -6,9 +6,12 @@ const Auth_Url = {
 }
 export const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
+    if(!token){
+        return;
+    }
     const decodedToken = jwtDecode(token);
     return decodedToken?.user?.id;
-  };
+};
 
 const createAccount = async (payload) => {
     try {
@@ -33,9 +36,26 @@ const logout = () => {
     setAuthState({ isAuthenticated: false, token: null });
     localStorage.removeItem('token');
 };
-
+const followUser = async (userId) => {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+           throw error.response?.data || { msg: "An unknown error occurred." };
+        }
+        const response = await axios.post(`${Auth_Url.AUTH_URL}/follow/${userId}`,
+            {}, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        return response;
+    } catch (error) {
+        throw error.response?.data || { msg: "An unknown error occurred." };
+    }
+}
 export const AuthServices = {
     createAccount,
     login,
     logout,
+    followUser,
 }

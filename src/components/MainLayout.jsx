@@ -34,28 +34,34 @@ const MainLayout = () => {
           <h3 className="text-1xl mt-1 ml-2">Fitness Tracker</h3>
         </div>
         <ul className="hidden md:flex">
-        <ScrollLink to="home" smooth={true} duration={500}>
-          <li className="mr-6 mt-1 text-lg cursor-pointer">
-            <Link to="/" smooth={true} duration={500}>
-              Home
-            </Link>
-          </li>
+          <ScrollLink to="home" smooth={true} duration={500}>
+            <li className="mr-6 mt-1 text-lg cursor-pointer">
+              <Link to="/">
+                Home
+              </Link>
+            </li>
           </ScrollLink>
-          <li className="mr-6 mt-1 text-lg cursor-pointer">
-            <ScrollLink to="contact-info" smooth={true} duration={500}>
-              Contact
-            </ScrollLink>
-          </li>
-          <li className="mr-6 mt-1 text-lg cursor-pointer">
-            <ScrollLink to="services" smooth={true} duration={500}>
-              Services
-            </ScrollLink>
-          </li>
-          <li className="mr-6 mt-1 text-lg cursor-pointer">
-            <ScrollLink to="about" smooth={true} duration={500}>
-              About
-            </ScrollLink>
-          </li>
+          <ScrollLink to="contact-info" smooth={true} duration={500}>
+            <li className="mr-6 mt-1 text-lg cursor-pointer">
+              <Link to="/">
+                Contact
+              </Link>
+            </li>
+          </ScrollLink>
+          <ScrollLink to="services" smooth={true} duration={500}>
+            <li className="mr-6 mt-1 text-lg cursor-pointer">
+              <Link to="/">
+                Services
+              </Link>
+            </li>
+          </ScrollLink>
+          <ScrollLink to="about" smooth={true} duration={500}>
+            <li className="mr-6 mt-1 text-lg cursor-pointer">
+              <Link to="/">
+                About
+              </Link>
+            </li>
+          </ScrollLink>
           <li className="mr-6 mt-1 text-lg cursor-pointer">
             <Link to="/login">
               Login
@@ -84,26 +90,34 @@ const MainLayout = () => {
             />
           </div>
           <ul className="mt-10">
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <ScrollLink onClick={toggleDrawer} to="home" smooth={true} duration={500}>
-                Home
-              </ScrollLink>
-            </li>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <ScrollLink onClick={toggleDrawer} to="contact-info" smooth={true} duration={500}>
-                Contact
-              </ScrollLink>
-            </li>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <ScrollLink onClick={toggleDrawer} to="services" smooth={true} duration={500}>
-                Services
-              </ScrollLink>
-            </li>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <ScrollLink onClick={toggleDrawer} to="about" smooth={true} duration={500}>
-                About
-              </ScrollLink>
-            </li>
+            <ScrollLink onClick={toggleDrawer} to="home" smooth={true} duration={500}>
+              <li className="mr-6 mt-1 text-lg cursor-pointer">
+                <Link to="/">
+                  Home
+                </Link>
+              </li>
+            </ScrollLink>
+            <ScrollLink onClick={toggleDrawer} to="contact-info" smooth={true} duration={500}>
+              <li className="mr-6 mt-1 text-lg cursor-pointer">
+                <Link to="/">
+                  Contact
+                </Link>
+              </li>
+            </ScrollLink>
+            <ScrollLink onClick={toggleDrawer} to="services" smooth={true} duration={500}>
+              <li className="mr-6 mt-1 text-lg cursor-pointer">
+                <Link to="/">
+                  Services
+                </Link>
+              </li>
+            </ScrollLink>
+            <ScrollLink onClick={toggleDrawer} to="about" smooth={true} duration={500}>
+              <li className="mr-6 mt-1 text-lg cursor-pointer">
+                <Link to="/">
+                  About
+                </Link>
+              </li>
+            </ScrollLink>
             <li className="mr-6 mt-1 text-lg cursor-pointer">
               <Link onClick={toggleDrawer} to="/login">
                 Login
@@ -114,22 +128,23 @@ const MainLayout = () => {
       </div>
 
       <div className="mt-16">
-        {location.pathname === '/explore' && <Outlet />}
-        <div className={`${location.pathname==='/explore'?'hidden':'block'}`}>
-        <Element name="home" id="home">
-          <Home />
-        </Element>
-        <Element name="about" id="about">
-          <About />
-        </Element>
+        {location.pathname === '/explore' && <Outlet/>}
+        {location.pathname === '/profile' && <Outlet />}
+        <div className={`${location.pathname === '/explore' || location.pathname === '/profile' ? 'hidden' : 'block'}`}>
+          <Element name="home" id="home">
+            <Home />
+          </Element>
+          <Element name="about" id="about">
+            <About />
+          </Element>
 
-        <Element name="services" id="services">
-          <Services />
-        </Element>
+          <Element name="services" id="services">
+            <Services />
+          </Element>
 
-        <Element name="contact-info" id="contact-info">
-          <Contact />
-        </Element>
+          <Element name="contact-info" id="contact-info">
+            <Contact />
+          </Element>
         </div>
       </div>
 

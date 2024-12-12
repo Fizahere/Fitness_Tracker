@@ -10,8 +10,20 @@ const UserProfile = () => {
         <div className='absolute top-36 left-12 lg:left-20 border-4 border-double dark:border-[#efeeb6] border-[#6a4b5d] rounded-full p-1 h-64 w-64'><img src={'https://i.pinimg.com/736x/67/6f/15/676f1545c9539c15809b3c5595b6986f.jpg'} className='h-full w-full bg-contain rounded-full' alt="" /></div>
         <div className='flex flex-col md:flex-row justify-around mt-4'>
           <div className='md:w-7/12'>
-            <p className='dark:text-white text-black font-bold text-3xl mt-28 lg:mt-0 lg:ml-[22rem] text-center lg:text-left'>Fiza -</p>
-            <p className='text-gray-400 lg:ml-[22rem] text-center lg:text-left'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio, aperiam.</p>
+<div className='flex'>
+<p className='dark:text-white text-black font-bold text-3xl mt-28 lg:mt-0 lg:ml-[22rem] text-center lg:text-left'>Fiza -</p>
+<div className="flex w-full justify-evenly">
+<div className='text-center'>
+<p className='font-bold text-lg'>Followers</p>
+<p>3223</p>
+</div>
+<div className='text-center'>
+  <p className='font-bold text-lg'>Following</p>
+  <p>2323</p>
+</div>
+</div>
+</div>
+            <p className='text-zinc-600 dark:text-zinc-300 lg:ml-[22rem] text-center lg:text-left'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio, aperiam. Lorem ipsum dolor sit.</p>
             <div className='bg-gradient-to-t from-[#efeeb6] to-[#1b1b1c] rounded-3xl p-4 lg:p-8 text-white mt-4 lg:mt-10 flex lg:justify-around'>
               <div className='text-lg font-bold'>
                 <p>Name:</p>
@@ -20,7 +32,7 @@ const UserProfile = () => {
               </div>
               <div className='text-lg ml-2 md:ml-0'>
                 <p>Fiza -</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio, aperiam.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio, aperiam. Lorem ipsum dolor sit.</p>
                 <p>fizabatool028@gmail.com</p>
                 <div className='flex justify-end mt-4 cursor-pointer'>
                 <button className='bg-white px-5 py-2 rounded-full text-black' title='edit your information'>
