@@ -18,8 +18,8 @@ const ExploreUsers = () => {
         WorkoutServices.getAllWorkouts
     );
     const allWorkoutsMemoData = useMemo(
-        () => allWorkoutsData?.results,
-        [allWorkoutsData?.results]
+        () => allWorkoutsData?.results || [],
+        [allWorkoutsData]
     );
 
     const { mutateAsync: followUserRequest } = useMutation(AuthServices.followUser, {

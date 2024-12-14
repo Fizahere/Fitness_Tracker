@@ -7,6 +7,7 @@ import UserProfile from '../pages/Dashboard/UserProfile'
 import UserWorkout from '../pages/Dashboard/UserWorkout'
 import Nutrition from '../pages/Dashboard/Nutrition'
 import Progress from '../pages/Dashboard/Progress'
+import Posts from '../pages/Dashboard/Posts'
 
 const AuthenticatedRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AuthenticatedRoutes = () => {
         <Route path='/home' element={<UserHome />} />
         <Route path='/workout' element={<UserWorkout />} />
         <Route path='/nutrition' element={<Nutrition />} />
+        <Route path='/posts' element={<Posts />} />
         <Route path='/progress' element={<Progress />} />
         <Route path='/profile' element={<UserProfile />} />
       </Route>

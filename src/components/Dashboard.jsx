@@ -100,6 +100,9 @@ const Dashboard = () => {
                         <Link to={'/nutrition'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.NUTRITION /></i>Nutrition</li>
                         </Link>
+                        <Link to={'/posts'}>
+                            <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.NUTRITION /></i>Posts</li>
+                        </Link>
                         <Link to={'/progress'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.PROGRESS /></i>Progress</li>
                         </Link>

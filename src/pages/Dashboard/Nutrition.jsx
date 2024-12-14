@@ -98,7 +98,7 @@ const Nutrition = () => {
     setDrawerOpen(open);
   };
 
-  const handleSaveWorkout = async (e) => {
+  const handleSaveNutrition = async (e) => {
     e.preventDefault();
     const nutritionPayload = {
       userId,
@@ -164,7 +164,7 @@ const Nutrition = () => {
                   <ICONS.CLOSE fontSize={20} />
                 </i>
               </div>
-              <form onSubmit={handleSaveWorkout}>
+              <form onSubmit={handleSaveNutrition}>
                 <div className="flex">
                   <div>
                     <label className="block text-sm font-medium text-black dark:text-white">
