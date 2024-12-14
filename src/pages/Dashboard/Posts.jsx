@@ -9,7 +9,7 @@ const Posts = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
-  const authorId = getUserIdFromToken();
+  const author = getUserIdFromToken();
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
 
@@ -86,12 +86,12 @@ const Posts = () => {
   const handleSavePost = async (e) => {
     e.preventDefault();
     const postPayload = new FormData();
-    postPayload.append('authorId', authorId);
+    postPayload.append('author', author);
     postPayload.append('content', content);
     if (file) {
       postPayload.append('file', file);
     }
-
+console.log(postPayload,'post payload')
     try {
       await savepost(
         isEdit ? [dataToEdit._id, postPayload] : postPayload

@@ -63,7 +63,7 @@ const PostDataTable = ({
                                 </button>
                             </td>
                         </tr>
-                    )) : !isLoading && <p className='text-center p-5'>No Data</p>}
+                    )) : !isLoading && <p className="text-center p-5">No Data</p>}
                 </tbody>
             </table>
             <div className='flex justify-center items-center m-10'>

@@ -106,9 +106,9 @@ const UserWorkout = () => {
   };
 
   return (
-    <div className="p-4">
+    <div>
       <div className="flex justify-around md:justify-between mb-4 items-center w-screen lg:w-auto">
-        <h1 className="text-3xl font-bold text-black dark:text-white">Workouts</h1>
+        <h1 className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">Workouts</h1>
         <button
           className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
           onClick={() => toggleDrawer(true)}

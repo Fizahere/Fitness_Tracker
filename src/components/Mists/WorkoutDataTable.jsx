@@ -23,10 +23,10 @@ const  WorkoutDataTable = ({
 
     return (
         <div className="overflow-x-auto">
-            <table className="bg-transparent dark:border-[#1b1b1c] border border-gray-200 rounded-lg shadow-md">
+            <table className="min-w-full bg-transparent dark:border-[#1b1b1c] border border-gray-200 rounded-lg shadow-md">
                 <thead>
                     <tr className="bg-gray-300 text-gray-700 dark:bg-[#1b1b1c] dark:text-zinc-400 text-sm font-semibold">
-                        {['S.no', 'Exercise Name', 'Sets', 'Reps', 'Weights', 'Notes', 'Category', 'Edit', 'Delete'].map((headerName) => (
+                    {['S.no', 'Exercise Name', 'Sets', 'Reps', 'Weights', 'Notes', 'Category', 'Edit', 'Delete'].map((headerName) => (
                             <th className="px-2 md:px-8 py-3 text-left">{headerName}</th>
                         ))}
                     </tr>
