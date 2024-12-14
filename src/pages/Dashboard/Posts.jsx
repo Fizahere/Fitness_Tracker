@@ -85,11 +85,12 @@ const Posts = () => {
 
   const handleSavePost = async (e) => {
     e.preventDefault();
-    const postPayload = {
-      authorId,
-      content,
-      file,
-    };
+    const postPayload = new FormData();
+    postPayload.append('authorId', authorId);
+    postPayload.append('content', content);
+    if (file) {
+      postPayload.append('file', file);
+    }
 
     try {
       await savepost(
@@ -149,7 +150,7 @@ const Posts = () => {
                   <ICONS.CLOSE fontSize={20} />
                 </i>
               </div>
-              <form onSubmit={handleSavePost}>
+              <form onSubmit={handleSavePost} encType='multipart/form-data'>
                   <div>
                     <label className="block text-sm font-medium text-black dark:text-white">
                       Content
