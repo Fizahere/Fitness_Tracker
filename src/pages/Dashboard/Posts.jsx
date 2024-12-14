@@ -14,11 +14,12 @@ const Posts = () => {
   const [file, setFile] = useState(null);
 
   const handleImageChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-          const reader = new FileReader();
-          reader.onload = () => setFile(reader.result);
-      reader.readAsDataURL(file);
+    const file = e.target.files[0];
+    if (file) {
+      // const reader = new FileReader();
+      // reader.onload = () => setFile(reader.result);
+      // reader.readAsDataURL(file);
+      setFile(file);
     }
   };
   const queryClient = useQueryClient();
@@ -32,7 +33,7 @@ const Posts = () => {
 
   const { data: postsData, isLoading: postsLoading } = useQuery(
     'posts-data',
-    PostServices
+    PostServices.getPosts
   );
 
   const postsMemoData = useMemo(
@@ -91,7 +92,7 @@ const Posts = () => {
     if (file) {
       postPayload.append('file', file);
     }
-console.log(postPayload,'post payload')
+    console.log(postPayload)
     try {
       await savepost(
         isEdit ? [dataToEdit._id, postPayload] : postPayload
@@ -151,50 +152,51 @@ console.log(postPayload,'post payload')
                 </i>
               </div>
               <form onSubmit={handleSavePost} encType='multipart/form-data'>
-                  <div>
-                    <label className="block text-sm font-medium text-black dark:text-white">
-                      Content
-                    </label>
-                    <input
-                      type="text"
-                      name="content"
-                      value={content}
-                      onChange={(e) =>
-                        setContent(e.target.value)
-                      }
-                      className="w-full p-2 border rounded-lg"
-                      required
-                    />
-                  </div>
-                   <div className='mt-4'>
-                   <label className='font-medium'>Image</label>
+                <div>
+                  <label className="block text-sm font-medium text-black dark:text-white">
+                    Content
+                  </label>
+                  <input
+                    type="text"
+                    name="content"
+                    value={content}
+                    onChange={(e) =>
+                      setContent(e.target.value)
+                    }
+                    className="w-full p-2 border rounded-lg"
+                    required
+                  />
+                </div>
+                <div className='mt-4'>
+                  <label className='font-medium'>Image</label>
                   <div className="w-full h-64 flex items-center justify-center border-2 border-dashed rounded-md border-gray-300 text-gray-400 relative">
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleImageChange}
-    className="hidden"
-    id="fileInput"
-  />
-  <label
-    htmlFor="fileInput"
-    className="absolute inset-0 flex items-center justify-center cursor-pointer"
-  >
-    {file ? (
-      <img
-        src={file}
-        alt="Uploaded"
-        className="w-full h-full object-cover rounded-md"
-      />
-    ) : (
-      <div className="text-gray-400 flex flex-col items-center">
-        <ICONS.FOLLOW className="text-3xl mb-2" />
-        <p>Click to Upload</p>
-      </div>
-    )}
-  </label>
-</div>
-                   </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                      id="fileInput"
+                    />
+                    <label
+                      htmlFor="fileInput"
+                      className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                    >
+                      {file ? (
+                        <img
+                          src={URL.createObjectURL(file)} // Generate object URL from file
+                          alt="Uploaded"
+                          className="w-full h-full object-cover rounded-md"
+                        />
+                      ) : (
+                        <div className="text-gray-400 flex flex-col items-center">
+                          <ICONS.FOLLOW className="text-3xl mb-2" />
+                          <p>Click to Upload</p>
+                        </div>
+                      )}
+                    </label>
+                  </div>
+
+                </div>
                 <div className="mt-4">
                   <button
                     type="submit"

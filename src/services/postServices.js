@@ -35,16 +35,14 @@ const getPostById = async (postId) => {
   }
 }
 const addPost = async (payload) => {
+  payload.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+  });
   try {
     const response = await axios.post(
+      // 'http://localhost:2000/post/create-post',
       `${Post_Url.POST_URL}/create-post`,
-      payload,
-      {
-        headers: {
-          "Content-Type": `multipart/form-data`,
-        },
-      }
-    );
+      payload);
     return response.data;
   } catch (error) {
     throw error.response?.data || { msg: "An unknown error occurred." };
@@ -53,7 +51,13 @@ const addPost = async (payload) => {
 const editPosts = async (props) => {
   const [postId, payload]=props;
   try {
-    const response = await axios.put(`${Post_Url.POST_URL}/edit-post/${postId}`, payload)
+    const response = await axios.put(`${Post_Url.POST_URL}/edit-post/${postId}`, payload,
+      {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
+    )
     return response;
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
@@ -61,13 +65,18 @@ const editPosts = async (props) => {
 }
 const deletePost = async (postId) => {
   try {
-    const response = await axios.delete(`${Post_Url.POST_URL}/delete-post/${postId}`)
+    const response = await axios.delete(`${Post_Url.POST_URL}/delete-post/${postId}`,
+      {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
+    )
     return response;
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
   }
 }
-
 const PostChart = async () => {
   const response = await axios.get(
     `${Post_Url.POST_URL}/get-posts`,
