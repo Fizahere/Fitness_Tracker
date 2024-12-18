@@ -28,6 +28,7 @@ import { FaEyeSlash } from "react-icons/fa6";
 import { BiHeart } from "react-icons/bi";
 import { BiPlusCircle } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
+import { AiOutlineComment } from "react-icons/ai";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -59,7 +60,8 @@ const ICONS = {
     CLOSEDEYE: FaEyeSlash,
     LIKE:BiHeart,
     LIKED:BsHeartFill,
-    FOLLOW:BiPlusCircle
+    FOLLOW:BiPlusCircle,
+    COMMENT:AiOutlineComment,
 }
 
 export default ICONS

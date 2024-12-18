@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import ICONS from '../assets/constants/icons'
 import { Link, Outlet } from 'react-router-dom';
 import '../App.css'
-import ProfileModal from './Mists/ProfileModal';
+import { Models } from './Mists/ProfileModal';
 
 const Dashboard = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -41,8 +41,10 @@ const Dashboard = () => {
         setIsSidebarOpen(!isSidebarOpen)
     }
     //profile modsl 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const buttonRef = useRef(null);
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+    const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+    const profileButtonRef = useRef(null);
+    const notificationButtonRef = useRef(null);
     const [modalPosition, setModalPosition] = useState({});
 
     const user = {
@@ -51,15 +53,25 @@ const Dashboard = () => {
         profileImage: 'https://via.placeholder.com/150',
     };
 
-    const handleButtonClick = () => {
-        if (buttonRef.current) {
-            const rect = buttonRef.current.getBoundingClientRect();
+    const handleProfileButtonClick = () => {
+        if (profileButtonRef.current) {
+            const rect = profileButtonRef.current.getBoundingClientRect();
             setModalPosition({
                 top: rect.bottom + window.scrollY,
                 left: rect.left + window.scrollX,
             });
         }
-        setIsModalOpen(!isModalOpen);
+        setIsProfileModalOpen(!isProfileModalOpen);
+    };
+    const handleNotificationButtonClick = () => {
+        if (notificationButtonRef.current) {
+            const rect = notificationButtonRef.current.getBoundingClientRect();
+            setModalPosition({
+                top: rect.bottom + window.scrollY,
+                left: rect.left + window.scrollX,
+            });
+        }
+        setIsNotificationModalOpen(!isNotificationModalOpen);
     };
     return (
         <div className='bg-gray-200 dark:bg-black min-h-screen'>
@@ -119,7 +131,13 @@ const Dashboard = () => {
                             <p className='ml-2'><b>Karachi,</b>Pakistan</p>
                         </div>
                         <div className='hidden md:flex text-black dark:text-white items-center'>
-                            <i className='cursor-pointer'><ICONS.RINGBELL fontSize={27} /></i>
+                            <i className='cursor-pointer' onClick={handleNotificationButtonClick}><ICONS.RINGBELL fontSize={27} /></i>
+                            <Models.NotificationsModel
+                                isNotificationModalOpen={isNotificationModalOpen}
+                                onNotificationModalClose={() => setIsNotificationModalOpen(false)}
+                                user={user}
+                                position={modalPosition}
+                            />
                             <i className='ml-4 cursor-pointer' onClick={toggleDarkMode}>
                                 {isDarkMode ? (
                                     <ICONS.SUN color='white' fontSize={27} />
@@ -131,17 +149,17 @@ const Dashboard = () => {
                             </i>
                             {/* <Link to={'/profile'}> */}
                             <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2 cursor-pointer'
-                                    onClick={handleButtonClick}
+                                    onClick={handleProfileButtonClick}
                                     >
                                 <ICONS.PROFILE
                                     fontSize={16}
-                                    ref={buttonRef}
+                                    ref={profileButtonRef}
                                 />
 
                             </div>
-                            <ProfileModal
-                                isOpen={isModalOpen}
-                                onClose={() => setIsModalOpen(false)}
+                            <Models.ProfileModal
+                                isProfileModalOpen={isProfileModalOpen}
+                                onProfileModalClose={() => setIsProfileModalOpen(false)}
                                 user={user}
                                 position={modalPosition}
                             />

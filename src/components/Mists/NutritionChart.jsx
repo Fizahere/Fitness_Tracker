@@ -64,7 +64,7 @@ const NutritionChart = () => {
   };
 
   return (
-    <div className="max-w-[200px] mx-auto">
+    <div className="max-w-[300px] mx-auto">
       <Doughnut data={chartData} />
     </div>
   );

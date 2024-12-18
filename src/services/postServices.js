@@ -5,6 +5,14 @@ const Post_Url = {
 }
 const token = localStorage.getItem('token');
 
+const getAllPosts = async () => {
+  try {
+    const response = await axios.get(`${Post_Url.POST_URL}/get-all-posts`)
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { msg: "An unknown error occurred." };
+  }
+}
 const getPosts = async () => {
   try {
     if (!token) {
@@ -49,12 +57,12 @@ const addPost = async (payload) => {
   }
 };
 const editPosts = async (props) => {
-  const [postId, payload]=props;
+  const [postId, payload] = props;
   try {
     const response = await axios.put(`${Post_Url.POST_URL}/edit-post/${postId}`, payload,
       {
-        headers:{
-          Authorization:`Bearer ${token}`
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       }
     )
@@ -67,8 +75,8 @@ const deletePost = async (postId) => {
   try {
     const response = await axios.delete(`${Post_Url.POST_URL}/delete-post/${postId}`,
       {
-        headers:{
-          Authorization:`Bearer ${token}`
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       }
     )
@@ -77,23 +85,88 @@ const deletePost = async (postId) => {
     throw error || { msg: "An unknown error occurred." };
   }
 }
-const PostChart = async () => {
-  const response = await axios.get(
-    `${Post_Url.POST_URL}/get-posts`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data.results;
-};
+const LikePost = async (postId) => {
+  try {
+    const response = await axios.post(`${Post_Url.POST_URL}/like-post`,
+      { postId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
+const DisLikePost = async (postId) => {
+  try {
+    const response = await axios.post(`${Post_Url.POST_URL}/dislike-post`,
+      { postId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
+const AddComment = async (postId, payload) => {
+  try {
+    const response = await axios.post(`${Post_Url.POST_URL}/comment/${postId}`,
+      { payload },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
+const DeleteComment = async (commentId, postId) => {
+  try {
+    const response = await axios.delete(`${Post_Url.POST_URL}/delete-comment/${commentId}`,
+      { postId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
 
+// const PostChart = async () => {
+//   const response = await axios.get(
+//     `${Post_Url.POST_URL}/get-posts`,
+//     {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     }
+//   );
+//   return response.data.results;
+// };
 export const PostServices = {
+  getAllPosts,
   getPosts,
   getPostById,
   addPost,
   editPosts,
   deletePost,
-  PostChart,
+  LikePost,
+  DisLikePost,
+  AddComment,
+  DeleteComment,
+  // PostChart,
 }

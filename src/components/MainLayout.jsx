@@ -25,7 +25,7 @@ const MainLayout = () => {
   return (
     <div>
       <nav className={`flex justify-between bg-white text-black py-4 fixed top-0 left-0 w-full z-50`}>
-        <h3 className="hidden md:block ml-4 text-3xl">Fitness Tracker</h3>
+        <h3 className="hidden md:block ml-4 text-3xl font-serif">Fitness Tracker</h3>
         <div className="flex md:hidden">
           <ICONS.HAMBURGER
             className={`text-xl cursor-pointer mr-4 mt-1 ml-2 ${isOpen ? "hidden" : "block"}`}
@@ -83,7 +83,7 @@ const MainLayout = () => {
           className={`fixed top-0 p-5 left-0 h-full w-64 bg-zinc-900 text-white text-black transition-transform transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="flex justify-between md:hidden">
-            <h3 className="text-1xl">Fitness Tracker</h3>
+            <h3 className="text-1xl font-serif">Fitness Tracker</h3>
             <ICONS.CLOSE
               className={`text-1xl mt-1 cursor-pointer ${isOpen ? "block" : "hidden"}`}
               onClick={toggleDrawer}
@@ -151,7 +151,7 @@ const MainLayout = () => {
       <div className="lg:px-40 px-4 py-20 bg-gray-100">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div>
-            <h3 className="text-1xl md:text-3xl font-bold">Fitness Tracker</h3>
+            <h3 className="text-1xl md:text-2xl font-bold font-serif">Fitness Tracker</h3>
             <p className="text-zinc-600 mt-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta, suscipit?</p>
           </div>
           <div>

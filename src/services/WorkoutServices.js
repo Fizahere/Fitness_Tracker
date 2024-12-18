@@ -6,9 +6,9 @@ const WorkoutUrl = {
 
 const token = localStorage.getItem('token');
 
-const getAllWorkouts=async()=>{
+const getAllWorkouts = async () => {
   try {
-    const response=await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-all-workouts`)
+    const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-all-workouts`)
     return response.data;
   } catch (error) {
     throw error.response?.data || { msg: "An unknown error occurred." };
@@ -34,7 +34,20 @@ const getWorkouts = async () => {
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 };
-
+const getCaloryBurn = async () => {
+  try {
+    const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-calories`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response;
+  } catch (error) {
+    throw error.response?.data || { msg: "An unknown error occurred." };
+  }
+}
 const getWorkoutById = async (workoutId) => {
   try {
     const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-workout/${workoutId}`);
@@ -56,7 +69,7 @@ const addWorkout = async (payload) => {
   }
 };
 export const editWorkout = async (props) => {
-  const [workoutId, payload]=props;
+  const [workoutId, payload] = props;
   try {
     const response = await axios.put(
       `${WorkoutUrl.WORKOUT_URL}/update-workout/${workoutId}`,
@@ -93,4 +106,5 @@ export const WorkoutServices = {
   addWorkout,
   editWorkout,
   deleteWorkout,
+  getCaloryBurn,
 }

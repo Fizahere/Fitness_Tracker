@@ -7,5 +7,6 @@ const COLORS={
     maroon:'#6a4b5d',
     darkblue:'#262135',
     lightgrey:'#e5e6e1',
+    theme_dark:'#1b1b1c',
 }
 export default COLORS;

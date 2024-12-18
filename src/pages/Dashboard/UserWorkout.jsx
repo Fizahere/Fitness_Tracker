@@ -2,7 +2,6 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { WorkoutServices } from '../../services/WorkoutServices';
 import ICONS from '../../assets/constants/icons';
-import { jwtDecode } from 'jwt-decode';
 import WorkoutDataTable from '../../components/Mists/WorkoutDataTable';
 import { getUserIdFromToken } from '../../services/authServices';
 
@@ -110,7 +109,7 @@ const UserWorkout = () => {
       <div className="flex justify-around md:justify-between mb-4 items-center w-screen lg:w-auto">
         <h1 className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">Workouts</h1>
         <button
-          className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
+          className="text-white bg-[#262135] px-5 py-3 text-md rounded-lg"
           onClick={() => toggleDrawer(true)}
         >
           Add Workout
@@ -187,7 +186,7 @@ const UserWorkout = () => {
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </label>
                     <input
-                      type={field === 'notes' ? 'textarea' : 'text'}
+                      type={(field === 'notes' || field === 'exerciseName') ? 'text' : 'number'}
                       name={field}
                       value={exercises[field]}
                       onChange={(e) =>
@@ -201,7 +200,7 @@ const UserWorkout = () => {
 
                 <button
                   type="submit"
-                  className="bg-[#262135] text-white dark:bg-white dark:text-black px-4 py-3 rounded-lg w-full"
+                  className="text-white bg-[#262135] px-4 py-3 rounded-lg w-full"
                   disabled={isSavingWorkout}
                 >
                   {isSavingWorkout ? 'Saving...' : 'Save Workout'}

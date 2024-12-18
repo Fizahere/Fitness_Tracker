@@ -16,9 +16,6 @@ const Posts = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // const reader = new FileReader();
-      // reader.onload = () => setFile(reader.result);
-      // reader.readAsDataURL(file);
       setFile(file);
     }
   };
@@ -92,7 +89,6 @@ const Posts = () => {
     if (file) {
       postPayload.append('file', file);
     }
-    console.log(postPayload)
     try {
       await savepost(
         isEdit ? [dataToEdit._id, postPayload] : postPayload
@@ -163,13 +159,13 @@ const Posts = () => {
                     onChange={(e) =>
                       setContent(e.target.value)
                     }
-                    className="w-full p-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                     required
                   />
                 </div>
                 <div className='mt-4'>
                   <label className='font-medium'>Image</label>
-                  <div className="w-full h-64 flex items-center justify-center border-2 border-dashed rounded-md border-gray-300 text-gray-400 relative">
+                  <div className="w-full h-64 flex items-center justify-center border-2 border-dashed rounded-md border-gray-300 bg-white dark:bg-[#1b1b1c] text-black dark:text-white relative">
                     <input
                       type="file"
                       accept="image/*"
@@ -183,7 +179,7 @@ const Posts = () => {
                     >
                       {file ? (
                         <img
-                          src={URL.createObjectURL(file)} // Generate object URL from file
+                          src={URL.createObjectURL(file)} 
                           alt="Uploaded"
                           className="w-full h-full object-cover rounded-md"
                         />

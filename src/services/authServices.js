@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 const Auth_Url = {
     AUTH_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/auth'
 }
+
 export const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
     if(!token){
@@ -53,9 +54,27 @@ const followUser = async (userId) => {
         throw error.response?.data || { msg: "An unknown error occurred." };
     }
 }
+const unfollowUser = async (userId) => {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+           throw error.response?.data || { msg: "An unknown error occurred." };
+        }
+        const response = await axios.post(`${Auth_Url.AUTH_URL}/unfollow/${userId}`,
+            {}, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        return response;
+    } catch (error) {
+        throw error.response?.data || { msg: "An unknown error occurred." };
+    }
+}
 export const AuthServices = {
     createAccount,
     login,
     logout,
     followUser,
+    unfollowUser,
 }
