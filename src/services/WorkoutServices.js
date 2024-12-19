@@ -14,23 +14,12 @@ const getAllWorkouts = async () => {
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 }
-const getWorkouts = async () => {
+const getWorkouts = async (userId) => {
   try {
-    if (!token) {
-      throw { msg: "No token found, please log in again." };
-    }
-
-    const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-workouts`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-workouts/${userId}`);
+    console.log(response,'workout data request')
     return response;
   } catch (error) {
-    if (error.response?.status === 403 || error.response?.status === 401) {
-      localStorage.removeItem('token');
-      throw { msg: "Session expired, please log in again." };
-    }
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 };

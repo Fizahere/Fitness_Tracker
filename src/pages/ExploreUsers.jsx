@@ -13,7 +13,6 @@ const ExploreUsers = () => {
     const [isForyou, setIsForyou] = useState('foryou');
     const navigate = useNavigate();
     const [isFollowed, setIsFollowed] = useState(false);
-    // const [isLiked, setIsLiked] = useState(false)
     const token = localStorage.getItem('token');
     //set valye of comment
     const [comment, setComment] = useState('')
@@ -48,7 +47,6 @@ const ExploreUsers = () => {
         }
         await followUserRequest(userId);
     };
-    //did'nt apply yet,
     const visitProfile = (userId) => {
         if (!token) {
             navigate('/login');
@@ -69,7 +67,6 @@ const ExploreUsers = () => {
             }
         }
     )
-
     const { mutateAsync: disLikePostRequest } = useMutation(
         PostServices.DisLikePost,
         {
@@ -82,7 +79,6 @@ const ExploreUsers = () => {
             }
         }
     )
-
     const likePostHandler = async (postId) => {
         if (!token) {
             navigate('/login');
@@ -136,7 +132,6 @@ const ExploreUsers = () => {
                 <div>
                     {isForyou === 'foryou' ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8 gap-2">
-
                             {allPostsMemoData ? (
                                 allPostsMemoData.map((singleData, index) => (
                                     <PostCard
@@ -159,7 +154,6 @@ const ExploreUsers = () => {
                                     </p>
                                 )
                             )}
-
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

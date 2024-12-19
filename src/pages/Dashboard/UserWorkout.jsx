@@ -38,10 +38,10 @@ const UserWorkout = () => {
     }
   }, [isEdit, dataToEdit]);
 
-  const { data: workoutData, isLoading: workoutLoading } = useQuery(
-    'workout-data',
-    WorkoutServices.getWorkouts
-  );
+  const { data: workoutData, isLoading: workoutLoading } =  useQuery(['workout-data', userId],
+      () => WorkoutServices.getWorkouts(userId), {
+      enabled: !!userId,
+    });
   const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
 
   const { mutateAsync: deleteWorkout, isLoading: deleteLoading } = useMutation(

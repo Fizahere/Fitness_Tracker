@@ -8,6 +8,7 @@ import { WorkoutServices } from '../services/WorkoutServices';
 import image from '../assets/images/victoria.jpg'
 import { useParams } from 'react-router-dom';
 import { PostServices } from '../services/postServices';
+import PostCard from '../components/Mists/PostCard';
 
 const Profile = () => {
     const { id: userId } = useParams();
@@ -25,7 +26,6 @@ const Profile = () => {
         () => userData?.data?.results,
         [userData]
     )
-    console.log(userMemoData)
 
     const { mutateAsync: unfollowUserRequest } = useMutation(AuthServices.unfollowUser, {
         onSuccess: () => {
@@ -67,8 +67,22 @@ const Profile = () => {
         () => postsData?.data?.results || [],
         [postsData]
     );
-    //i'm here displaying posts on the click of specific user profile then i have to display wotrrkout of them on condition of tabs
     console.log(postsMemoData, 'postsMemoData')
+    const { data: workoutData, isLoading: workoutLoading } = useQuery(
+        ['workout-data', userId],
+        () => WorkoutServices.getWorkouts(userId),
+        {
+            enabled: !!userId,
+            staleTime: 1000 * 60,
+        }
+    );
+
+    const workoutMemoData = useMemo(
+        () => workoutData?.data?.results || [],
+        [workoutData]
+    );
+
+    console.log(workoutMemoData, 'workoutMemoData');
 
     const followUserHandler = async (userId) => {
         if (!token) {
@@ -143,19 +157,46 @@ const Profile = () => {
                                     : 'Follow'
                             }
                         </button>
-                        <div className="flex justify-evenly font-bold mt-4">
-                            <p
-                                className={`text-xl cursor-pointer ${isTab === 'posts' ? 'border-b-2' : 'border-none'} border-black p-2`}
-                                onClick={() => setIsTab('posts')}
-                            >
-                                Posts
-                            </p>
-                            <p
-                                className={`text-xl cursor-pointer ml-4 ${isTab === 'workouts' ? 'border-b-2' : 'border-none'} border-black p-2`}
-                                onClick={() => setIsTab('workouts')}
-                            >
-                                Workouts
-                            </p>
+                        <div>
+                            <div className="flex justify-evenly font-bold mt-4">
+                                <p
+                                    className={`text-xl cursor-pointer ${isTab === 'posts' ? 'border-b-2' : 'border-none'} border-black p-2`}
+                                    onClick={() => setIsTab('posts')}
+                                >
+                                    Posts
+                                </p>
+                                <p
+                                    className={`text-xl cursor-pointer ml-4 ${isTab === 'workouts' ? 'border-b-2' : 'border-none'} border-black p-2`}
+                                    onClick={() => setIsTab('workouts')}
+                                >
+                                    Workouts
+                                </p>
+                            </div>
+                            <div>
+                                {isTab === 'posts'
+                                    ?
+                                    <div>
+                                        {postsMemoData && postsMemoData.map((singleData, index) => (
+                                            <PostCard
+                                                key={index}
+                                                data={singleData}
+                                            />
+                                        ))}
+                                    </div>
+                                    :
+                                    <div>
+                                        {workoutMemoData && workoutMemoData.map((singleData, index) => (
+                                            <div key={index} className='border-2 p-4'>
+                                                <p className='text-xl'>{singleData?.title}</p>
+                                                <div className="flex text-zinc-600">
+                                                    <p>{singleData?.exercises.exerciseName} {"=>"}</p>
+                                                    <p className='ml-2'>{singleData?.exercises.notes}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
 
