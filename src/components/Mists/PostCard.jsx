@@ -93,26 +93,29 @@ const PostCard = (props) => {
                         {data.author.username}
                     </p>
                 </div>
-                <div className="h-72 w-72 p-2">
-                    <img
+                <div className="h-40 w-40 md:h-60 md:w-60 lg:h-72 lg:w-72 p-2">
+                   {data?.image ? <img
                         className="mt-2 rounded-md h-full w-full border-2 border-black"
-                        src={`https://fitness-tracker-backend-1-vqav.onrender.com/${data.image}`} alt="" />
+                        src={`https://fitness-tracker-backend-1-vqav.onrender.com/${data?.image}`} alt="" />
+                    :
+                    <ICONS.PROFILE className="mt-2 rounded-md h-full w-full border-2 border-black"/>    
+                    }
                 </div>
-                <div className="flex items-center mt-2 mx-5 h-8 justify-between">
+                <div className="flex items-center mt-2 mx-5 h-8 justify-between w-36 md:w-56 lg:w-72">
                     <div className="flex">
                         {
                             data?.likes.includes(loggedInUserId) ?
-                                <ICONS.LIKED className="text-xl text-red-500 mt-1 active:text-[1.4rem] cursor-pointer" onClick={() => disLikePostHandler(data._id)} />
+                                <ICONS.LIKED className="text-md md:text-xl text-red-500 mt-1 active:text-[0.9rem] md:active:text-[1.4rem] cursor-pointer" onClick={() => disLikePostHandler(data._id)} />
                                 :
-                                <ICONS.LIKE className="text-2xl active:text-[1.6rem] cursor-pointer" onClick={() => likePostHandler(data._id)} />
+                                <ICONS.LIKE className="text-xl md:text-2xl active:text-[1rem] md:active:text-[1.6rem] cursor-pointer" onClick={() => likePostHandler(data._id)} />
                         }
                         <p className="ml-1">{data?.likes.length}</p>
                     </div>
                     <div>
-                        <ICONS.COMMENT className="mt-1 text-2xl hover:text-[1.6rem] cursor-pointer" />
+                        <ICONS.COMMENT className="md:mt-1 text-xl md:text-2xl hover:text-[1.4rem] md:hover:text-[1.6rem] cursor-pointer" />
                     </div>
                 </div>
-                <p className="mt-1 ml-4">{data.content}</p>
+                <p className="mt-1 ml-4 text-xs md:text-md">{data.content}</p>
             </div>
         </>
     )

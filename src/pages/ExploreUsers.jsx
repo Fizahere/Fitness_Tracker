@@ -27,7 +27,7 @@ const ExploreUsers = () => {
         () => allPosts?.results || [],
         [allPosts]
     );
-
+console.log(allPostsMemoData,'allPostsMemoData')
     const { data: allUsersData, isLoading: usersLoading } = useQuery(
         'users-data',
         UserServices.getAllUsers
@@ -164,7 +164,8 @@ const ExploreUsers = () => {
                 </div>
                 <div>
                     {isForyou === 'foryou' ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 md:gap-20 lg:gap-3">
+                        <div className="grid grid-cols-2 md:grid-cols-3">
+                        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 md:gap-20 lg:gap-3"> */}
                             {allPostsMemoData ? (
                                 allPostsMemoData.map((singleData, index) => (
                                     <PostCard
