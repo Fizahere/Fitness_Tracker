@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useMatch } from "react-router-dom";
 import { Link as ScrollLink, Element } from "react-scroll";
 import ICONS from "../assets/constants/icons";
 import Home from "../pages/Home";
@@ -9,6 +9,9 @@ import Contact from "../pages/Contact";
 
 const MainLayout = () => {
   const location = useLocation();
+  const matchProfile = useMatch('/visit-profile/:id');
+  const matchSettings = useMatch('/explore');
+
   useEffect(() => {
     if (location.hash) {
       const section = document.querySelector(location.hash);
@@ -128,9 +131,9 @@ const MainLayout = () => {
       </div>
 
       <div className="mt-16">
-        {location.pathname === '/explore' && <Outlet/>}
-        {location.pathname === '/profile' && <Outlet />}
-        <div className={`${location.pathname === '/explore' || location.pathname === '/profile' ? 'hidden' : 'block'}`}>
+
+        {(matchProfile || matchSettings) && <Outlet />}
+        <div className={`${(location.pathname === '/explore' || location.pathname.startsWith('/visit-profile/')) ? 'hidden' : 'block'}`}>
           <Element name="home" id="home">
             <Home />
           </Element>

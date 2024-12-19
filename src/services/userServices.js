@@ -34,7 +34,17 @@ const getUser = async () => {
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 }
-
+const getUserById = async (userId) => {
+  try {
+    if (!token) {
+      throw { msg: "No token found, please log in again." };
+    }
+    const response = await axios.get(`${User_Url.USER_URL}/get-user-by-id/${userId}`);
+    return response;
+  } catch (error) {
+    throw error.response?.data || { msg: "An unknown error occurred." };
+  }
+}
 const editUser = async (props) => {
   const [userId, payload] = props;
   console.log(userId)
@@ -98,6 +108,7 @@ const getNotifications = async () => {
 export const UserServices = {
   getAllUsers,
   getUser,
+  getUserById,
   editUser,
   deleteUser,
   getNotifications,

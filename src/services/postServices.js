@@ -13,24 +13,11 @@ const getAllPosts = async () => {
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 }
-const getPosts = async () => {
+const getPosts = async (userId) => {
   try {
-    if (!token) {
-      throw { msg: "No token found, please log in again." };
-    }
-
-    const response = await axios.get(`${Post_Url.POST_URL}/get-posts`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(response, 'response');
+    const response = await axios.get(`${Post_Url.POST_URL}/get-posts/${userId}`);
     return response;
   } catch (error) {
-    if (error.response?.status === 403 || error.response?.status === 401) {
-      localStorage.removeItem('token');
-      throw { msg: "Session expired, please log in again." };
-    }
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 }

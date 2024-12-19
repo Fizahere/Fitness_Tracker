@@ -38,20 +38,8 @@ const ExploreUsers = () => {
             console.error(error.msg);
         }
     });
-    const { mutateAsync: unfollowUserRequest } = useMutation(AuthServices.unfollowUser, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('all-posts');
-            console.log('User unfollowed.');
-        },
-        onError: (error) => {
-            // if (error.msg === 'You are already following.') {
-            //     setIsFollowed(true);
-            // }
-            console.error(error.msg);
-        }
-    });
 
-    const followUserHandler = async (userId) => {
+     const followUserHandler = async (userId) => {
         if (!token) {
             navigate('/login');
             return;
@@ -59,20 +47,12 @@ const ExploreUsers = () => {
         await followUserRequest(userId);
     };
     //did'nt apply yet,
-    const unfollowUserHandler = async (userId) => {
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-        await unfollowUserRequest(userId);
-    };
-
     const visitProfile = (userId) => {
         if (!token) {
             navigate('/login');
             return;
         }
-        navigate('/profile')
+        navigate(`/visit-profile/${userId}`)
     }
 
     const { mutateAsync: likePostRequest } = useMutation(

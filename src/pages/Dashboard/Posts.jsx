@@ -28,10 +28,14 @@ const Posts = () => {
     }
   }, [isEdit, dataToEdit]);
 
-  const { data: postsData, isLoading: postsLoading } = useQuery(
-    'posts-data',
-    PostServices.getPosts
-  );
+  // const { data: postsData, isLoading: postsLoading } = useQuery(
+  //   'posts-data',
+  //   PostServices.getPosts
+  // );
+  const { data: postsData, isLoading: postsLoading } = useQuery(['posts-data', author],
+    () => PostServices.getPosts(author), {
+    enabled: !!author,
+  });
 
   const postsMemoData = useMemo(
     () => postsData?.data?.results || [],
@@ -179,7 +183,7 @@ const Posts = () => {
                     >
                       {file ? (
                         <img
-                          src={URL.createObjectURL(file)} 
+                          src={URL.createObjectURL(file)}
                           alt="Uploaded"
                           className="w-full h-full object-cover rounded-md"
                         />
