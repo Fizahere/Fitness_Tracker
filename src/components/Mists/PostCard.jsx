@@ -16,7 +16,7 @@ const PostCard = (props) => {
     return (
         <>
         
-        <div className="max-w-sm w-full lg:max-w-full lg:flex">
+        {/* <div className="max-w-sm w-full lg:max-w-full lg:flex">
         <div
   className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
   style={{
@@ -62,8 +62,8 @@ const PostCard = (props) => {
           </div>
         </div>
       </div>
-    </div>
-            {/* <div
+    </div> */}
+            <div
                 key={key}
                 className="m-4"
             >
@@ -113,7 +113,7 @@ const PostCard = (props) => {
                     </div>
                 </div>
                 <p className="mt-1 ml-4">{data.content}</p>
-            </div> */}
+            </div>
         </>
     )
 }

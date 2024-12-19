@@ -57,7 +57,13 @@ const Profile = () => {
             console.error(error.msg);
         }
     });
-
+    const followUserHandler = async (userId) => {
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+        await followUserRequest(userId);
+    };
     const { data: postsData, isLoading: postsLoading } = useQuery(['posts-data', userId],
         () => PostServices.getPosts(userId), {
         enabled: !!userId,
@@ -81,16 +87,6 @@ const Profile = () => {
         () => workoutData?.data?.results || [],
         [workoutData]
     );
-
-    console.log(workoutMemoData, 'workoutMemoData');
-
-    const followUserHandler = async (userId) => {
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-        await followUserRequest(userId);
-    };
     // const userMemoData = {
     //     username: 'Victoria',
     //     email: 'victoriaabc@gmail.com',
@@ -141,7 +137,7 @@ const Profile = () => {
                             {userMemoData?.about}
                         </p>
                         <button
-                            className='bg-[#262135] text-white font-bold w-40 flex justify-center px-4 py-2 rounded-lg lg:ml-[22rem] text-center lg:text-left mt-4'
+                            className='ml-10 bg-[#262135] text-white font-bold w-40 flex justify-center px-4 py-2 rounded-lg lg:ml-[22rem] text-center lg:text-left mt-4'
                             onClick={() => {
                                 if ((userMemoData?.followers || []).includes(loggedInUserId)) {
                                     unfollowUserHandler(userMemoData?._id);
@@ -175,7 +171,7 @@ const Profile = () => {
                             <div>
                                 {isTab === 'posts'
                                     ?
-                                    <div>
+                                    <div className='grid grid-cols-1 lg:grid-cols-2'>
                                         {postsMemoData && postsMemoData.map((singleData, index) => (
                                             <PostCard
                                                 key={index}
