@@ -140,8 +140,8 @@ const Posts = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
-              <div className="flex justify-between items-center mb-10">
-                <h2 className="text-xl font-semibold text-black dark:text-white">
+              <div className="flex justify-between items-center mb-10 text-black dark:text-white">
+                <h2 className="text-xl font-semibold">
                   {isEdit ? 'Edit posts' : 'Add New posts'}
                 </h2>
                 <i

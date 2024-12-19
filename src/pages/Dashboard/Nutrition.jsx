@@ -153,8 +153,8 @@ const Nutrition = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
-              <div className="flex justify-between items-center mb-10">
-                <h2 className="text-xl font-semibold text-black dark:text-white">
+              <div className="flex justify-between items-center mb-10 text-black dark:text-white">
+                <h2 className="text-xl font-semibold">
                   {isEdit ? 'Edit Nutrition' : 'Add New Nutrition'}
                 </h2>
                 <i
@@ -177,7 +177,7 @@ const Nutrition = () => {
                       onChange={(e) =>
                         setFoodItems({ ...foodItems, foodName: e.target.value })
                       }
-                      className="w-52 p-2 border rounded-lg"
+                      className="w-52 p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                       required
                     />
                   </div>
@@ -189,7 +189,7 @@ const Nutrition = () => {
                       name="mealType"
                       value={mealType}
                       onChange={(e) => setMealType(e.target.value)}
-                      className="w-full px-4 py-2 border rounded-md"
+                      className="w-full px-4 py-2 border rounded-md bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                       required
                     >
                       <option value="" disabled>
@@ -220,7 +220,7 @@ const Nutrition = () => {
                             [field]: e.target.value,
                           })
                         }
-                        className="w-full p-2 border rounded-lg"
+                        className="w-full p-2 border rounded-lg bg-white text-black dark:bg-[#1b1b1c] dark:text-white"
                         required
                       />
                     </div>

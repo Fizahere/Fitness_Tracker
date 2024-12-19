@@ -91,7 +91,7 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
                         </li>
                     ))} */}
                     {notificationMemoData && notificationMemoData.map((singleNotification) => (
-                        <li className='border-b-2 border-black p-4 hover:bg-zinc-800 min-w-96'>
+                        <li className='border-b-2 border-black p-4 hover:bg-zinc-100 dark:hover:bg-zinc-800 min-w-96'>
                             <div className='flex items-center justify-between'>
                                 <div className="flex items-center">
                                     {(singleNotification?.fromUser?.profileImage) ? <img

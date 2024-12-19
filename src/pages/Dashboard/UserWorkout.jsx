@@ -109,7 +109,7 @@ const UserWorkout = () => {
       <div className="flex justify-around md:justify-between mb-4 items-center w-screen lg:w-auto">
         <h1 className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">Workouts</h1>
         <button
-          className="text-white bg-[#262135] px-5 py-3 text-md rounded-lg"
+          className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
           onClick={() => toggleDrawer(true)}
         >
           Add Workout
@@ -137,7 +137,7 @@ const UserWorkout = () => {
             className="bg-white dark:bg-black shadow-xl w-[30rem] h-full p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 text-black dark:text-white">
               <h2 className="text-xl font-semibold">
                 {isEdit ? 'Edit Workout' : 'Add New Workout'}
               </h2>
