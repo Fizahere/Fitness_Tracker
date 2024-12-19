@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useMemo, useState } from "react";
 import { AuthServices, getUserIdFromToken } from "../services/authServices";
 import userImage from '../assets/images/user.jpg';
 import ICONS from "../assets/constants/icons";
 import { useNavigate } from "react-router-dom";
 import { PostServices } from "../services/postServices";
+import PostCard from "../components/Mists/PostCard";
 
 const loggedInUserId = getUserIdFromToken(localStorage.getItem('token'));
 
@@ -16,6 +17,7 @@ const ExploreUsers = () => {
     const token = localStorage.getItem('token');
     //set valye of comment
     const [comment, setComment] = useState('')
+    const queryClient = useQueryClient();
 
     const { data: allPosts, isLoading: postLoading } = useQuery(
         'all-posts',
@@ -39,7 +41,7 @@ const ExploreUsers = () => {
         }
     });
 
-     const followUserHandler = async (userId) => {
+    const followUserHandler = async (userId) => {
         if (!token) {
             navigate('/login');
             return;
@@ -132,139 +134,62 @@ const ExploreUsers = () => {
                     </p>
                 </div>
                 <div>
-                    {isForyou === 'foryou' ?
-                        (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8 gap-2">
-                                {allPostsMemoData ? (
-                                    allPostsMemoData.map((singleData, index) => (
-                                        <div
+                    {isForyou === 'foryou' ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-8 gap-2">
+
+                            {allPostsMemoData ? (
+                                allPostsMemoData.map((singleData, index) => (
+                                    <PostCard
+                                        key={index}
+                                        data={singleData}
+                                        likePostHandler={likePostHandler}
+                                        disLikePostHandler={disLikePostHandler}
+                                        followUserHandler={followUserHandler}
+                                        visitProfile={visitProfile}
+                                    />
+                                ))
+                            ) : (
+                                Loading ? (
+                                    <i className="flex justify-center">
+                                        <ICONS.LOADING className="animate-spin text-2xl my-56" />
+                                    </i>
+                                ) : (
+                                    <p className="my-56 text-zinc-700 flex items-center justify-center">
+                                        Check your internet connection
+                                    </p>
+                                )
+                            )}
+
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                            {allPostsMemoData ? (
+                                allPostsMemoData
+                                    .filter((singleData) =>
+                                        singleData?.author?.followers?.includes(loggedInUserId)
+                                    )
+                                    .map((singleData, index) => (
+                                        <PostCard
                                             key={index}
-                                            className="m-4"
-                                        >
-                                            <div className="flex items-center">
-                                                <div className="relative">
-                                                    {
-                                                        !singleData?.author?.followers.includes(loggedInUserId) &&
-                                                        singleData?.author?._id !== loggedInUserId && (
-                                                            <i
-                                                                className="absolute -right-1 -bottom-0 text-lg cursor-pointer bg-lime-300 rounded-full"
-                                                            >
-                                                                <ICONS.FOLLOW
-                                                                    onClick={() => followUserHandler(singleData?.author?._id)}
-                                                                />
-                                                            </i>
-                                                        )
-                                                    }
-                                                    <img
-                                                        src={`https://fitness-tracker-backend-1-vqav.onrender.com/${singleData.author.profileImage}`}
-                                                        className="cursor-pointer rounded-full h-10 w-10 ml-2 border-double border-2 border-[#6a4b5d] p-1"
-                                                        alt="profile image"
-                                                        onClick={() => visitProfile(singleData?.author?._id)}
-                                                    />
-                                                </div>
-                                                <p className="font-bold text-black ml-2">
-                                                    {singleData.author.username}
-                                                </p>
-                                            </div>
-                                            <div className="h-72 w-72 p-2">
-                                                <img
-                                                    className="mt-2 rounded-md h-full w-full border-2 border-black"
-                                                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${singleData.image}`} alt="" />
-                                            </div>
-                                            <div className="flex items-center mt-2 mx-5 h-8 justify-between">
-                                                <div className="flex">
-                                                    {
-                                                        singleData?.likes.includes(loggedInUserId)?
-                                                            <ICONS.LIKED className="text-xl text-red-500 mt-1 active:text-[1.4rem] cursor-pointer" onClick={() => disLikePostHandler(singleData._id)} />
-                                                            :
-                                                            <ICONS.LIKE className="text-2xl active:text-[1.6rem] cursor-pointer" onClick={() => likePostHandler(singleData._id)} />
-                                                    }
-                                                    <p className="ml-1">{singleData?.likes.length}</p>
-                                                </div>
-                                                <div>
-                                                    <ICONS.COMMENT className="mt-1 text-2xl hover:text-[1.6rem] cursor-pointer" />
-                                                </div>
-                                            </div>
-                                            <p className="mt-1 ml-4">{singleData.content}</p>
-                                        </div>
+                                            data={singleData}
+                                            Loading={postLoading}
+                                            likePostHandler={likePostHandler}
+                                            disLikePostHandler={disLikePostHandler}
+                                            followUserHandler={followUserHandler}
+                                            visitProfile={visitProfile}
+                                        />
                                     ))
-                                ) : (
-                                    postLoading ? (
-                                        <i className="flex justify-center">
-                                            <ICONS.LOADING className="animate-spin text-2xl my-56" />
-                                        </i>
-                                    ) : (
-                                        <p className="my-56 text-zinc-700 flex items-center justify-center">
-                                            Check your internet connection
-                                        </p>
-                                    )
-                                )}
-                            </div>
-                        )
-                        : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                                {allPostsMemoData ? (
-                                    allPostsMemoData.map((singleData, index) => (
-                                        <>
-                                            {singleData?.author?.followers.includes(loggedInUserId) &&
-                                                <div
-                                                    key={index}
-                                                    className="bg-[#e5e6e1] rounded-xl p-4 m-4 flex justify-between items-center"
-                                                >
-                                                    <div>
-                                                        <div className="flex items-center">
-                                                            <div className="relative">
-                                                                {
-                                                                    !singleData?.author?.followers.includes(loggedInUserId) &&
-                                                                    singleData?.author?._id !== loggedInUserId && (
-                                                                        <i
-                                                                            className="absolute right-0 bottom-1 text-xl cursor-pointer bg-lime-300 rounded-full"
-                                                                        >
-                                                                            <ICONS.FOLLOW
-                                                                                onClick={() => followUserHandler(singleData?.author?._id)}
-                                                                            />
-                                                                        </i>
-                                                                    )
-                                                                }
-                                                                <img
-                                                                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${singleData.author.profileImage}`}
-                                                                    className="cursor-pointer rounded-full h-14 w-14 border-double border-2 border-[#6a4b5d] p-1"
-                                                                    alt="profile image"
-                                                                    onClick={() => visitProfile(singleData?.author?._id)}
-                                                                />
-                                                            </div>
-                                                            <p className="font-bold text-black ml-2">
-                                                                {singleData.userId.username}
-                                                            </p>
-                                                        </div>
-                                                        <p className="text-lg ml-10">{singleData.author?.username}</p>
-                                                    </div>
-                                                    <div className="flex flex-col">
-                                                        {
-                                                            isLiked ?
-                                                                <ICONS.LIKED className="text-xl mt-1 hover:text-[1.6rem] cursor-pointer" onClick={() => disLikePostHandler(singleData._id)} />
-                                                                :
-                                                                <ICONS.LIKE className="text-2xl hover:text-[1.6rem] cursor-pointer" onClick={() => likePostHandler(singleData._id)} />
-                                                        }
-                                                    </div>
-                                                </div>
-                                            }
-                                        </>
-                                    ))
-                                ) : (
-                                    postLoading ? (
-                                        <i className="flex justify-center">
-                                            <ICONS.LOADING className="animate-spin text-2xl my-56" />
-                                        </i>
-                                    ) : (
-                                        <p className="my-56 text-zinc-700 flex items-center justify-center">
-                                            Check your internet connection
-                                        </p>
-                                    )
-                                )}
-                            </div>
-                        )
-                    }
+                            ) : postLoading ? (
+                                <i className="flex justify-center">
+                                    <ICONS.LOADING className="animate-spin text-2xl my-56" />
+                                </i>
+                            ) : (
+                                <p className="my-56 text-zinc-700 flex items-center justify-center">
+                                    Check your internet connection
+                                </p>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="w-auto md:w-1/4 md:mt-14">
