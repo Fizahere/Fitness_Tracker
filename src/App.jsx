@@ -29,11 +29,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {isAuthenticated ?
+        {/* {isAuthenticated ?
           <AuthenticatedRoutes />
           : <UnAuthenticatedRoutes />
-        }
-        {/* <Routes>
+        } */}
+        <Routes>
           {isAuthenticated ? (
             <>
               <Route path="/dashboard" element={<AuthenticatedRoutes />} />
@@ -46,7 +46,7 @@ function App() {
               <Route path="*" element={<Notfound />} />
             </>
           )}
-        </Routes> */}
+        </Routes>
       </BrowserRouter>
     </QueryClientProvider>
   );

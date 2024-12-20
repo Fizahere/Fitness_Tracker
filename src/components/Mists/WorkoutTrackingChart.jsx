@@ -83,18 +83,24 @@ import {
     Legend,
 } from 'chart.js';
 import ICONS from '../../assets/constants/icons';
+import { getUserIdFromToken } from '../../services/authServices';
 
-// Register Chart.js components
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
+const userId=getUserIdFromToken()
 
 const WorkoutBubbleChart = () => {
     const { data: workoutData, isLoading, error } = useQuery(
-        'workout-data',
-        WorkoutServices.getWorkouts
-    );
-    const workoutMemoData = useMemo(
-        () => workoutData?.data?.results, [workoutData]
-    )
+            ['workout-data', userId],
+            () => WorkoutServices.getWorkouts(userId),
+            {
+                enabled: !!userId,
+                staleTime: 1000 * 60,
+            }
+        );
+     const workoutMemoData = useMemo(
+          () => workoutData?.data?.results || [],
+          [workoutData]
+      );
     if (isLoading) return <ICONS.LOADING className='text-2xl text-white animate-spin' />;
     if (error) return <p>Error fetching workout data: {error.message}</p>;
 

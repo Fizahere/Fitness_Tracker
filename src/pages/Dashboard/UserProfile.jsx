@@ -138,13 +138,13 @@ const UserProfile = () => {
         <div className='flex flex-col lg:flex-row justify-around mt-4'>
           <div className='lg:w-7/12'>
             <div className='flex justify-center mt-28 lg:mt-0'>
-              <p className='dark:text-white text-black font-bold text-3xl lg:ml-[22rem] text-center lg:text-left'>{userMemoData?.username}</p>
+              <p className='dark:text-white text-black font-bold text-3xl lg:ml-[22rem] text-center lg:text-left mr-10 md:mr-4'>{userMemoData?.username}</p>
               {/* <div className="flex w-full justify-end md:justify-evenly text-black dark:text-white"> */}
-                <div className='text-center mr-10 md:mr-0'>
+                <div className='text-center mr-10 md:mr-4'>
                   <p className='font-bold text-lg'>Followers</p>
                   <p>{userMemoData?.followers.length}</p>
                 </div>
-                <div className='text-center mr-20 md:mr-0'>
+                <div className='text-center mr-20 md:mr-4'>
                   <p className='font-bold text-lg'>Following</p>
                   <p>{userMemoData?.following.length}</p>
                 </div>
