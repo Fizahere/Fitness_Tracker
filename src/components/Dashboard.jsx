@@ -1,12 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ICONS from '../assets/constants/icons'
 import { Link, Outlet } from 'react-router-dom';
 import '../App.css'
 import { Models } from './Mists/ProfileModal';
+import { UserServices } from '../services/userServices';
+import { AuthServices, getUserIdFromToken } from '../services/authServices';
+import { useQuery } from 'react-query';
 
 const Dashboard = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const userId = getUserIdFromToken();
 
     useEffect(() => {
         const savedDarkMode = localStorage.getItem("darkMode");
@@ -40,39 +44,45 @@ const Dashboard = () => {
     const toggleSideBar = () => {
         setIsSidebarOpen(!isSidebarOpen)
     }
-    //profile modsl 
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
     const profileButtonRef = useRef(null);
     const notificationButtonRef = useRef(null);
-    const [modalPosition, setModalPosition] = useState({});
-
-    const user = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        profileImage: 'https://via.placeholder.com/150',
-    };
+    // const [modalPosition, setModalPosition] = useState({});
 
     const handleProfileButtonClick = () => {
         if (profileButtonRef.current) {
             const rect = profileButtonRef.current.getBoundingClientRect();
-            setModalPosition({
-                top: rect.bottom + window.scrollY,
-                left: rect.left + window.scrollX,
-            });
+            // setModalPosition({
+            //     top: rect.bottom + window.scrollY,
+            //     left: rect.left + window.scrollX,
+            // });
         }
         setIsProfileModalOpen(!isProfileModalOpen);
     };
     const handleNotificationButtonClick = () => {
         if (notificationButtonRef.current) {
             const rect = notificationButtonRef.current.getBoundingClientRect();
-            setModalPosition({
-                top: rect.bottom + window.scrollY,
-                left: rect.left + window.scrollX,
-            });
+            // setModalPosition({
+            //     top: rect.bottom + window.scrollY,
+            //     left: rect.left + window.scrollX,
+            // });
         }
         setIsNotificationModalOpen(!isNotificationModalOpen);
     };
+    const { data: userData } = useQuery(
+        ['user-data', userId], () => UserServices.getUser(userId)
+    )
+    const userMemoData = useMemo(
+        () => userData?.data?.results, [userData]
+    )
+
+    // const user = {
+    //     name: 'John Doe',
+    //     email: 'john.doe@example.com',
+    //     profileImage: 'https://via.placeholder.com/150',
+    // };
+
     return (
         <div className='bg-gray-200 dark:bg-black min-h-screen'>
             <div className='flex flex-col md:flex-row'>
@@ -93,9 +103,9 @@ const Dashboard = () => {
                                 )}
                         </i>
                         <Link to={'/profile'}>
-                        <div className='border-2 border-black dark:border-white rounded-full p-1.5 mx-2'>
-                            <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
-                        </div>
+                            <div className='border-2 border-black dark:border-white rounded-full p-1.5 mx-2'>
+                                <ICONS.PROFILE className='cursor-pointer' fontSize={16} />
+                            </div>
                         </Link>
 
                     </div>
@@ -121,6 +131,12 @@ const Dashboard = () => {
                         <Link to={'/profile'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.PROFILE /></i>Profile</li>
                         </Link>
+                        <li className="flex items-center mt-6 -ml-1 text-lg cursor-pointer" onClick={() => AuthServices.logout}>
+                            <i className="mr-4 text-xl transform rotate-180">
+                                <ICONS.LOGOUT />
+                            </i>
+                            Logout
+                        </li>
                     </ul >
                 </div >
 
@@ -128,15 +144,15 @@ const Dashboard = () => {
                     <div className='flex justify-between h-20 mx-4 items-center'>
                         <div className='text-black dark:text-white flex'>
                             <i><ICONS.LOCATION fontSize={22} /></i>
-                            <p className='ml-2'><b>Karachi,</b>Pakistan</p>
+                            <p className='ml-2'><b>{userMemoData?.location?.city},</b> {userMemoData?.location?.country}</p>
                         </div>
                         <div className='hidden md:flex text-black dark:text-white items-center'>
                             <i className='cursor-pointer' onClick={handleNotificationButtonClick}><ICONS.RINGBELL fontSize={27} /></i>
                             <Models.NotificationsModel
                                 isNotificationModalOpen={isNotificationModalOpen}
                                 onNotificationModalClose={() => setIsNotificationModalOpen(false)}
-                                user={user}
-                                position={modalPosition}
+                            // user={us}
+                            // position={modalPosition}
                             />
                             <i className='ml-4 cursor-pointer' onClick={toggleDarkMode}>
                                 {isDarkMode ? (
@@ -148,20 +164,27 @@ const Dashboard = () => {
                                     )}
                             </i>
                             {/* <Link to={'/profile'}> */}
-                            <div className='border-2 border-black dark:border-white rounded-full p-1.5 ml-2 cursor-pointer'
-                                    onClick={handleProfileButtonClick}
-                                    >
-                                <ICONS.PROFILE
-                                    fontSize={16}
-                                    ref={profileButtonRef}
+                            <div className='dark:border-white rounded-full border-double border-2 border-[#6a4b5d] p-1 ml-2 cursor-pointer'
+                                onClick={handleProfileButtonClick}
+                                ref={profileButtonRef}
+                            >
+                                {userMemoData?.profileImage ? <img
+                                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${userMemoData?.profileImage}`}
+                                    className="cursor-pointer rounded-full h-10 w-10"
+                                    alt="profile image"
                                 />
+                                    :
+                                    <ICONS.PROFILE
+                                        fontSize={16}
+                                    />
+                                }
 
                             </div>
                             <Models.ProfileModal
                                 isProfileModalOpen={isProfileModalOpen}
                                 onProfileModalClose={() => setIsProfileModalOpen(false)}
-                                user={user}
-                                position={modalPosition}
+                                user={userMemoData}
+                            // position={modalPosition}
                             />
                             {/* </Link> */}
                         </div>

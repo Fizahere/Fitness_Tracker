@@ -5,20 +5,20 @@ import { useQuery } from 'react-query';
 import { UserServices } from '../../services/userServices';
 import image from '../../assets/images/user.jpg'
 
-const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user, position }) => {
+const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user }) => {
     if (!isProfileModalOpen) return null;
-
     return (
         <div
             className="absolute border-2 dark:border-white border-black top-12 lg:right-7 bg-white dark:bg-[#1b1b1c] dark:text-white text-black rounded-lg z-50"
-            style={{ top: position.top, left: position.left }}
+            // style={{ top: position.top, left: position.left }}
+            
         >
             <div className='h-20 bg-[#fcc6e6]
              relative'>
                 {/* // bg-gradient-to-t to-[#fcc6e6] from-[#1b1b1c] */}
                 <img
-                    src={'https://i.pinimg.com/736x/67/6f/15/676f1545c9539c15809b3c5595b6986f.jpg'}
-                    alt={'Fiza'}
+                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${user?.profileImage}`}
+                    alt={user?.username}
                     className="absolute left-24 top-10 w-32 h-32 rounded-full mb-3 border-4 border-double border-[#6a4b5d] p-1"
                 />
             </div>
@@ -31,8 +31,8 @@ const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user, position 
                 </button>
                 <div className="flex flex-col items-center">
 
-                    <p className="font-semibold text-xl">Fiza</p>
-                    <p className="text-sm">fizabatool028@gmail.com</p>
+                    <p className="font-semibold text-xl">{user?.username}</p>
+                    <p className="text-sm">{user?.email}</p>
                     <Link to={'/profile'}>
                         <i className='mt-2 text-xl' onClick={onProfileModalClose}><ICONS.PENCIL /></i>
                     </Link>
@@ -41,7 +41,7 @@ const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user, position 
         </div>
     );
 };
-const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose, position }) => {
+const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose }) => {
     if (!isNotificationModalOpen) return null;
     const [error, setError] = useState(null)
 
@@ -62,7 +62,7 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
     return (
         <div
             className="absolute border-2 dark:border-white border-black top-12 lg:right-7 bg-white dark:bg-[#1b1b1c] dark:text-white text-black rounded-lg z-50"
-            style={{ top: position.top, left: position.left }}
+            // style={{ top: position.top, left: position.left }}
         >
             <div className="flex justify-between px-4 py-6 text-black bg-[#fcc6e6]">
                 <p className="text-xl">Notifications</p>

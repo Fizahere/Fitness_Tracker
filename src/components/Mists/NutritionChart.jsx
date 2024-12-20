@@ -56,8 +56,8 @@ const NutritionChart = () => {
     datasets: [
       {
         data: [macronutrients.carbs, macronutrients.protein, macronutrients.fats],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        backgroundColor: ["#cdbfe7", "#6a4b5d", "#f7f6b4"],
+        hoverBackgroundColor: ["#b9a3df", "#5a3f4f", "#f1f09d"],
         borderWidth: 1,
       },
     ],

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ICONS from '../../assets/constants/icons';
+import { formatDate } from '../../utilities/changeDateTimeFormate';
 
 const WorkoutDataTable = ({
     data,
@@ -19,16 +20,6 @@ const WorkoutDataTable = ({
         } finally {
             setDeletingWorkoutId(null);
         }
-    };
-
-    const formatDate = (timestamp) => {
-        const date = new Date(timestamp);
-        return date.toLocaleDateString('en-US', {
-            weekday: 'long', 
-            year: 'numeric',
-            month: 'short', 
-            day: 'numeric',
-        });
     };
 
     return (

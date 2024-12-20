@@ -29,6 +29,7 @@ import { BiHeart } from "react-icons/bi";
 import { BiPlusCircle } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
 import { AiOutlineComment } from "react-icons/ai";
+import { MdLogout } from "react-icons/md";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -62,6 +63,7 @@ const ICONS = {
     LIKED:BsHeartFill,
     FOLLOW:BiPlusCircle,
     COMMENT:AiOutlineComment,
+    LOGOUT:MdLogout,
 }
 
 export default ICONS
