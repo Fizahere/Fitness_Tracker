@@ -9,27 +9,27 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const NutritionChart = () => {
   const { data, isLoading, isError, error, refetch } = useQuery(
-    "nutritionData", 
-    NutritionServices.NutritionChart 
+    "nutritionData",
+    NutritionServices.NutritionChart
   );
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-<ICONS.LOADING className="animate-spin text-black text-3xl"/>
+        <ICONS.LOADING className="animate-spin text-black text-3xl" />
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="text-center mt-4">
-        <p className="text-red-500 mb-2">Error: {error.message}</p>
+      <div className="text-center mt-12">
+        <p className="text-red-700 mb-2">{error.message ? error.message : 'check your internet'}</p>
         <button
-          className="px-4 py-2 bg-[#262135] text-white rounded hover:bg-[#262135e3]"
+          className="px-4 py-2 text-3xl text-white rounded"
           onClick={refetch}
         >
-          Retry
+          <ICONS.REFRESH />
         </button>
       </div>
     );

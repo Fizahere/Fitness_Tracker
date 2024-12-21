@@ -7,7 +7,7 @@ const Auth_Url = {
 
 export const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
-    if(!token){
+    if (!token) {
         return;
     }
     const decodedToken = jwtDecode(token);
@@ -33,15 +33,15 @@ const login = async (payload) => {
         throw error.response?.data || { msg: "An unknown error occurred." };
     }
 };
-const logout = () => {
-    setAuthState({ isAuthenticated: false, token: null });
+const logout = ({ setIsAuthenticated }) => {
+    setIsAuthenticated(false);
     localStorage.removeItem('token');
 };
 const followUser = async (userId) => {
     try {
         const token = localStorage.getItem('token');
         if (!token) {
-           throw error.response?.data || { msg: "An unknown error occurred." };
+            throw error.response?.data || { msg: "An unknown error occurred." };
         }
         const response = await axios.post(`${Auth_Url.AUTH_URL}/follow/${userId}`,
             {}, {
@@ -58,7 +58,7 @@ const unfollowUser = async (userId) => {
     try {
         const token = localStorage.getItem('token');
         if (!token) {
-           throw error.response?.data || { msg: "An unknown error occurred." };
+            throw error.response?.data || { msg: "An unknown error occurred." };
         }
         const response = await axios.post(`${Auth_Url.AUTH_URL}/unfollow/${userId}`,
             {}, {

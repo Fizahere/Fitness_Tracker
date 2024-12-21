@@ -86,23 +86,39 @@ import ICONS from '../../assets/constants/icons';
 import { getUserIdFromToken } from '../../services/authServices';
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
-const userId=getUserIdFromToken()
+const userId = getUserIdFromToken()
 
 const WorkoutBubbleChart = () => {
-    const { data: workoutData, isLoading, error } = useQuery(
-            ['workout-data', userId],
-            () => WorkoutServices.getWorkouts(userId),
-            {
-                enabled: !!userId,
-                staleTime: 1000 * 60,
-            }
-        );
-     const workoutMemoData = useMemo(
-          () => workoutData?.data?.results || [],
-          [workoutData]
-      );
-    if (isLoading) return <ICONS.LOADING className='text-2xl text-white animate-spin' />;
-    if (error) return <p>Error fetching workout data: {error.message}</p>;
+    const { data: workoutData, isLoading, error, refetch } = useQuery(
+        ['workout-data', userId],
+        () => WorkoutServices.getWorkouts(userId),
+        {
+            enabled: !!userId,
+            staleTime: 1000 * 60,
+        }
+    );
+    const workoutMemoData = useMemo(
+        () => workoutData?.data?.results || [],
+        [workoutData]
+    );
+    if (isLoading) {
+        return (<div className="flex justify-center items-center min-h-[100px]">
+            <ICONS.LOADING className="animate-spin text-black text-3xl" />
+        </div>)
+    }
+    if (error) {
+    return (
+        <div className="text-center mt-4">
+            <p className="text-red-700 mb-2">{error?.message ? error?.message : 'check your internet'}</p>
+            <button
+                className="px-4 py-2 text-3xl text-white rounded"
+                onClick={refetch}
+            >
+                <ICONS.REFRESH />
+            </button>
+        </div>
+    );
+    }
 
     const chartData = workoutMemoData.map((workout, index) => {
         const date = dayjs(workout.createdAt);

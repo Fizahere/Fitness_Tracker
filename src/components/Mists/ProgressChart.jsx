@@ -31,7 +31,7 @@ ChartJS.register(
 const ProgressChart = () => {
     const userId = getUserIdFromToken();
 
-    const { data: progressData, isLoading } = useQuery(
+    const { data: progressData, isLoading, refetch, isError, error } = useQuery(
         ['progress-data', userId],
         () => ProgressServices.getProgress(userId),
         { enabled: Boolean(userId) }
@@ -42,7 +42,6 @@ const ProgressChart = () => {
         return progressData.data.data;
     }, [progressData]);
 
-    console.log(progressMemoData, 'progressMemoData');
 
     const chartData = useMemo(
         () => ({
@@ -96,11 +95,29 @@ const ProgressChart = () => {
     );
 
     if (isLoading) {
-        return <ICONS.LOADING className='animate-spin text-2xl' />;
+        return (<div className="flex justify-center items-center min-h-[200px]">
+            <ICONS.LOADING className="animate-spin text-black text-3xl" />
+        </div>)
     }
-
+    if (isError) {
+        return (
+            <div className="text-center mt-4">
+                <p className="text-red-700 mb-2">{error.message ? error.message : 'check your internet'}</p>
+                <button
+                    className="px-4 py-2 text-3xl text-white rounded"
+                    onClick={refetch}
+                >
+                    <ICONS.REFRESH />
+                </button>
+            </div>
+        );
+    }
     if (progressMemoData.length === 0) {
-        return <p>No data available</p>;
+        return (
+            <>
+                <p>No data available</p>
+            </>
+        )
     }
 
     return <Line data={chartData} options={chartOptions} />;

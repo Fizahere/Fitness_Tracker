@@ -9,10 +9,10 @@ import Nutrition from '../pages/Dashboard/Nutrition'
 import Progress from '../pages/Dashboard/Progress'
 import Posts from '../pages/Dashboard/Posts'
 
-const AuthenticatedRoutes = () => {
+const AuthenticatedRoutes = ({setIsAuthenticated}) => {
   return (
     <Routes>
-      <Route element={<Dashboard />}>
+      <Route element={<Dashboard setIsAuthenticated={setIsAuthenticated}/>}>
         <Route path='/' element={<UserHome />} />
         <Route path='/home' element={<UserHome />} />
         <Route path='/workout' element={<UserWorkout />} />

@@ -9,7 +9,8 @@ import { WorkoutServices } from '../../services/WorkoutServices'
 import ProgressChart from '../../components/Mists/ProgressChart'
 import { UserServices } from '../../services/userServices'
 import { getUserIdFromToken } from '../../services/authServices'
-
+import { FaClock } from "react-icons/fa";
+import { motion } from "framer-motion";
 const UserHome = () => {
   const userId = getUserIdFromToken();
   const { data: caloryBurnData } = useQuery(
@@ -30,14 +31,19 @@ const UserHome = () => {
         <div className='lg:w-3/5 w-auto md:ml-4'>
           <div className='grid grid-cols-2 gap-4 mt-5'>
             <div className='border-2 border-black dark:border-white px-5 py-6 sm:px-20 sm:py-10 bg-[#fffeca] flex flex-col items-center justify-center rounded-3xl'>
-              <i><ICONS.CLOCK fontSize={28} /></i>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+              >
+                <ICONS.CLOCK fontSize={30} />
+              </motion.div>
               <p className='text-zinc-700 mt-2 text-sm sm:text-md'>Time</p>
               <p className='text-lg sm:text-3xl font-bold'>
-                <Clock />
+                <Clock className={'animated-'} />
               </p>
             </div>
             <div className='border-2 border-black dark:border-white px-5 py-6 sm:px-20 sm:py-10 bg-[#d5c7ec] flex flex-col items-center justify-center rounded-3xl'>
-              <i><ICONS.DISTANCE fontSize={30} /></i>
+              <i><ICONS.FOLLOWERS fontWeight={'bold'} fontSize={35} /></i>
               <p className='text-zinc-700 mt-3 text-sm sm:text-md'>Followers</p>
               <p className='text-lg sm:text-3xl font-bold'>{userMemoData?.followers.length}</p>
             </div>
@@ -47,7 +53,7 @@ const UserHome = () => {
               <p className='text-lg sm:text-3xl font-bold'>{caloryBurnMemoData && caloryBurnMemoData[0]} kal</p>
             </div>
             <div className='border-2 border-black dark:border-white px-5 py-6 sm:px-20 sm:py-10 bg-[#c5e0e0] flex flex-col items-center justify-center rounded-3xl'>
-              <i><ICONS.MOON fontSize={30} /></i>
+              <i><ICONS.WEIGHT fontSize={30} className='animate-bounce' /></i>
               <p className='text-zinc-700 mt-2 text-sm sm:text-md'>Weight</p>
               <p className='text-lg sm:text-3xl font-bold'>{userMemoData?.currentWeight} kg</p>
             </div>

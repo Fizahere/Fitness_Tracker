@@ -30,8 +30,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         {isAuthenticated ?
-          <AuthenticatedRoutes />
-          : <UnAuthenticatedRoutes />
+          <AuthenticatedRoutes setIsAuthenticated={setIsAuthenticated} />
+          : <UnAuthenticatedRoutes setIsAuthenticated={setIsAuthenticated}/>
         }
         {/* <Routes>
           {isAuthenticated ? (

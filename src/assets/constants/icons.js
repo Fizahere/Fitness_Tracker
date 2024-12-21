@@ -30,6 +30,9 @@ import { BiPlusCircle } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
 import { AiOutlineComment } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
+import { MdOutlineRefresh } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -43,7 +46,9 @@ const ICONS = {
     LOCATION: GoLocation,
     RINGBELL: HiOutlineBell,
     CLOCK: LuClock,
-    DISTANCE: GiPathDistance,
+    // DISTANCE: GiPathDistance,
+    FOLLOWERS:FaUsers,
+    WEIGHT:GiWeightLiftingUp,
     FIRE: PiFireLight,
     MOON: PiMoonStars,
     SHOEDOWN: GiRunningShoe,
@@ -64,6 +69,7 @@ const ICONS = {
     FOLLOW:BiPlusCircle,
     COMMENT:AiOutlineComment,
     LOGOUT:MdLogout,
+    REFRESH:MdOutlineRefresh,
 }
 
 export default ICONS

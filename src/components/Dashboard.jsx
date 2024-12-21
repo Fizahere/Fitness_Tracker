@@ -1,16 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ICONS from '../assets/constants/icons'
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import '../App.css'
 import { Models } from './Mists/ProfileModal';
 import { UserServices } from '../services/userServices';
 import { AuthServices, getUserIdFromToken } from '../services/authServices';
 import { useQuery } from 'react-query';
 
-const Dashboard = () => {
+const Dashboard = ({ setIsAuthenticated }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const userId = getUserIdFromToken();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const savedDarkMode = localStorage.getItem("darkMode");
@@ -131,12 +132,19 @@ const Dashboard = () => {
                         <Link to={'/profile'}>
                             <li className='flex items-center mt-6 text-lg cursor-pointer'><i className='mr-4'><ICONS.PROFILE /></i>Profile</li>
                         </Link>
-                        <li className="flex items-center mt-6 -ml-1 text-lg cursor-pointer" onClick={() => AuthServices.logout}>
+                        <li
+                            className="flex items-center mt-6 -ml-1 text-lg cursor-pointer"
+                            onClick={() => {
+                                AuthServices.logout({ setIsAuthenticated });
+                                navigate('/')
+                            }}
+                        >
                             <i className="mr-4 text-xl transform rotate-180">
                                 <ICONS.LOGOUT />
                             </i>
                             Logout
                         </li>
+
                     </ul >
                 </div >
 
