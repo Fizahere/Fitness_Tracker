@@ -84,6 +84,21 @@ const Dashboard = ({ setIsAuthenticated }) => {
     //     profileImage: 'https://via.placeholder.com/150',
     // };
 
+    const { data: notificationsData } = useQuery(
+        'notification-data', UserServices.getNotifications,
+        {
+            onError: (error) => {
+                if (error.message == 'Request failed with status code 404') {
+                    setError('No Newer Notifications.')
+                }
+            }
+        }
+    )
+    const notificationMemoData = useMemo(
+        () => notificationsData?.data?.notifications,
+        [notificationsData]
+    )
+
     return (
         <div className='bg-gray-200 dark:bg-black min-h-screen'>
             <div className='flex flex-col md:flex-row'>
@@ -159,7 +174,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
                             <Models.NotificationsModel
                                 isNotificationModalOpen={isNotificationModalOpen}
                                 onNotificationModalClose={() => setIsNotificationModalOpen(false)}
-                            // user={us}
+                            data={notificationMemoData}
                             // position={modalPosition}
                             />
                             <i className='ml-4 cursor-pointer' onClick={toggleDarkMode}>

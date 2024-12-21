@@ -114,9 +114,9 @@ const ProgressChart = () => {
     }
     if (progressMemoData.length === 0) {
         return (
-            <>
-                <p>No data available</p>
-            </>
+            <div className="text-center mt-10">
+            <p className="text-zinc-800 dark:text-zinc-300 mb-2">No data available.</p>
+        </div>
         )
     }
 

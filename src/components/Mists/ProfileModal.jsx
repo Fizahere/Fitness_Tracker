@@ -41,24 +41,11 @@ const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user }) => {
         </div>
     );
 };
-const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose }) => {
+const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,data:notificationMemoData }) => {
     if (!isNotificationModalOpen) return null;
     const [error, setError] = useState(null)
 
-    const { data: notificationsData } = useQuery(
-        'notification-data', UserServices.getNotifications,
-        {
-            onError: (error) => {
-                if (error.message == 'Request failed with status code 404') {
-                    setError('No Newer Notifications.')
-                }
-            }
-        }
-    )
-    const notificationMemoData = useMemo(
-        () => notificationsData?.data?.notifications,
-        [notificationsData]
-    )
+   
     return (
         <div
             className="absolute border-2 dark:border-white border-black top-12 lg:right-7 bg-white dark:bg-[#1b1b1c] dark:text-white text-black rounded-lg z-50"
@@ -112,7 +99,9 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose 
                     ))}
                     <p className='text-center min-w-96'>{error && error}</p>
                 </ul>
-                <p className='h-10 flex items-center justify-center cursor-pointer text-zinc-400 hover:text-zinc-300 hover:underline active:text-sm'>view all</p>
+                <div className='h-10 flex items-center justify-center'>
+                    <p className='cursor-pointer text-black dark:text-white hover:text-zinc-400 dark:hover:text-zinc-300 hover:underline active:text-sm'>view all</p>
+                </div>
             </div>
         </div>
     );

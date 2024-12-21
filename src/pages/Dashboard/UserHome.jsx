@@ -64,7 +64,7 @@ const UserHome = () => {
               <NutritionChart />
             </div>
             <div>
-              <p className="text-xl text-center mb-6 font-bold">Your Progress</p>
+              <p className="text-xl text-center mb-6 font-bold text-black dark:text-white">Your Progress</p>
               <ProgressChart />
             </div>
 
