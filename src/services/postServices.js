@@ -132,7 +132,28 @@ const DeleteComment = async (commentId, postId) => {
     throw error || { msg: "An unknown error occurred." };
   }
 }
-
+const searchPost = async (searchQuery) => {
+  try {
+    const response = await axios.get(`${Post_Url.POST_URL}/search-post/${searchQuery}`)
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
+const searchUserPost = async (searchQuery) => {
+  try {
+    console.log(searchQuery)
+    const response = await axios.get(`${Post_Url.POST_URL}/search-user-post/${searchQuery}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    return response.data;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
 // const PostChart = async () => {
 //   const response = await axios.get(
 //     `${Post_Url.POST_URL}/get-posts`,
@@ -155,5 +176,7 @@ export const PostServices = {
   DisLikePost,
   AddComment,
   DeleteComment,
+  searchPost,
+  searchUserPost,
   // PostChart,
 }

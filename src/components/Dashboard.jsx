@@ -159,7 +159,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
                             </i>
                             Logout
                         </li>
-
                     </ul >
                 </div >
 

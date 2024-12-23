@@ -12,6 +12,9 @@ const Posts = () => {
   const author = getUserIdFromToken();
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearch, setIsSearch] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -107,6 +110,30 @@ const Posts = () => {
       );
     }
   };
+  const { data: searchedPosts, isLoading: searchLoading, isError: searchError, refetch } = useQuery(
+    ['searched-posts-data', searchQuery],
+    () => PostServices.searchUserPost(searchQuery),
+    {
+      onSuccess: () => { setIsSearch(true) },
+      onError: (err) => {
+        setIsSearch(true)
+        if (err.message === "Request failed with status code 400") {
+          setError(`no results for '${searchQuery}'`)
+        }
+      },
+      enabled: false,
+    }
+  );
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) {
+      setIsSearch(false)
+      return;
+    }
+    refetch();
+  };
+
 
   return (
     <div>
@@ -114,21 +141,37 @@ const Posts = () => {
         <p className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">
           Posts
         </p>
-        <button
-          className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
-          onClick={() => toggleDrawer(true)}
-        >
-          Add Post
-        </button>
+        <div className="flex flex-col-reverse md:flex-row">
+          <div className="relative">
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search workouts..."
+                className='border-2 border-black p-2 rounded-lg md:mr-4'
+              />
+              <button type="submit" disabled={searchLoading} className='absolute right-6 text-lg top-3'>
+                {searchLoading ? <ICONS.LOADING className='animate-spin' /> : <ICONS.SEARCH />}
+              </button>
+            </form>
+          </div>
+          <button
+            className="mb-4 md:mb-0 text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
+            onClick={() => toggleDrawer(true)}
+          >
+            Add Post
+          </button>
+        </div>
       </div>
 
-      <PostDataTable
-        data={postsMemoData}
-        isLoading={postsLoading}
-        deleteLoading={deleteLoading}
-        onDelete={deletepost}
-        onEdit={(id) => fetchpostById(id)}
-      />
+      {postsLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> : <PostDataTable
+        data={isSearch ? searchedPosts || [] : postsMemoData || []}
+          // isLoading={postsLoading}
+          deleteLoading={deleteLoading}
+          onDelete={deletepost}
+          onEdit={(id) => fetchpostById(id)}
+        />)}
 
       {drawerOpen && (
         <div

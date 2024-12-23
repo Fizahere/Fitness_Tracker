@@ -62,6 +62,19 @@ const deleteProgress = async (progressId) => {
     }
 };
 
+  const searchUserProgress = async (searchQuery) => {
+    try {
+      const response = await axios.get(`${Progress_Url.PROGRESS_URL}/search-user-progress/${searchQuery}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      return response;
+    } catch (error) {
+      throw error || { msg: "An unknown error occurred." };
+    }
+  }
 // const ProgressChart = async () => {
 //     try {
 //         const response = await axios.get(
@@ -84,5 +97,6 @@ export const ProgressServices = {
     addProgress,
     editProgress,
     deleteProgress,
+    searchUserProgress
     // ProgressChart,
 };

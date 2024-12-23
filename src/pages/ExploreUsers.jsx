@@ -19,7 +19,7 @@ const ExploreUsers = () => {
     const [comment, setComment] = useState('')
     const queryClient = useQueryClient();
 
-    const { data: allPosts, isLoading: postLoading } = useQuery(
+    const { data: allPosts, isLoading: postLoading, isError, error } = useQuery(
         'all-posts',
         PostServices.getAllPosts
     );
@@ -27,7 +27,7 @@ const ExploreUsers = () => {
         () => allPosts?.results || [],
         [allPosts]
     );
-console.log(allPostsMemoData,'allPostsMemoData')
+    console.log(allPostsMemoData, 'allPostsMemoData')
     const { data: allUsersData, isLoading: usersLoading } = useQuery(
         'users-data',
         UserServices.getAllUsers
@@ -165,7 +165,7 @@ console.log(allPostsMemoData,'allPostsMemoData')
                 <div>
                     {isForyou === 'foryou' ? (
                         <div className="grid grid-cols-2 md:grid-cols-3">
-                        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 md:gap-20 lg:gap-3"> */}
+                            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 md:gap-20 lg:gap-3"> */}
                             {allPostsMemoData ? (
                                 allPostsMemoData.map((singleData, index) => (
                                     <PostCard
@@ -177,16 +177,18 @@ console.log(allPostsMemoData,'allPostsMemoData')
                                         visitProfile={visitProfile}
                                     />
                                 ))
+                            ) : postLoading ? (
+                                <i className="flex justify-center">
+                                    <ICONS.LOADING className="animate-spin text-2xl my-56" />
+                                </i>
                             ) : (
-                                Loading ? (
-                                    <i className="flex justify-center">
-                                        <ICONS.LOADING className="animate-spin text-2xl my-56" />
-                                    </i>
-                                ) : (
-                                    <p className="my-56 text-zinc-700 flex items-center justify-center">
-                                        Check your internet connection
+                                <div className="flex items-center justify-center w-screen">
+                                    <p className="my-56 text-zinc-700 flex">
+                                        {error
+                                            ? error.message
+                                            : "Check your internet connection"}
                                     </p>
-                                )
+                                </div>
                             )}
                         </div>
                     ) : (
@@ -215,13 +217,13 @@ console.log(allPostsMemoData,'allPostsMemoData')
                                         <ICONS.LOADING className="animate-spin text-2xl my-56" />
                                     </i>
                                 ) : (
-                                   <div className="flex items-center justify-center w-screen">
-                                     <p className="my-56 text-zinc-700 flex">
-                                        {allPostsMemoData?.some(post => post?.author?.followers?.length > 0)
-                                            ? "You haven't followed anyone"
-                                            : "Check your internet connection"}
-                                    </p>
-                                   </div>
+                                    <div className="flex items-center justify-center w-screen">
+                                        <p className="my-56 text-zinc-700 flex">
+                                            {allPostsMemoData?.some(post => post?.author?.followers?.length > 0)
+                                                ? "You haven't followed anyone"
+                                                : "Check your internet connection"}
+                                        </p>
+                                    </div>
                                 )
                             }
                         </div>
@@ -230,7 +232,7 @@ console.log(allPostsMemoData,'allPostsMemoData')
             </div>
             <div className="w-auto md:w-1/4 md:mt-14">
                 <h3 className="text-2xl font-bold ml-4">Explore Users</h3>
-                {displayUsers && displayUsers.map((singleData, index) => (
+                {displayUsers ? displayUsers.map((singleData, index) => (
                     <div
                         key={index}
                         className="bg-[#e5e6e1] rounded-xl p-4 m-4 flex justify-between items-center"
@@ -264,7 +266,20 @@ console.log(allPostsMemoData,'allPostsMemoData')
                             </button>
                         </div>
                     </div>
-                ))}
+                ))
+               :  usersLoading ? (
+                <i className="flex justify-center">
+                    <ICONS.LOADING className="animate-spin text-2xl my-56" />
+                </i>
+            ) : (
+                <div className="flex items-center justify-center w-screen">
+                    <p className="my-56 text-zinc-700 flex">
+                        {isError
+                            ? error.message
+                            : "Check your internet connection"}
+                    </p>
+                </div>
+            )}
             </div>
         </div>
     );

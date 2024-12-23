@@ -103,7 +103,7 @@ const WorkoutBubbleChart = () => {
     );
     if (isLoading) {
         return (<div className="flex justify-center items-center min-h-[100px]">
-            <ICONS.LOADING className="animate-spin text-black text-3xl" />
+            <ICONS.LOADING className="animate-spin text-white text-3xl" />
         </div>)
     }
     if (error) {

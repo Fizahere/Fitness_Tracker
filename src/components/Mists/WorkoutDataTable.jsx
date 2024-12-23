@@ -4,7 +4,7 @@ import { formatDate } from '../../utilities/changeDateTimeFormate';
 
 const WorkoutDataTable = ({
     data,
-    workoutLoading,
+    // workoutLoading,
     deleteLoading,
     onDelete,
     onEdit,
@@ -74,21 +74,9 @@ const WorkoutDataTable = ({
                                 </td>
                             </tr>
                         ))
-                    ) : !workoutLoading ? (
-                        <tr>
-                            <td colSpan="10" className="text-center py-5">No Data</td>
-                        </tr>
-                    ) : null}
+                    ) :  <p className="text-center p-5">No Data</p>}
                 </tbody>
             </table>
-            <div className="flex justify-center items-center m-10">
-                {workoutLoading && (
-                    <i className="flex items-center">
-                        <ICONS.LOADING className="animate-spin text-black dark:text-white text-4xl mr-2" />
-                        Loading...
-                    </i>
-                )}
-            </div>
         </div>
     );
 };

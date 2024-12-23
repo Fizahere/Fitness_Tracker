@@ -104,7 +104,7 @@ const ProgressChart = () => {
             <div className="text-center mt-4">
                 <p className="text-red-700 mb-2">{error.message ? error.message : 'check your internet'}</p>
                 <button
-                    className="px-4 py-2 text-3xl text-white rounded"
+                    className="px-4 py-2 text-3xl text-black dark:text-white rounded"
                     onClick={refetch}
                 >
                     <ICONS.REFRESH />

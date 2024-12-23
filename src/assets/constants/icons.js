@@ -33,6 +33,7 @@ import { MdLogout } from "react-icons/md";
 import { MdOutlineRefresh } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
+import { BiSearch } from "react-icons/bi";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -70,6 +71,7 @@ const ICONS = {
     COMMENT:AiOutlineComment,
     LOGOUT:MdLogout,
     REFRESH:MdOutlineRefresh,
+    SEARCH:BiSearch,
 }
 
 export default ICONS

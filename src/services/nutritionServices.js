@@ -16,7 +16,6 @@ const getNutritions = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response, 'response');
     return response;
   } catch (error) {
     if (error.response?.status === 403 || error.response?.status === 401) {
@@ -51,7 +50,7 @@ const addNutrition = async (payload) => {
   }
 };
 const editNutritions = async (props) => {
-  const [nutritionId, payload]=props;
+  const [nutritionId, payload] = props;
   try {
     const response = await axios.put(`${Nutriton_Url.NUTRITION_URL}/update-nutritions/${nutritionId}`, payload)
     return response;
@@ -66,8 +65,22 @@ const deleteNutrition = async (nutritionId) => {
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
   }
-}
+};
 
+const searchUserNutrition = async (searchQuery) => {
+  try {
+    const response = await axios.get(`${Nutriton_Url.NUTRITION_URL}/search-user-nutrition/${searchQuery}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+};
 const NutritionChart = async () => {
   const response = await axios.get(
     `${Nutriton_Url.NUTRITION_URL}/get-nutritions`,
@@ -87,4 +100,5 @@ export const NutritionServices = {
   editNutritions,
   deleteNutrition,
   NutritionChart,
+  searchUserNutrition
 }

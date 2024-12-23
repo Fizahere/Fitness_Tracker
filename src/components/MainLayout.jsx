@@ -6,8 +6,10 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Services from "../pages/Services";
 import Contact from "../pages/Contact";
+import { AuthServices } from "../services/authServices";
 
-const MainLayout = () => {
+const MainLayout = ({ setIsAuthenticated }) => {
+  const token = localStorage.getItem('token')
   const location = useLocation();
   const matchProfile = useMatch('/visit-profile/:id');
   const matchSettings = useMatch('/explore');
@@ -66,15 +68,27 @@ const MainLayout = () => {
             </li>
           </ScrollLink>
           <li className="mr-6 mt-1 text-lg cursor-pointer">
-            <Link to="/login">
-              Login
+            <Link to="/explore">
+              Explore
             </Link>
           </li>
         </ul>
         <div className="mr-6 ml-6 text-lg mt-1">
-          <Link to="/explore">
-            Explore
-          </Link>
+          {token ?
+            <li
+              className="flex items-center text-lg cursor-pointer"
+              onClick={() => {
+                AuthServices.logout({ setIsAuthenticated });
+                navigate('/')
+              }}
+            >
+              Logout
+            </li>
+            :
+            <Link to="/login">
+              Login
+            </Link>
+          }
         </div>
       </nav>
 
@@ -83,7 +97,7 @@ const MainLayout = () => {
         onClick={toggleDrawer}
       >
         <div
-          className={`fixed top-0 p-5 left-0 h-full w-64 bg-zinc-900 text-white text-black transition-transform transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`fixed top-0 p-5 left-0 h-full w-64 bg-white text-black transition-transform transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="flex justify-between md:hidden">
             <h3 className="text-1xl font-serif">Fitness Tracker</h3>
@@ -122,11 +136,28 @@ const MainLayout = () => {
               </li>
             </ScrollLink>
             <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <Link onClick={toggleDrawer} to="/login">
-                Login
+              <Link onClick={toggleDrawer} to="/explore">
+                Explore
               </Link>
             </li>
           </ul>
+          <div className="text-white text-center text-md rounded-full py-2 w-full mt-8 bg-[#262135]">
+            {token ?
+              <li
+                className="flex items-center text-lg cursor-pointer"
+                onClick={() => {
+                  AuthServices.logout({ setIsAuthenticated });
+                  navigate('/')
+                }}
+              >
+                Logout
+              </li>
+              :
+              <Link to="/login">
+                Login
+              </Link>
+            }
+          </div>
         </div>
       </div>
 

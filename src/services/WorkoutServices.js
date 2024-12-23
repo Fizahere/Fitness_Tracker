@@ -17,7 +17,6 @@ const getAllWorkouts = async () => {
 const getWorkouts = async (userId) => {
   try {
     const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-workouts/${userId}`);
-    console.log(response,'workout data request')
     return response;
   } catch (error) {
     throw error.response?.data || { msg: "An unknown error occurred." };
@@ -72,7 +71,6 @@ export const editWorkout = async (props) => {
     return response;
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
-
   }
 }
 const deleteWorkout = async (userId) => {
@@ -85,7 +83,27 @@ const deleteWorkout = async (userId) => {
     return response;
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
-
+  }
+}
+const searchWorkout = async (searchQuery) => {
+  try {
+    const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/search-workout/${searchQuery}`)
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
+const searchUserWorkout = async (searchQuery) => {
+  try {
+    const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/search-user-workout/${searchQuery}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    return response.data;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
   }
 }
 export const WorkoutServices = {
@@ -96,4 +114,6 @@ export const WorkoutServices = {
   editWorkout,
   deleteWorkout,
   getCaloryBurn,
+  searchWorkout,
+  searchUserWorkout
 }

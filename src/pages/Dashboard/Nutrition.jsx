@@ -20,6 +20,10 @@ const Nutrition = () => {
     fats: '',
   });
   const [mealType, setMealType] = useState('');
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isSearch, setIsSearch] = useState(false);
+  const [error, setError] = useState(null);
+
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -120,6 +124,30 @@ const Nutrition = () => {
       );
     }
   };
+  const { data: searchedNutritions, isLoading: searchLoading, isError: searchError, refetch } = useQuery(
+    ['searched-nutrition-data', searchQuery],
+    () => NutritionServices.searchUserNutrition(searchQuery),
+    {
+      onSuccess: () => { setIsSearch(true) },
+      onError: (err) => {
+        setIsSearch(true)
+        if (err.message === 'Request failed with status code 400') {
+          setError(`no results for '${searchQuery}'`)
+        }
+      },
+      enabled: false,
+    }
+  );
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) {
+      setIsSearch(false)
+      return;
+    }
+    refetch();
+  };
+
 
   return (
     <div>
@@ -127,22 +155,39 @@ const Nutrition = () => {
         <p className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">
           Nutritions
         </p>
-        <button
-          className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
-          onClick={() => toggleDrawer(true)}
-        >
-          Add Nutrition
-        </button>
+        <div className="flex flex-col-reverse md:flex-row">
+          <div className="relative">
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search workouts..."
+                className='border-2 border-black p-2 rounded-lg md:mr-4'
+              />
+              <button type="submit" disabled={searchLoading} className='absolute right-6 text-lg top-3'>
+                {searchLoading ? <ICONS.LOADING className='animate-spin' /> : <ICONS.SEARCH />}
+              </button>
+            </form>
+          </div>
+          <button
+            className="mb-4 md:mb-0 text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
+            onClick={() => toggleDrawer(true)}
+          >
+            Add Nutrition
+            {/* <ICONS.FOLLOW/> */}
+          </button>
+        </div>
       </div>
-
-      <NutritionDataTable
-        data={nutritionMemoData}
-        isLoading={nutritionLoading}
-        deleteLoading={deleteLoading}
-        onDelete={deleteNutrition}
-        onEdit={(id) => fetchNutritionById(id)}
-      />
-
+      {nutritionLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> :
+        <NutritionDataTable
+          data={isSearch ? searchedNutritions || [] : nutritionMemoData || []}
+          // isLoading={nutritionLoading}
+          deleteLoading={deleteLoading}
+          onDelete={deleteNutrition}
+          onEdit={(id) => fetchNutritionById(id)}
+        />
+      )}
       {drawerOpen && (
         <div
           className="fixed inset-0 bg-[#1b1b1c] bg-opacity-50 z-50"

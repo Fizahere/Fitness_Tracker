@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token); // Set authentication based on token existence
+    setIsAuthenticated(!!token); 
   }, []);
 
   return (

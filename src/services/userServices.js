@@ -24,7 +24,6 @@ const getUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response, 'response');
     return response;
   } catch (error) {
     if (error.response?.status === 403 || error.response?.status === 401) {
@@ -92,6 +91,15 @@ const getNotifications = async () => {
     throw error || { msg: "An unknown error occurred." };
   }
 }
+const searchUser = async (searchQuery) => {
+  try {
+    const response = await axios.get(`${User_Url.USER_URL}/search-user/${searchQuery}`)
+    return response;
+  } catch (error) {
+    throw error || { msg: "An unknown error occurred." };
+  }
+}
+
 //it will be followers chart
 // const PostChart = async () => {
 //   const response = await axios.get(
@@ -112,5 +120,6 @@ export const UserServices = {
   editUser,
   deleteUser,
   getNotifications,
+  searchUser,
   //   PostChart,
 }

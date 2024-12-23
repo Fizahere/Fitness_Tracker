@@ -4,7 +4,7 @@ import { formatDate } from '../../utilities/changeDateTimeFormate';
 
 const ProgressDataTable = ({
     data,
-    isLoading,
+    // isLoading,
     deleteLoading,
     onDelete,
     onEdit,
@@ -66,17 +66,17 @@ const ProgressDataTable = ({
                                 </button>
                             </td>
                         </tr>
-                    )) : !isLoading && <p className='text-center p-5'>No Data</p>}
+                    )) : <p className='text-center p-5'>No Data</p>}
                 </tbody>
             </table>
-            <div className='flex justify-center items-center m-10'>
+            {/* <div className='flex justify-center items-center m-10'>
                 {isLoading &&
                     <i className='flex items-center text-black dark:text-white'>
                         <ICONS.LOADING className='animate-spin text-4xl mr-2' />
                         Loading..
                     </i>
                 }
-            </div>
+            </div> */}
         </div>
     );
 };

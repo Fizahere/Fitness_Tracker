@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { isError, useMutation, useQuery, useQueryClient } from 'react-query';
 import { WorkoutServices } from '../../services/WorkoutServices';
 import ICONS from '../../assets/constants/icons';
 import WorkoutDataTable from '../../components/Mists/WorkoutDataTable';
@@ -20,7 +20,9 @@ const UserWorkout = () => {
     notes: '',
   });
   const [category, setCategory] = useState('');
-
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isSearch, setIsSearch] = useState(false)
+  const [error, setError] = useState(null)
   const queryClient = useQueryClient();
   const userId = getUserIdFromToken();
 
@@ -38,10 +40,11 @@ const UserWorkout = () => {
     }
   }, [isEdit, dataToEdit]);
 
-  const { data: workoutData, isLoading: workoutLoading } =  useQuery(['workout-data', userId],
-      () => WorkoutServices.getWorkouts(userId), {
-      enabled: !!userId,
-    });
+  const { data: workoutData, isLoading: workoutLoading, isError } = useQuery(['workout-data', userId],
+    () => WorkoutServices.getWorkouts(userId), {
+    onError: (err) => { setError(err) },
+    enabled: !!userId,
+  });
   const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
 
   const { mutateAsync: deleteWorkout, isLoading: deleteLoading } = useMutation(
@@ -104,21 +107,64 @@ const UserWorkout = () => {
     }
   };
 
+  const { data: searchedWorkouts, isLoading: searchLoading, isError: searchError, refetch } = useQuery(
+    ['searched-workouts-data', searchQuery],
+    () => WorkoutServices.searchUserWorkout(searchQuery),
+    {
+      onSuccess: () => { setIsSearch(true) },
+      onError: (err) => {
+        setIsSearch(true)
+        if (err.message === 'Request failed with status code 404') {
+          setError(`no results for '${searchQuery}'`)
+        }
+      },
+      enabled: false,
+    },
+
+  );
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) {
+      setIsSearch(false)
+      return;
+    }
+    refetch();
+  };
+
+
   return (
     <div>
-      <div className="flex justify-around md:justify-between mb-4 items-center w-screen lg:w-auto">
-        <h1 className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">Workouts</h1>
-        <button
-          className="text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
-          onClick={() => toggleDrawer(true)}
-        >
-          Add Workout
-        </button>
+      <div className="flex justify-between mb-4 items-center">
+        <p className="text-3xl font-bold text-black dark:text-white mx-4 mb-6">
+          Workouts
+        </p>
+        <div className="flex flex-col-reverse md:flex-row">
+          <div className="relative">
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search workouts..."
+                className='border-2 border-black p-2 rounded-lg md:mr-4'
+              />
+              <button type="submit" disabled={searchLoading} className='absolute right-6 text-lg top-3'>
+                {searchLoading ? <ICONS.LOADING className='animate-spin' /> : <ICONS.SEARCH />}
+              </button>
+            </form>
+          </div>
+          <button
+            className="mb-4 md:mb-0 text-white bg-[#262135] dark:text-black dark:bg-white px-5 py-3 text-md rounded-lg"
+            onClick={() => toggleDrawer(true)}
+          >
+            Add Workout
+          </button>
+        </div>
       </div>
-
-      <WorkoutDataTable
-        data={workoutMemoData}
-        isLoading={workoutLoading}
+      {workoutLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> : <WorkoutDataTable
+        data={isSearch ? searchedWorkouts || [] : workoutMemoData || []}
+        // isLoading={workoutLoading}
         deleteLoading={deleteLoading}
         onDelete={deleteWorkout}
         onEdit={(id) => {
@@ -126,7 +172,7 @@ const UserWorkout = () => {
           fetchWorkoutById(id);
           toggleDrawer(true);
         }}
-      />
+      />)}
 
       {drawerOpen && (
         <div

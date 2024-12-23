@@ -11,7 +11,7 @@ const UnAuthenticatedRoutes = ({setIsAuthenticated}) => {
 
   return (
     <Routes>
-      <Route element={<MainLayout />} >
+      <Route element={<MainLayout setIsAuthenticated={setIsAuthenticated} />} >
       <Route path='/explore' element={<ExploreUsers />} />
       <Route path='/visit-profile/:id' element={<Profile />} />
       </Route>

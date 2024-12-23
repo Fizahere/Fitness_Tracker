@@ -15,6 +15,7 @@ const UserProfile = () => {
   const [dataToEdit, setDataToEdit] = useState(null);
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
+  const [err,setError]=useState(null)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -56,7 +57,7 @@ const UserProfile = () => {
     setDataToEdit(userMemoData);
   };
 
-  const { mutateAsync: editRequest, isLoading: isEditLoading } = useMutation(
+  const { mutateAsync: editRequest, isLoading: isEditLoading, isError, error } = useMutation(
     UserServices.editUser,
     {
       onSuccess: () => {
@@ -64,7 +65,7 @@ const UserProfile = () => {
         console.log('edited')
       },
       onError: (error) => {
-        console.log(error, 'error')
+        setError(error.message)
       }
     }
   )
@@ -107,20 +108,20 @@ const UserProfile = () => {
     };
   }, [file]);
 
-  
-    const { data: workoutData, isLoading: workoutLoading } = useQuery(
-      'workout-data',
-      WorkoutServices.getWorkouts
-    );
-    const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
-    const formatDate = (timestamp) => {
-      const date = new Date(timestamp);
-      return date.toLocaleDateString('en-US', {
-          weekday: 'long', 
-          year: 'numeric',
-          month: 'short', 
-          day: 'numeric',
-      });
+
+  const { data: workoutData, isLoading: workoutLoading } = useQuery(
+    'workout-data',
+    WorkoutServices.getWorkouts
+  );
+  const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
   };
 
   return (
@@ -140,19 +141,19 @@ const UserProfile = () => {
             <div className='flex justify-center mt-28 lg:mt-0'>
               <p className='dark:text-white text-black font-bold text-3xl lg:ml-[22rem] text-center lg:text-left mr-10 md:mr-4'>{userMemoData?.username}</p>
               {/* <div className="flex w-full justify-end md:justify-evenly text-black dark:text-white"> */}
-                <div className='text-center mr-10 md:mr-4'>
-                  <p className='font-bold text-lg'>Followers</p>
-                  <p>{userMemoData?.followers.length}</p>
-                </div>
-                <div className='text-center mr-20 md:mr-4'>
-                  <p className='font-bold text-lg'>Following</p>
-                  <p>{userMemoData?.following.length}</p>
-                </div>
+              <div className='text-center mr-10 md:mr-4'>
+                <p className='font-bold text-lg'>Followers</p>
+                <p>{userMemoData?.followers.length}</p>
               </div>
+              <div className='text-center mr-20 md:mr-4'>
+                <p className='font-bold text-lg'>Following</p>
+                <p>{userMemoData?.following.length}</p>
+              </div>
+            </div>
             {/* </div> */}
             <p className='text-zinc-600 dark:text-zinc-300 lg:ml-[22rem] text-center lg:text-left'>
               {/* {userMemoData?.about} */}
-              </p>
+            </p>
             <div className='bg-gradient-to-t from-[#efeeb6] to-[#1b1b1c] rounded-3xl p-4 lg:p-8 text-white mt-4 lg:mt-10 flex lg:justify-around'>
               <div className='text-lg font-bold'>
                 <p>Name:</p>
@@ -259,8 +260,9 @@ const UserProfile = () => {
                         ></textarea>
                       </div>
                     </div>
+                    <p className='text-red-500 ml-5 mb-2'>{err && err}</p>
                     <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                      <div className="mt-4">
+                      <div className="mt-2">
                         <button
                           type="submit"
                           className="px-4 py-3 rounded-lg bg-[#262135] text-white w-full"

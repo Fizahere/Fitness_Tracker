@@ -4,7 +4,7 @@ import { formatDate } from '../../utilities/changeDateTimeFormate';
 
 const PostDataTable = ({
     data,
-    isLoading,
+    // isLoading,
     deleteLoading,
     onDelete,
     onEdit,
@@ -26,7 +26,7 @@ const PostDataTable = ({
             <table className="min-w-full bg-transparent dark:border-[#1b1b1c] border border-gray-200 rounded-lg shadow-md">
                 <thead>
                     <tr className="bg-gray-300 text-gray-700 dark:bg-[#1b1b1c] dark:text-zinc-400 text-sm font-semibold">
-                        {['S.no', 'Content','Image', 'Edit', 'Delete'].map((headerName) => (
+                        {['S.no', 'Content','Image', 'Date', 'Edit', 'Delete'].map((headerName) => (
                             <th className="px-2 md:px-8 py-3 text-left">{headerName}</th>
                         ))}
                     </tr>
@@ -64,17 +64,17 @@ const PostDataTable = ({
                                 </button>
                             </td>
                         </tr>
-                    )) : !isLoading && <p className="text-center p-5">No Data</p>}
+                    )) : <p className="text-center p-5">No Data</p>}
                 </tbody>
             </table>
-            <div className='flex justify-center items-center m-10'>
+            {/* <div className='flex justify-center items-center m-10'>
                 {isLoading &&
                     <i className='flex items-center text-black dark:text-white'>
                         <ICONS.LOADING className='animate-spin text-4xl mr-2' />
                         Loading..
                     </i>
                 }
-            </div>
+            </div> */}
         </div>
     )
 }
