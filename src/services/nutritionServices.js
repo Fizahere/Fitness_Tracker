@@ -76,7 +76,7 @@ const searchUserNutrition = async (searchQuery) => {
         }
       }
     )
-    return response;
+    return response.data;
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
   }

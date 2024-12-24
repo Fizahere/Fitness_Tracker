@@ -163,7 +163,7 @@ const Progress = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search workouts..."
+                placeholder="enter weight..."
                 className='border-2 border-black p-2 rounded-lg md:mr-4'
               />
               <button type="submit" disabled={searchLoading} className='absolute right-6 text-lg top-3'>

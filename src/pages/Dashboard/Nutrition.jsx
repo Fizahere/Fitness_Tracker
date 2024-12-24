@@ -138,7 +138,7 @@ const Nutrition = () => {
       enabled: false,
     }
   );
-
+console.log(searchedNutritions,'searchedNutritions')
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) {
