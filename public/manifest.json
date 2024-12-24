@@ -1,6 +1,7 @@
 {
     "name": "Fitness Tracker",
     "short_name": "FitnessApp",
+    "description": "A fitness tracker app to help you monitor your health and fitness progress.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
