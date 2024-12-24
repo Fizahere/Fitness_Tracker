@@ -34,6 +34,10 @@ import { MdOutlineRefresh } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { BiSearch } from "react-icons/bi";
+import { FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -48,8 +52,8 @@ const ICONS = {
     RINGBELL: HiOutlineBell,
     CLOCK: LuClock,
     // DISTANCE: GiPathDistance,
-    FOLLOWERS:FaUsers,
-    WEIGHT:GiWeightLiftingUp,
+    FOLLOWERS: FaUsers,
+    WEIGHT: GiWeightLiftingUp,
     FIRE: PiFireLight,
     MOON: PiMoonStars,
     SHOEDOWN: GiRunningShoe,
@@ -65,13 +69,17 @@ const ICONS = {
     LOADING: AiOutlineLoading3Quarters,
     OPENEYE: FaEye,
     CLOSEDEYE: FaEyeSlash,
-    LIKE:BiHeart,
-    LIKED:BsHeartFill,
-    FOLLOW:BiPlusCircle,
-    COMMENT:AiOutlineComment,
-    LOGOUT:MdLogout,
-    REFRESH:MdOutlineRefresh,
-    SEARCH:BiSearch,
+    LIKE: BiHeart,
+    LIKED: BsHeartFill,
+    FOLLOW: BiPlusCircle,
+    COMMENT: AiOutlineComment,
+    LOGOUT: MdLogout,
+    REFRESH: MdOutlineRefresh,
+    SEARCH: BiSearch,
+    RIGHTARROW: FaArrowRight,
+    LEFTARROWN: FaArrowLeft,
+    PHONE: FaPhoneAlt,
+    EMAIL:MdEmail,
 }
 
 export default ICONS
