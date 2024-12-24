@@ -94,7 +94,7 @@ const getNotifications = async () => {
 const searchUser = async (searchQuery) => {
   try {
     const response = await axios.get(`${User_Url.USER_URL}/search-user/${searchQuery}`)
-    return response;
+    return response.data;
   } catch (error) {
     throw error || { msg: "An unknown error occurred." };
   }

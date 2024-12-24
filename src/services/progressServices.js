@@ -70,7 +70,7 @@ const deleteProgress = async (progressId) => {
             Authorization: `Bearer ${token}`
           }
         })
-      return response;
+      return response.data;
     } catch (error) {
       throw error || { msg: "An unknown error occurred." };
     }

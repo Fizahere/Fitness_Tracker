@@ -149,7 +149,6 @@ const Progress = () => {
     refetch();
   };
 
-
   return (
     <div>
       <div className="flex justify-between mb-4 items-center">
