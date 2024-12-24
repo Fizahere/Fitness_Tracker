@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Progress_Url = {
-    PROGRESS_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/progress'
+    PROGRESS_URL: `${import.meta.env.VITE_API_URL}/progress`
 };
 const token = localStorage.getItem('token');
 

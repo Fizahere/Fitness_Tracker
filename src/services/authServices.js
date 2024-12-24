@@ -2,9 +2,8 @@ import axios from "axios"
 import { jwtDecode } from "jwt-decode";
 
 const Auth_Url = {
-    AUTH_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/auth'
+     AUTH_URL :`${import.meta.env.VITE_API_URL}/auth`
 }
-
 export const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
     if (!token) {

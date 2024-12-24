@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const User_Url = {
-  USER_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/auth'
+  USER_URL: `${import.meta.env.VITE_API_URL}/auth`
 }
 const token = localStorage.getItem('token');
 

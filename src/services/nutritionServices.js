@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Nutriton_Url = {
-  NUTRITION_URL: 'https://fitness-tracker-backend-1-vqav.onrender.com/nutrition'
+  NUTRITION_URL: `${import.meta.env.VITE_API_URL}/nutrition`
 }
 const token = localStorage.getItem('token');
 
