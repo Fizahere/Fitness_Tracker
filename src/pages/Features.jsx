@@ -5,18 +5,18 @@ const Features = () => {
     const tabsData = [
         {
           icon: <ICONS.CLOCK />,
-          heading: "Tracking",
-          description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi sunt perferendis ut repellendus esse quidem aperiam asperiores obcaecati ullam veritatis!"
+          heading: "Goal Setting",
+          description: "Define your fitness objectives with ease, whether it’s weight loss, strength building. Our app helps you break down your goals into manageable steps."
         },
         {
           icon: <ICONS.CHART1 />,
-          heading: "Insight",
-          description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi sunt perferendis ut repellendus esse quidem aperiam asperiores obcaecati ullam veritatis!"
+          heading: "Analytics Dashboard",
+          description: "Gain valuable insights into your progress with a detailed analytics dashboard. Visualize your performance over time to make informed adjustments to your fitness plan."
         },
         {
           icon: <ICONS.FIRE />,
-          heading: "Real Time",
-          description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi sunt perferendis ut repellendus esse quidem aperiam asperiores obcaecati ullam veritatis!"
+          heading: "Community Support",
+          description: "Stay inspired by connecting with a community of like-minded fitness enthusiasts. Share your progress, exchange tips, and celebrate milestones together."
         },
       ]
     
@@ -28,9 +28,8 @@ const Features = () => {
             <p className="text-2xl lg:text-5xl font-bold">We Offer For You</p>
           </div>
           <div className="w-full md:w-1/2 font-thin">
-            <p className="text-zinc-700 mt-4 lg:text-sm text-xs">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi sunt perferendis ut repellendus esse quidem aperiam asperiores obcaecati ullam veritatis!
-              <div className="flex space-x-3 justify-end">
+            <p className="text-zinc-700 mt-4 md:text-[12px] text-xs">
+            Explore the powerful features designed to make your fitness journey seamless and effective. From personalized tracking to real-time updates and community support, our app offers everything you need to set, track, and achieve your goals              <div className="flex space-x-3 justify-end">
 
                 <div className="w-8 h-8 border-2 border-black rounded-full flex items-center justify-center mt-4">
                   <i ><ICONS.LEFTARROWN fontSize={12} /></i>
@@ -55,7 +54,7 @@ const Features = () => {
             >
               <i className="flex justify-end text-3xl sm:text-4xl">{tab.icon}</i>
               <h3 className="text-white text-2xl sm:text-3xl font-bold my-4">{tab.heading}</h3>
-              <p className="text-xs sm:text-sm md:text-base">{tab.description}</p>
+              <p className="text-xs sm:text-sm md:text-[12px]">{tab.description}</p>
             </div>
           ))}
         </div>

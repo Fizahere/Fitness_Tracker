@@ -16,7 +16,7 @@ const About = () => {
             <h3 className="font-bold text-[12px] sm:text-[20px] mt-2">
               "Track Your Fitness Journey: Stay Motivated, Stay Healthy!"
             </h3>
-            <p className="mt-4 text-[10px] sm:text-[12px] font-thin">
+            <p className="mt-4 text-[10px] sm:text-[12px] md:text-[12px]font-thin">
               Our fitness tracker website helps you stay on top of your health and fitness goals with ease. From tracking daily activities and workouts to monitoring your progress over time, our platform offers real-time insights to keep you motivated.
             </p>
           </div>

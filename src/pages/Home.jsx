@@ -7,7 +7,7 @@ import bg from '../assets/images/bg.webp'
 import phone from '../assets/images/phone.png'
 
 const Home = () => {
- 
+
   return (
     <>
       <section className="px-10 py-10 h-auto bg-white text-black" id="home">
@@ -21,8 +21,7 @@ const Home = () => {
               Our Plan
             </h1>
             <p className="mt-3 text-black sm:text-[8px] md:text-[12px] w-80">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde ullam eum alias! Modi, possimus distinctio accusantium et eius quos esse.
-            </p>
+              Track your fitness progress, set goals, and stay motivated with Fitness Tracker. Your personal fitness companion for a healthier lifestyle.            </p>
             <div className="relative inline-block">
               <button className="mt-5 bg-[#262135] text-white py-2 text-sm w-[120px] rounded-2xl relative">
                 Join
@@ -43,7 +42,7 @@ const Home = () => {
                 <div className="sm:ml-7 mt-4 sm:mt-0 text-center sm:text-left">
                   <h2 className="text-[16px] sm:text-[18px] text-white">Download Our App</h2>
                   <p className="text-[10px] sm:text-[12px] text-gray-300 mt-2">
-                    Lorem ipsum dolor sit amet consectetur.
+                    Loved by users for its simplicity and effectiveness.
                   </p>
                 </div>
                 <button className=" h-10 w-10 flex items-center justify-center mt-4 sm:mt-0 sm:ml-auto text-black rounded-full">
@@ -72,8 +71,10 @@ const Home = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-8 mt-1">
-                <p className="text-[10px] sm:text-[8px] text-gray-400">Lorem ipsum dolor</p>
-                <p className="text-[10px] sm:text-[8px] text-gray-400">Lorem ipsum dolor</p>
+                <p className="text-[10px] sm:text-[8px] text-gray-400">Loved by users for its simplicity and effectiveness.
+
+                </p>
+                <p className="text-[10px] sm:text-[8px] text-gray-400">Rated 5 stars by fitness enthusiasts worldwide.</p>
               </div>
             </div>
           </div>
@@ -106,17 +107,15 @@ const Home = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 text-center gap-4 mt-4">
             <p className="text-white text-[10px] sm:text-[12px] md:text-[14px] leading-tight">
-              Lorem ipsum, dolor sit amet consectetur adipisicin
+              Top-rated fitness app with real user feedback.
             </p>
             <p className="text-white text-[10px] sm:text-[12px] md:text-[14px] leading-tight">
-              Lorem ipsum dolor sit amet consectetur adipisicing
+              Join thousands of satisfied users tracking their progress.
             </p>
             <p className="text-white text-[10px] sm:text-[12px] md:text-[14px] leading-tight">
-              Lorem, ipsum dolor sit amet consectetur adipisicing
-            </p>
+              Our users trust us to help them reach their fitness goals.</p>
             <p className="text-white text-[10px] sm:text-[12px] md:text-[14px] leading-tight">
-              Lorem ipsum, dolor sit amet consectetur adipisicing
-            </p>
+              Quick ratings to track your fitness success.</p>
           </div>
         </div>
       </section>
