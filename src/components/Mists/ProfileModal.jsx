@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { UserServices } from '../../services/userServices';
 import image from '../../assets/images/user.jpg'
+import { getHoursAgo } from '../../utilities/changeDateTimeFormate';
 
 const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user }) => {
     if (!isProfileModalOpen) return null;
@@ -92,7 +93,7 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
                                     }
                                     <p>{singleNotification?.fromUser?.username}</p>
                                 </div>
-                                <p className='text-xs text-zinc-400'>2h ago</p>
+                                <p className='text-xs text-zinc-400'>{singleNotification.createdAt ? getHoursAgo(singleNotification.createdAt) : '-'}</p>
                             </div>
                             <p className='ml-16'>{singleNotification.message}</p>
                         </li>

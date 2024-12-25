@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import login from '../../assets/images/login.png';
+import login from '../../assets/images/fitnss-tracker.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { AuthServices } from '../../services/authServices';

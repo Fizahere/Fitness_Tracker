@@ -1,16 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import VitePWA from 'vite-plugin-pwa';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
     react(),
-    VitePWA({ // Correct way to use PWA plugin
+    VitePWA({
       registerType: 'autoUpdate',
       manifest: {
         name: 'Fitness Tracker',
         short_name: 'FitnessApp',
-        description: 'Fitness Tracker app to monitor your health and progress.',
+        description: 'A fitness tracker app to help you monitor your health and fitness progress.',
         theme_color: '#000000',
         background_color: '#ffffff',
         start_url: '/',
@@ -38,12 +38,12 @@ export default defineConfig({
               cacheName: 'assets-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // Cache for 30 days
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
             },
           },
         ],
       },
-    })
+    }),
   ],
 });

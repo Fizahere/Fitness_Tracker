@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getUserIdFromToken } from '../../services/authServices';
 import image from '../../assets/images/user.jpg';
 import { WorkoutServices } from '../../services/WorkoutServices';
+import { formatDate } from '../../utilities/changeDateTimeFormate';
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,7 @@ const UserProfile = () => {
   const [dataToEdit, setDataToEdit] = useState(null);
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
-  const [err,setError]=useState(null)
+  const [err, setError] = useState(null)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -108,21 +109,13 @@ const UserProfile = () => {
     };
   }, [file]);
 
-
+  const userId = getUserIdFromToken(localStorage.getItem('token'))
   const { data: workoutData, isLoading: workoutLoading } = useQuery(
-    'workout-data',
-    WorkoutServices.getWorkouts
+    ['workout-data', userId],
+    () => WorkoutServices.getWorkouts(userId)
   );
   const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
-  };
+  const printReport = workoutMemoData.slice(1, 4)
 
   return (
     <div>
@@ -284,23 +277,15 @@ const UserProfile = () => {
               <p>/2024</p>
             </div>
             <ul>
+              {printReport?printReport.map((singleData)=>(
               <li className='py-4 mt-6 px-6 rounded-full flex justify-between items-center cursor-pointer bg-[#fcc6e6] hover:bg-opacity-90'>
-                <p>running, monday</p>
+                <p>{singleData?.title}, {singleData.createdAt ? formatDate(singleData.createdAt) : '-'}</p>
                 <i><ICONS.RUN /></i>
               </li>
-              <li className='py-4 mt-4 px-6 rounded-full flex justify-between items-center cursor-pointer bg-[#262135] text-white hover:bg-opacity-90'>
-                <p>Bedtime, monday</p>
-                <i><ICONS.SLEEP /></i>
-              </li>
-              <li className='py-4 mt-4 px-6 rounded-full flex justify-between items-center cursor-pointer bg-[#262135] text-white hover:bg-opacity-90'>
-                <p>Meal, monday</p>
-                <i><ICONS.MEAL /></i>
-              </li>
-              <li className='flex justify-end mt-4 cursor-pointer'>
-                <p className='text-black bg-white px-3 py-2 rounded-full text-center'>
-                  See All
-                </p>
-              </li>
+              ))
+            :
+            <p>no reports</p>
+            }
             </ul>
           </div>
         </div>

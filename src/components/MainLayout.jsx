@@ -11,6 +11,8 @@ import Features from "../pages/Features";
 import { UserServices } from "../services/userServices";
 import { useQuery } from "react-query";
 import { getUserIdFromToken } from "../services/authServices";
+import FeedbackForm from "../pages/Feedback";
+import FAQPage from "../pages/Faq";
 
 const loggedInUserId = getUserIdFromToken(localStorage.getItem('token'));
 
@@ -295,7 +297,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
               </i>
             ) : (
               <div className="flex items-center justify-center text-xl w-screen">
-               {error && <p>{error || error.message}</p>}
+                {error && <p>{error || error.message}</p>}
               </div>
             )}
         </div>
@@ -320,6 +322,12 @@ const MainLayout = ({ setIsAuthenticated }) => {
 
             <Element name="contact-info" id="contact-info">
               <Contact />
+            </Element>
+            <Element name="faq" id="faq">
+              <FAQPage />
+            </Element>
+            <Element name="feedback" id="feedback">
+              <FeedbackForm />
             </Element>
           </div>
         </div>
@@ -350,24 +358,24 @@ const MainLayout = ({ setIsAuthenticated }) => {
           <div>
             <ul>
               <li className="text-lg mb-4">Privacy Policy</li>
-              <ScrollLink to="contact" smooth={true} duration={500}>
+              <ScrollLink to="faq" smooth={true} duration={500}>
                 <li className="text-zinc-600 mr-6 mt-1 text-md cursor-pointer">
                   <Link to="/">
-                    Contact
+                    FAQ
                   </Link>
                 </li>
               </ScrollLink>
-              <ScrollLink to="about" smooth={true} duration={500}>
+              <ScrollLink to="feedback" smooth={true} duration={500}>
                 <li className="text-zinc-600 mr-6 mt-1 text-md cursor-pointer">
                   <Link to="/">
-                    About
+                  Feedback
                   </Link>
                 </li>
               </ScrollLink>
               <ScrollLink to="features" smooth={true} duration={500}>
                 <li className="text-zinc-600 mr-6 mt-1 text-md cursor-pointer">
                   <Link to="/">
-                    Features
+                  Contact
                   </Link>
                 </li>
               </ScrollLink>
@@ -414,7 +422,11 @@ const MainLayout = ({ setIsAuthenticated }) => {
             </ul>
           </div>
           <div>
-            <button className="bg-black rounded-full text-white w-full py-3">Explore</button>
+              <Link to="/explore">
+            <button className="bg-black rounded-full text-white w-full py-3">
+                Explore
+            </button>
+              </Link>
             <div className="flex justify-evenly mt-4">
               <i className="text-2xl bg-lime-300 rounded-full p-4"><ICONS.MEAL /></i>
               <i className="text-2xl bg-lime-300 rounded-full p-4"><ICONS.CHART2 /></i>
