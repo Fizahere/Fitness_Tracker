@@ -8,12 +8,15 @@ import UserWorkout from '../pages/Dashboard/UserWorkout'
 import Nutrition from '../pages/Dashboard/Nutrition'
 import Progress from '../pages/Dashboard/Progress'
 import Posts from '../pages/Dashboard/Posts'
+import MainLayout from '../components/MainLayout'
+import ExploreUsers from '../pages/ExploreUsers'
+import Profile from '../pages/Profiles'
 
-const AuthenticatedRoutes = ({setIsAuthenticated}) => {
+const AuthenticatedRoutes = ({ setIsAuthenticated }) => {
   return (
     <Routes>
-      <Route element={<Dashboard setIsAuthenticated={setIsAuthenticated}/>}>
-        <Route path='/' element={<UserHome />} />
+      <Route element={<Dashboard setIsAuthenticated={setIsAuthenticated} />}>
+        <Route path='/dashboard' element={<UserHome />} />
         <Route path='/home' element={<UserHome />} />
         <Route path='/workout' element={<UserWorkout />} />
         <Route path='/nutrition' element={<Nutrition />} />
@@ -21,6 +24,12 @@ const AuthenticatedRoutes = ({setIsAuthenticated}) => {
         <Route path='/progress' element={<Progress />} />
         <Route path='/profile' element={<UserProfile />} />
       </Route>
+      <Route element={<MainLayout setIsAuthenticated={setIsAuthenticated} />} >
+        <Route path='/explore' element={<ExploreUsers />} />
+        <Route path='/visit-profile/:id' element={<Profile />} />
+      </Route>
+      <Route path='/' element={<MainLayout />} />
+
       <Route path='*' element={<Notfound />} />
     </Routes>
   )

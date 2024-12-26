@@ -162,7 +162,7 @@ const UserWorkout = () => {
           </button>
         </div>
       </div>
-      {workoutLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> : <WorkoutDataTable
+      {workoutLoading || searchLoading ? <ICONS.LOADING className='animate-spin text-xl text-center text-black dark:text-white' /> : (error ? <p>{error || error.message}</p> : <WorkoutDataTable
         data={isSearch ? searchedWorkouts || [] : workoutMemoData || []}
         // isLoading={workoutLoading}
         deleteLoading={deleteLoading}

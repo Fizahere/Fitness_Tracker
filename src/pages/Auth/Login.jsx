@@ -22,7 +22,7 @@ const Login = ({setIsAuthenticated}) => {
         password: '',
       })
       setIsAuthenticated(true)
-      navigate('/')
+      navigate('/dashboard')
       console.log('loggedIn.')
     },
     onError: (error) => {

@@ -1,18 +1,64 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import ICONS from '../assets/constants/icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
+  const formRef = useRef();
+
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_hhe9up9', 
+        'template_8cnuucc', 
+        formRef.current,
+        'peWYyFgV3JWI_Maqx' 
+      )
+      .then(
+        (result) => {
+          toast.success("Message sent, we'll get back to you soon.", {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          formRef.current.reset();
+        },
+        (error) => {
+          toast.error('Failed to send.', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      );
+  };
+
   return (
     <>
+      <ToastContainer />
       <section className="px-10 py-10 h-auto bg-white" id="contact">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left Column: Contact Form */}
           <div className="flex flex-col items-center justify-center p-8 rounded-lg shadow-lg">
             <div className="w-full max-w-md">
               <h1 className="text-2xl font-bold text-center text-gray-800 mb-4 font-serif">
                 Contact Us
               </h1>
-              <form className="space-y-4">
+              <form
+                ref={formRef}
+                onSubmit={handleSendEmail}
+                className="space-y-4"
+              >
                 <div>
                   <label
                     htmlFor="name"
@@ -63,7 +109,7 @@ const Contact = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2 px-4 bg-[#262135] text-white rounded-lg shadow-md  focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full py-2 px-4 bg-[#262135] text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Send Message
                 </button>
@@ -71,7 +117,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Column: Information or Illustration */}
           <div className="flex flex-col items-center justify-center bg-gray-30 p-5 rounded-lg shadow-lg">
             <div className="text-center">
               <h2 className="text-xl font-bold text-gray-800 mb-4 font-serif">
@@ -81,14 +126,17 @@ const Contact = () => {
                 Feel free to reach out to us with any questions or inquiries. We're here to help!
               </p>
               <ul className="text-gray-600 space-y-2">
-              <li className='flex justify-center items-center'>
-                <ICONS.LOCATION className='text-purple-600'/> <span className='ml-2'>123 Main Street, Cityville</span>
+                <li className="flex justify-center items-center">
+                  <ICONS.LOCATION className="text-purple-600" />{' '}
+                  <span className="ml-2">123 Main Street, Cityville</span>
                 </li>
-                <li className='flex justify-center items-center'>
-                  <ICONS.PHONE className='text-red-400'/> <span className='ml-2'>+123 456 7890</span>
+                <li className="flex justify-center items-center">
+                  <ICONS.PHONE className="text-red-400" />{' '}
+                  <span className="ml-2">+123 456 7890</span>
                 </li>
-                <li className='flex justify-center items-center'>
-                  <ICONS.EMAIL className='text-blue-500'/> <span className='ml-2'>fitnesstracker@gmail.com</span>
+                <li className="flex justify-center items-center">
+                  <ICONS.EMAIL className="text-blue-500" />{' '}
+                  <span className="ml-2">fitnesstracker@gmail.com</span>
                 </li>
               </ul>
             </div>

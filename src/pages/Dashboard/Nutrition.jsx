@@ -179,7 +179,7 @@ console.log(searchedNutritions,'searchedNutritions')
           </button>
         </div>
       </div>
-      {nutritionLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> :
+      {nutritionLoading || searchLoading ? <ICONS.LOADING className='animate-spin text-xl text-center text-black dark:text-white' /> : (error ? <p>{error || error.message}</p> :
         <NutritionDataTable
           data={isSearch ? searchedNutritions || [] : nutritionMemoData || []}
           // isLoading={nutritionLoading}

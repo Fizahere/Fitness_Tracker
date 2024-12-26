@@ -39,6 +39,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
+import { GiRoundStar } from "react-icons/gi";
 
 const ICONS = {
     LOGO: IoFitnessOutline,
@@ -82,6 +83,7 @@ const ICONS = {
     PHONE: FaPhoneAlt,
     EMAIL:MdEmail,
     STAR:CiStar,
+    FILLEDSTAR:GiRoundStar,
 }
 
 export default ICONS

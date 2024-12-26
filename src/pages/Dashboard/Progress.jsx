@@ -178,7 +178,7 @@ const Progress = () => {
           </button>
         </div>
       </div>
-      {progressLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> :
+      {progressLoading || searchLoading ? <ICONS.LOADING className='animate-spin text-xl text-center text-black dark:text-white' /> : (error ? <p>{error || error.message}</p> :
         <ProgressDataTable
           data={isSearch ? searchedProgress || [] : progressMemoData || []}
           // isLoading={progressLoading||searchLoading}

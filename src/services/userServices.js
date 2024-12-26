@@ -100,19 +100,6 @@ const searchUser = async (searchQuery) => {
   }
 }
 
-//it will be followers chart
-// const PostChart = async () => {
-//   const response = await axios.get(
-//     `${User_Url.USER_URL}/get-posts`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     }
-//   );
-//   return response.data.results;
-// };
-
 export const UserServices = {
   getAllUsers,
   getUser,

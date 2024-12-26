@@ -84,7 +84,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
             <div className="flex items-center mt-1 ml-2 text-xl">
               <i><ICONS.LOGO /></i>
               <ScrollLink to="home" smooth={true} duration={500}>
-                <p className="ml-2 mt-1 text-md cursor-pointer font-serif text-black">
+                <p className="ml-2 mt-1 text-sm cursor-pointer font-serif text-black">
                   <Link to="/">
                     Fitness Tracker
                   </Link>
@@ -149,10 +149,10 @@ const MainLayout = ({ setIsAuthenticated }) => {
             </Link>
           </li>
         </ul>
-        <div className="mr-6 ml-6 text-lg mt-1">
+        <div className="-ml-40 md:mr-6 md:ml-6 text-lg mt-1">
           {token ?
             <li
-              className="flex items-center text-lg cursor-pointer"
+              className="flex items-center text-sm md:text-lg cursor-pointer"
               onClick={() => {
                 AuthServices.logout({ setIsAuthenticated });
                 navigate('/')
@@ -236,7 +236,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
           <div className="text-white text-center text-md rounded-full py-2 w-full mt-8 bg-[#262135]">
             {token ?
               <li
-                className="flex items-center text-lg cursor-pointer"
+                className="flex ml-20 items-center text-lg cursor-pointer"
                 onClick={() => {
                   AuthServices.logout({ setIsAuthenticated });
                   navigate('/')

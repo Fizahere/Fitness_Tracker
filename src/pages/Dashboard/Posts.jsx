@@ -4,6 +4,7 @@ import ICONS from '../../assets/constants/icons';
 import { getUserIdFromToken } from '../../services/authServices';
 import { PostServices } from '../../services/postServices';
 import PostDataTable from '../../components/Mists/PostDataTable';
+import { ToastContainer } from 'react-toastify';
 
 const Posts = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -165,7 +166,7 @@ const Posts = () => {
         </div>
       </div>
 
-      {postsLoading || searchLoading ? <ICONS.LOADING className='animate-spin' /> : (error ? <p>{error || error.message}</p> : <PostDataTable
+      {postsLoading || searchLoading ? <i><ICONS.LOADING className='animate-spin text-xl text-center text-black dark:text-white' /></i> : (error ? <p>{error || error.message}</p> : <PostDataTable
         data={isSearch ? searchedPosts || [] : postsMemoData || []}
           // isLoading={postsLoading}
           deleteLoading={deleteLoading}
