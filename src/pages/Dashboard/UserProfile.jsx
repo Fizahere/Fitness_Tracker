@@ -4,9 +4,10 @@ import ICONS from '../../assets/constants/icons';
 import { UserServices } from '../../services/userServices';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getUserIdFromToken } from '../../services/authServices';
-import image from '../../assets/images/user.jpg';
 import { WorkoutServices } from '../../services/WorkoutServices';
 import { formatDate } from '../../utilities/changeDateTimeFormate';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -116,6 +117,36 @@ const UserProfile = () => {
   );
   const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
   const printReport = workoutMemoData.slice(1, 4)
+
+  //download pdf code.
+  const handleDownloadPDF = async () => {
+    const element = document.getElementById('reports-container');
+    if (!element) return;
+
+    try {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      const margin = 10;
+      const titleMargin = 20;
+      const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      const title = "Week Report - December";
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(16);
+      pdf.text(title, pdf.internal.pageSize.getWidth() / 2, margin + 5, {
+        align: 'center',
+      });
+
+      pdf.addImage(imgData, 'PNG', margin, titleMargin, pdfWidth, pdfHeight);
+      pdf.save('Week_Reports.pdf');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
+
 
   return (
     <div>
@@ -272,25 +303,42 @@ const UserProfile = () => {
           )}
 
           <div className='p-8 bg-gradient-to-t from-[#fcc6e6] to-[#1b1b1c] rounded-3xl lg:w-2/5 my-4 lg:mt-0'>
-            <div className='flex text-white justify-between'>
-              <p className='text-2xl font-bold'>Month reports</p>
-              <p>/2024</p>
+            <div id="reports-container">
+              <div className='flex text-white justify-between'>
+                <p className='text-2xl font-bold'>Month reports</p>
+                <p>/2024</p>
+              </div>
+              <ul>
+                {printReport ? (
+                  printReport.map((singleData, index) => (
+                    <li
+                      key={index}
+                      className='py-4 mt-6 px-6 rounded-full flex justify-between items-center cursor-pointer bg-[#fcc6e6] hover:bg-opacity-90'
+                    >
+                      <p>
+                        {singleData?.title}, {singleData.createdAt ? formatDate(singleData.createdAt) : '-'}
+                      </p>
+                      <i>
+                        <ICONS.RUN />
+                      </i>
+                    </li>
+                  ))
+                ) : (
+                  <p>no reports</p>
+                )}
+              </ul>
             </div>
-            <ul>
-              {printReport?printReport.map((singleData)=>(
-              <li className='py-4 mt-6 px-6 rounded-full flex justify-between items-center cursor-pointer bg-[#fcc6e6] hover:bg-opacity-90'>
-                <p>{singleData?.title}, {singleData.createdAt ? formatDate(singleData.createdAt) : '-'}</p>
-                <i><ICONS.RUN /></i>
-              </li>
-              ))
-            :
-            <p>no reports</p>
+            {printReport.length >= 1 && <button
+              onClick={handleDownloadPDF}
+              className='mt-6 bg-[#262135] text-white px-4 py-2 rounded-full hover:bg-opacity-90'
+            >
+              Download PDF
+            </button>
             }
-            </ul>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

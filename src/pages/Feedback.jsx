@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ICONS from '../assets/constants/icons'; // Ensure the path is correct
+import ICONS from '../assets/constants/icons'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FeedbackServices } from '../services/feedbackServices'; // Ensure the service functions are correct
+import { FeedbackServices } from '../services/feedbackServices'; 
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 const FeedbackForm = () => {
@@ -11,7 +11,7 @@ const FeedbackForm = () => {
   const [email, setEmail] = useState('');
   const queryClient = useQueryClient();
 
-  const { data: feedbacksData = [], isError, isLoading: feedbackLoading } = useQuery(
+  const { data: feedbacks = [], isError, isLoading: feedbackLoading } = useQuery(
     'feedbacks',
     FeedbackServices.getFeedbacks,
     {
@@ -20,14 +20,14 @@ const FeedbackForm = () => {
       },
     }
   );
-  const feedbacks = feedbacksData.slice(1, 6)
+  // const feedbacks = feedbacksData.slice(0, 4)
 
   const { mutateAsync: feedbackRequest, isLoading: feedbackLoadingSend } = useMutation(
     FeedbackServices.sendFeedback,
     {
       onSuccess: () => {
         queryClient.invalidateQueries('feedbacks');
-        toast.success('Feedback submitted successfully!');
+        toast.success('Thankyou for the Feedback.');
         setEmail('');
         setFeedback('');
         setRating(0);
@@ -125,10 +125,9 @@ const FeedbackForm = () => {
           </div>
         </form>
 
-        <div className="bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Feedback</h3>
-          <ul className="space-y-4">
-
+        <div className="bg-gray-50 rounded-lg shadow-md overflow-y-auto h-[28rem]">
+        <h3 className="text-xl text-gray-800 mb-4 sticky top-0 bg-gradient-to-l to-lime-300 from-gray-50 font-bold z-20 p-6">Recent Feedback</h3>
+          <ul className="space-y-4 p-6">
             {feedbackLoading ? (
               <ICONS.LOADING className='text-black animate-spin' />
             ) : (isError ? (
@@ -142,7 +141,7 @@ const FeedbackForm = () => {
                     {Array(fb.rating || 0)
                       .fill()
                       .map((_, i) => (
-                        <ICONS.FILLEDSTAR key={i} className="text-yellow-400 text-lg" />
+                        <ICONS.FILLEDSTAR key={i} className="text-orange-400 text-lg" />
                       ))}
                   </div>
                 </li>
