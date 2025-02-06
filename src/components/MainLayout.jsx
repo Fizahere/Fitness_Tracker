@@ -238,7 +238,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
               <div>
                 <div className="flex items-center">
                   <img
-                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${singleData?.profileImage}`}
+                    src={`${singleData?.profileImage}`}
                     className="rounded-full h-14 w-14 border-double border-2 border-[#6a4b5d] p-1"
                     alt="profile image"
                   />

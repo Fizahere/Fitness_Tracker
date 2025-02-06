@@ -38,7 +38,7 @@ const PostDataTable = ({
                             <td className="px-2 md:px-8 py-4">{singleData.content}</td>
                             <td className="px-2 md:px-8 py-4">
                                 <img className=''
-                                 src={`https://fitness-tracker-backend-1-vqav.onrender.com/${singleData.image}`} height={100} width={100} alt="" />
+                                 src={`${singleData.image}`} height={100} width={100} alt="" />
                             </td>
                             <td className="px-2 md:px-8 py-4">{singleData.createdAt ? formatDate(singleData.createdAt) : '-'}</td>
                             

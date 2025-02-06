@@ -18,7 +18,7 @@ const ProfileModal = ({ isProfileModalOpen, onProfileModalClose, user }) => {
              relative'>
                 {/* // bg-gradient-to-t to-[#fcc6e6] from-[#1b1b1c] */}
                 <img
-                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${user?.profileImage}`}
+                    src={`${user?.profileImage}`}
                     alt={user?.username}
                     className="absolute left-24 top-10 w-32 h-32 rounded-full mb-3 border-4 border-double border-[#6a4b5d] p-1"
                 />
@@ -83,7 +83,7 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
                             <div className='flex items-center justify-between'>
                                 <div className="flex items-center">
                                     {(singleNotification?.fromUser?.profileImage) ? <img
-                                        src={`https://fitness-tracker-backend-1-vqav.onrender.com/${singleNotification?.fromUser?.profileImage}`} alt=""
+                                        src={`${singleNotification?.fromUser?.profileImage}`} alt=""
                                         className='h-12 w-12 rounded-full mr-4 border-2 border-double cursor-pointer'
                                     />
                                         :

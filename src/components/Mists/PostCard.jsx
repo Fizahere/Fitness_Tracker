@@ -20,7 +20,7 @@ const PostCard = (props) => {
         <div
   className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
   style={{
-    backgroundImage: `url(https://fitness-tracker-backend-1-vqav.onrender.com/${data.author.profileImage})`,
+    backgroundImage: `url(${data.author.profileImage})`,
   }}
   title={data.author.name || "Author's Profile"}
 ></div>
@@ -53,7 +53,7 @@ const PostCard = (props) => {
         <div className="flex items-center">
           <img
             className="w-10 h-10 rounded-full mr-4"
-            src={`https://fitness-tracker-backend-1-vqav.onrender.com/${data.author.profileImage}`}
+            src={`${data.author.profileImage}`}
             alt="Avatar of Jonathan Reinink"
           />
           <div className="text-sm">
@@ -83,7 +83,7 @@ const PostCard = (props) => {
                             )
                         }
                         <img
-                            src={`https://fitness-tracker-backend-1-vqav.onrender.com/${data.author.profileImage}`}
+                            src={`${data.author.profileImage}`}
                             className="cursor-pointer rounded-full h-10 w-10 ml-2 border-double border-2 border-[#6a4b5d] p-1"
                             alt="profile image"
                             onClick={() => visitProfile(data?.author?._id)}
@@ -96,7 +96,7 @@ const PostCard = (props) => {
                 <div className="h-40 w-40 md:h-60 md:w-60 lg:h-72 lg:w-72 p-2">
                    {data?.image ? <img
                         className="mt-2 rounded-md h-full w-full border-2 border-black"
-                        src={`https://fitness-tracker-backend-1-vqav.onrender.com/${data?.image}`} alt="" />
+                        src={`${data?.image}`} alt="" />
                     :
                     <ICONS.PROFILE className="mt-2 rounded-md h-full w-full border-2 border-black"/>    
                     }

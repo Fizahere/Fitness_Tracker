@@ -191,7 +191,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
                                 ref={profileButtonRef}
                             >
                                 {userMemoData?.profileImage ? <img
-                                    src={`https://fitness-tracker-backend-1-vqav.onrender.com/${userMemoData?.profileImage}`}
+                                    src={`${userMemoData?.profileImage}`}
                                     className="cursor-pointer rounded-full h-10 w-10"
                                     alt="profile image"
                                 />

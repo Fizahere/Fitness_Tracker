@@ -155,7 +155,7 @@ const UserProfile = () => {
         <div className='absolute top-36 left-12 lg:left-20 border-4 border-double dark:border-[#efeeb6] border-[#6a4b5d] rounded-full p-1 h-64 w-64'>
           <img
             // src={userMemoData?.profileImage}
-            src={`https://fitness-tracker-backend-1-vqav.onrender.com/${userMemoData?.profileImage}`}
+            src={`${userMemoData?.profileImage}`}
             className='h-full w-full bg-contain rounded-full'
             alt=""
           />
