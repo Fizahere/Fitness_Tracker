@@ -42,7 +42,6 @@ const UserWorkout = () => {
 
   const { data: workoutData, isLoading: workoutLoading, isError } = useQuery(['workout-data', userId],
     () => WorkoutServices.getWorkouts(userId), {
-    onError: (err) => { setError(err) },
     enabled: !!userId,
   });
   const workoutMemoData = useMemo(() => workoutData?.data?.results || [], [workoutData]);
@@ -162,17 +161,18 @@ const UserWorkout = () => {
           </button>
         </div>
       </div>
-      {workoutLoading || searchLoading ? <ICONS.LOADING className='animate-spin text-xl text-center text-black dark:text-white' /> : (error ? <p>{error || error.message}</p> : <WorkoutDataTable
-        data={isSearch ? searchedWorkouts || [] : workoutMemoData || []}
-        // isLoading={workoutLoading}
-        deleteLoading={deleteLoading}
-        onDelete={deleteWorkout}
-        onEdit={(id) => {
-          setIsEdit(true);
-          fetchWorkoutById(id);
-          toggleDrawer(true);
-        }}
-      />)}
+      {workoutLoading || searchLoading ? <ICONS.LOADING className='animate-spin text-xl text-center text-black dark:text-white' /> : (error ? <p>{error || error.message}</p> :
+        <WorkoutDataTable
+          data={isSearch ? searchedWorkouts || [] : workoutMemoData || []}
+          // isLoading={workoutLoading}
+          deleteLoading={deleteLoading}
+          onDelete={deleteWorkout}
+          onEdit={(id) => {
+            setIsEdit(true);
+            fetchWorkoutById(id);
+            toggleDrawer(true);
+          }}
+        />)}
 
       {drawerOpen && (
         <div

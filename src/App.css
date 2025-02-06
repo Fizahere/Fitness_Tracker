@@ -3,6 +3,16 @@
 
   }
    */
-   .sidebar {
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+.sidebar {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.active-link div {
+  width: 100%;
+  left: 0;
+}
+
+.active-link-mob div {
+  width: 4.7rem;
+  left: 0;
 }

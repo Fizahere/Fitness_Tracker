@@ -52,7 +52,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
       enabled: false,
     }
   );
-  console.log(searchedUsers, 'searched users')
+  // console.log(searchedUsers, 'searched users')
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) {
@@ -108,45 +108,36 @@ const MainLayout = ({ setIsAuthenticated }) => {
           </div>
         </div>
         <ul className="hidden md:flex">
-          <ScrollLink to="home" smooth={true} duration={500}>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <Link to="/">
-                Home
+          {['home', 'features', 'about', 'services', 'contact-info'].map((section) => (
+            <ScrollLink
+              key={section}
+              to={section}
+              smooth={true}
+              duration={500}
+              spy={true}
+              activeClass="active-link"
+              className="group relative mr-6 p-1 text-lg cursor-pointer transition-all duration-300"
+            >
+                <Link to="/">
+              <span className="capitalize">{section}</span>
               </Link>
-            </li>
-          </ScrollLink>
-          <ScrollLink to="features" smooth={true} duration={500}>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <Link to="/">
-                Features
-              </Link>
-            </li>
-          </ScrollLink>
-          <ScrollLink to="about" smooth={true} duration={500}>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <Link to="/">
-                About
-              </Link>
-            </li>
-          </ScrollLink>
-          <ScrollLink to="services" smooth={true} duration={500}>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <Link to="/">
-                Services
-              </Link>
-            </li>
-          </ScrollLink>
-          <ScrollLink to="contact-info" smooth={true} duration={500}>
-            <li className="mr-6 mt-1 text-lg cursor-pointer">
-              <Link to="/">
-                Contact
-              </Link>
-            </li>
-          </ScrollLink>
-          <li className="mr-6 mt-1 text-lg cursor-pointer">
+              <div className="absolute left-1/2 bottom-0 w-0 h-0.5 bg-lime-400 transition-all duration-300 group-hover:left-0 group-hover:w-full"></div>
+            </ScrollLink>
+          ))}
+    
+          <li 
+           smooth={true}
+           duration={500}
+          //  spy={true}
+          //  activeClass="active-link"
+           className={`group relative mr-6 p-1 text-lg cursor-pointer transition-all duration-300 ${location.pathname=='/explore'&&'active-link'}`}
+          // className="mr-6 mt-1 text-lg cursor-pointer"
+          >
             <Link to="/explore">
               Explore
             </Link>
+            <div className={`absolute left-1/2 bottom-0 w-0 h-0.5 bg-lime-400 transition-all duration-300 group-hover:left-0 group-hover:w-full`}></div>
+
           </li>
         </ul>
         <div className="-ml-40 md:mr-6 md:ml-6 text-lg mt-1">
@@ -191,42 +182,25 @@ const MainLayout = ({ setIsAuthenticated }) => {
               onClick={toggleDrawer}
             />
           </div>
-          <ul className="mt-10">
-            <ScrollLink onClick={toggleDrawer} to="home" smooth={true} duration={500}>
-              <li className="mr-6 mt-1 text-lg cursor-pointer">
+          <ul className="mt-10 flex flex-col">
+            {['home', 'features', 'about', 'services', 'contact-info'].map((section) => (
+              <ScrollLink
+                key={section}
+                to={section}
+                smooth={true}
+                duration={500}
+                spy={true}
+                onClick={toggleDrawer}
+                activeClass="active-link-mob"
+                className="group relative mr-6 mt-1 p-1 text-sm cursor-pointer transition-all duration-300"
+              >
                 <Link to="/">
-                  Home
+                  <span className="capitalize">{section}</span>
                 </Link>
-              </li>
-            </ScrollLink>
-            <ScrollLink onClick={toggleDrawer} to="features" smooth={true} duration={500}>
-              <li className="mr-6 mt-1 text-lg cursor-pointer">
-                <Link to="/">
-                  Features
-                </Link>
-              </li>
-            </ScrollLink>
-            <ScrollLink onClick={toggleDrawer} to="contact-info" smooth={true} duration={500}>
-              <li className="mr-6 mt-1 text-lg cursor-pointer">
-                <Link to="/">
-                  Contact
-                </Link>
-              </li>
-            </ScrollLink>
-            <ScrollLink onClick={toggleDrawer} to="services" smooth={true} duration={500}>
-              <li className="mr-6 mt-1 text-lg cursor-pointer">
-                <Link to="/">
-                  Services
-                </Link>
-              </li>
-            </ScrollLink>
-            <ScrollLink onClick={toggleDrawer} to="about" smooth={true} duration={500}>
-              <li className="mr-6 mt-1 text-lg cursor-pointer">
-                <Link to="/">
-                  About
-                </Link>
-              </li>
-            </ScrollLink>
+                <div className="absolute left-11 bottom-0 w-0 h-0.5 bg-lime-300 transition-all duration-300 group-hover:left-0 group-hover:w-[4.7rem]"></div>
+              </ScrollLink>
+            ))}
+           
             <li className="mr-6 mt-1 text-lg cursor-pointer">
               <Link onClick={toggleDrawer} to="/explore">
                 Explore
@@ -368,14 +342,14 @@ const MainLayout = ({ setIsAuthenticated }) => {
               <ScrollLink to="feedback" smooth={true} duration={500}>
                 <li className="text-zinc-600 mr-6 mt-1 text-md cursor-pointer">
                   <Link to="/">
-                  Feedback
+                    Feedback
                   </Link>
                 </li>
               </ScrollLink>
               <ScrollLink to="features" smooth={true} duration={500}>
                 <li className="text-zinc-600 mr-6 mt-1 text-md cursor-pointer">
                   <Link to="/">
-                  Contact
+                    Contact
                   </Link>
                 </li>
               </ScrollLink>
@@ -422,11 +396,11 @@ const MainLayout = ({ setIsAuthenticated }) => {
             </ul>
           </div>
           <div>
-              <Link to="/explore">
-            <button className="bg-black rounded-full text-white w-full py-3">
+            <Link to="/explore">
+              <button className="bg-black rounded-full text-white w-full py-3">
                 Explore
-            </button>
-              </Link>
+              </button>
+            </Link>
             <div className="flex justify-evenly mt-4">
               <i className="text-2xl bg-lime-300 rounded-full p-4"><ICONS.MEAL /></i>
               <i className="text-2xl bg-lime-300 rounded-full p-4"><ICONS.CHART2 /></i>

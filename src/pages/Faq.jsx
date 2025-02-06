@@ -36,7 +36,7 @@ const FAQPage = () => {
           </button>
           {activeIndex === 0 && (
             <div className="p-4 text-gray-700">
-              A fitness tracker is a device that helps you monitor various physical activities, such as steps, calories burned, heart rate, and more.
+              A fitness tracker is an application that helps you monitor various physical activities, such as steps, calories burned, heart rate, and more.
             </div>
           )}
         </div>
@@ -63,7 +63,7 @@ const FAQPage = () => {
           </button>
           {activeIndex === 1 && (
             <div className="p-4 text-gray-700">
-              To use the fitness tracker app, simply download it from your app store, sign in or create an account, and start tracking your workouts, nutrition, and progress.
+              To use the fitness tracker app, simply download it from your safari or any browser, sign in or create an account, and start tracking your workouts, nutrition, and progress.
             </div>
           )}
         </div>
@@ -90,12 +90,10 @@ const FAQPage = () => {
           </button>
           {activeIndex === 2 && (
             <div className="p-4 text-gray-700">
-              Yes! The app is free to use with basic features. Premium features are available with a subscription.
+              Yes! The app is free to use with all it's features, create an account for free now.
             </div>
           )}
         </div>
-
-        {/* Add more FAQ items as needed */}
       </div>
     </div>
   );

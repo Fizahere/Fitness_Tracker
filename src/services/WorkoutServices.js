@@ -17,8 +17,10 @@ const getAllWorkouts = async () => {
 const getWorkouts = async (userId) => {
   try {
     const response = await axios.get(`${WorkoutUrl.WORKOUT_URL}/get-workouts/${userId}`);
+    console.log('data',response.data)
     return response;
   } catch (error) {
+    console.log('err',error.response.data)
     throw error.response?.data || { msg: "An unknown error occurred." };
   }
 };

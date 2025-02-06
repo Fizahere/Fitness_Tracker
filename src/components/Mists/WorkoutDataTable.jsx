@@ -33,7 +33,7 @@ const WorkoutDataTable = ({
                     </tr>
                 </thead>
                 <tbody className="text-gray-700 dark:text-zinc-400">
-                    {data.length > 0 ? (
+                    {data.length >=1 ? (
                         data.map((singleData, index) => (
                             <tr
                                 key={singleData._id || index}

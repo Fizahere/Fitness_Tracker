@@ -14,7 +14,7 @@ function App() {
         refetchOnmount: false,
         refetchOnReconnect: false,
         retry: 0,
-        staleTime: 5 * 1000, // Cache expiry time
+        staleTime: 5 * 1000, 
       },
     },
   });
