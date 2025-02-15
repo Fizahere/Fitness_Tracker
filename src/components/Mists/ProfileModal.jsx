@@ -63,7 +63,7 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
             </div>
             <div className="flex flex-col h-72 overflow-y-auto">
                 <ul>
-                    {[...Array(20)].map((_, index) => (
+                    {/* {[...Array(20)].map((_, index) => (
                         <li className='border-y-2 border-black py-2 px-4 hover:bg-zinc-800 min-w-96 max-w-[28rem]'>
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
@@ -77,8 +77,8 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
                             </div>
                             <p className='ml-16'>Fiza Followed you.</p>
                         </li>
-                    ))}
-                    {/* {notificationMemoData && notificationMemoData.map((singleNotification) => (
+                    ))} */}
+                    {notificationMemoData && notificationMemoData.map((singleNotification) => (
                         <li className='border-b-2 border-black p-4 hover:bg-zinc-100 dark:hover:bg-zinc-800 min-w-96'>
                             <div className='flex items-center justify-between'>
                                 <div className="flex items-center">
@@ -97,7 +97,7 @@ const NotificationsModel = ({ isNotificationModalOpen, onNotificationModalClose,
                             </div>
                             <p className='ml-16'>{singleNotification.message}</p>
                         </li>
-                    ))} */}
+                    ))}
                     <p className='text-center min-w-96'>{error && error}</p>
                 </ul>
                 <div className='h-10 flex items-center justify-center'>
