@@ -6,6 +6,7 @@ import { Models } from './Mists/ProfileModal';
 import { UserServices } from '../services/userServices';
 import { AuthServices, getUserIdFromToken } from '../services/authServices';
 import { useQuery } from 'react-query';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = ({ setIsAuthenticated }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);

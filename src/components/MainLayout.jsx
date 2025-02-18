@@ -66,11 +66,17 @@ const MainLayout = ({ setIsAuthenticated }) => {
   return (
 
     <>
-      <Helmet>
-        <title>Fitness Tracker | Track your fitness with real time insights.</title>
-        <meta name="description" content="Track your fitness progress with real-time insights." />
-        <meta name="keywords" content="fitness, workouts, health, exercise" />
-      </Helmet>
+     <Helmet>
+  <title>Best Fitness Tracker - Track Workouts & Nutrition</title>
+  <meta property="og:title" content="Best Fitness Tracker - Track Workouts & Nutrition" />
+  <meta name="description" content="Join our fitness tracker to monitor your health and workouts in real time! Get insights on nutrition, exercises, and progress tracking." />
+  <meta name="keywords" content="fitness tracker, workouts, health, exercise, nutrition" />
+  <meta name="keywords" content="track your fitness online for free" />
+  <meta property="og:url" content="https://fitness-tracker-red-five.vercel.app" />
+  <meta name="robots" content="index, follow" />
+</Helmet>
+  {/* <meta property="og:image" content="https://yourwebsite.com/images/preview.jpg" /> */}
+
       <nav className={`flex justify-between bg-white text-black py-4 fixed top-0 left-0 w-full z-10`}>
         <div className="flex flex-col md:flex-row">
           <div className="hidden md:flex items-center ml-4 text-3xl">
