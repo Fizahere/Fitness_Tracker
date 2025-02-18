@@ -67,7 +67,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
 
     <>
       <Helmet>
-        <title>Website | Fitness Tracker</title>
+        <title>Fitness Tracker | Track your fitness with real time insights.</title>
         <meta name="description" content="Track your fitness progress with real-time insights." />
         <meta name="keywords" content="fitness, workouts, health, exercise" />
       </Helmet>
