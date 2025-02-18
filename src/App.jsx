@@ -5,6 +5,7 @@ import Notfound from "./pages/Notfound";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useEffect, useState } from "react";
 import './App.css';
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   const queryClient = new QueryClient({
@@ -27,12 +28,17 @@ function App() {
   }, []);
 
   return (
+   <>
+   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         {isAuthenticated ?
           <AuthenticatedRoutes setIsAuthenticated={setIsAuthenticated} />
           : <UnAuthenticatedRoutes setIsAuthenticated={setIsAuthenticated}/>
         }
+      </BrowserRouter>
+    </QueryClientProvider>
+    </HelmetProvider>
         {/* <Routes>
           {isAuthenticated ? (
             <>
@@ -47,8 +53,7 @@ function App() {
             </>
           )}
         </Routes> */}
-      </BrowserRouter>
-    </QueryClientProvider>
+   </>
   );
 }
 

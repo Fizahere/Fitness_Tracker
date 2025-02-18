@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { getUserIdFromToken } from "../services/authServices";
 import FeedbackForm from "../pages/Feedback";
 import FAQPage from "../pages/Faq";
+import { Helmet } from "react-helmet-async";
 
 const loggedInUserId = getUserIdFromToken(localStorage.getItem('token'));
 
@@ -63,7 +64,13 @@ const MainLayout = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div>
+
+    <>
+      <Helmet>
+        <title>Website | Fitness Tracker</title>
+        <meta name="description" content="Track your fitness progress with real-time insights." />
+        <meta name="keywords" content="fitness, workouts, health, exercise" />
+      </Helmet>
       <nav className={`flex justify-between bg-white text-black py-4 fixed top-0 left-0 w-full z-10`}>
         <div className="flex flex-col md:flex-row">
           <div className="hidden md:flex items-center ml-4 text-3xl">
@@ -118,19 +125,19 @@ const MainLayout = ({ setIsAuthenticated }) => {
               activeClass="active-link"
               className="group relative mr-6 p-1 text-lg cursor-pointer transition-all duration-300"
             >
-                <Link to="/">
-              <span className="capitalize">{section}</span>
+              <Link to="/">
+                <span className="capitalize">{section}</span>
               </Link>
               <div className="absolute left-1/2 bottom-0 w-0 h-0.5 bg-lime-400 transition-all duration-300 group-hover:left-0 group-hover:w-full"></div>
             </ScrollLink>
           ))}
-    
-          <li 
-           smooth={true}
-           duration={500}
-          //  spy={true}
-          //  activeClass="active-link"
-           className={`group relative mr-6 p-1 text-lg cursor-pointer transition-all duration-300 ${location.pathname=='/explore'&&'active-link'}`}
+
+          <li
+            smooth={true}
+            duration={500}
+            //  spy={true}
+            //  activeClass="active-link"
+            className={`group relative mr-6 p-1 text-lg cursor-pointer transition-all duration-300 ${location.pathname == '/explore' && 'active-link'}`}
           // className="mr-6 mt-1 text-lg cursor-pointer"
           >
             <Link to="/explore">
@@ -200,7 +207,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
                 <div className="absolute left-11 bottom-0 w-0 h-0.5 bg-lime-300 transition-all duration-300 group-hover:left-0 group-hover:w-[4.7rem]"></div>
               </ScrollLink>
             ))}
-           
+
             <li className="mr-6 mt-1 text-lg cursor-pointer">
               <Link onClick={toggleDrawer} to="/explore">
                 Explore
@@ -409,7 +416,7 @@ const MainLayout = ({ setIsAuthenticated }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
